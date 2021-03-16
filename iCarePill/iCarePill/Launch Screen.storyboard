@@ -54,6 +54,6 @@
     </scenes>
     <resources>
         <image name="blue_bg" width="410" height="845"/>
-        <image name="logo" width="227" height="257"/>
+        <image name="logo" width="227" height="256.5"/>
     </resources>
 </document>
