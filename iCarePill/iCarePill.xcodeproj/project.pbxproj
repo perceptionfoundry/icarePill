@@ -3,10 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F23801642601CB3000B3FEA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */; };
+		F23801682601CED600B3FEA1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F23801672601CED600B3FEA1 /* FirebaseAnalytics */; };
+		F238016A2601CED600B3FEA1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F23801692601CED600B3FEA1 /* FirebaseStorage */; };
+		F238016C2601CED600B3FEA1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F238016B2601CED600B3FEA1 /* FirebaseAuth */; };
+		F238016E2601CED600B3FEA1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F238016D2601CED600B3FEA1 /* FirebaseFirestore */; };
+		F23801742601D0DE00B3FEA1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */; };
+		F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */; };
+		F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238017B2601D82C00B3FEA1 /* SignUpView.swift */; };
+		F238018026027ADC00B3FEA1 /* TypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238017F26027ADC00B3FEA1 /* TypeListView.swift */; };
 		F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD40F260106D500CA43F5 /* iCarePillApp.swift */; };
 		F29FD412260106D500CA43F5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD411260106D500CA43F5 /* SignInView.swift */; };
 		F29FD414260106D600CA43F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29FD413260106D600CA43F5 /* Assets.xcassets */; };
@@ -33,6 +42,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Resource/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F238017B2601D82C00B3FEA1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		F238017F26027ADC00B3FEA1 /* TypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeListView.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29FD40F260106D500CA43F5 /* iCarePillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCarePillApp.swift; sourceTree = "<group>"; };
 		F29FD411260106D500CA43F5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -65,6 +77,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F23801742601D0DE00B3FEA1 /* SDWebImageSwiftUI in Frameworks */,
+				F23801682601CED600B3FEA1 /* FirebaseAnalytics in Frameworks */,
+				F238016E2601CED600B3FEA1 /* FirebaseFirestore in Frameworks */,
+				F238016C2601CED600B3FEA1 /* FirebaseAuth in Frameworks */,
+				F238016A2601CED600B3FEA1 /* FirebaseStorage in Frameworks */,
+				F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +113,7 @@
 				F29FD41F260106F800CA43F5 /* Launch Screen.storyboard */,
 				F29FD413260106D600CA43F5 /* Assets.xcassets */,
 				F29FD418260106D600CA43F5 /* Info.plist */,
+				F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */,
 				F29FD415260106D600CA43F5 /* Preview Content */,
 			);
 			path = iCarePill;
@@ -138,6 +157,8 @@
 			children = (
 				F29FD40F260106D500CA43F5 /* iCarePillApp.swift */,
 				F29FD411260106D500CA43F5 /* SignInView.swift */,
+				F238017B2601D82C00B3FEA1 /* SignUpView.swift */,
+				F238017F26027ADC00B3FEA1 /* TypeListView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -158,6 +179,14 @@
 			dependencies = (
 			);
 			name = iCarePill;
+			packageProductDependencies = (
+				F23801672601CED600B3FEA1 /* FirebaseAnalytics */,
+				F23801692601CED600B3FEA1 /* FirebaseStorage */,
+				F238016B2601CED600B3FEA1 /* FirebaseAuth */,
+				F238016D2601CED600B3FEA1 /* FirebaseFirestore */,
+				F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */,
+				F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */,
+			);
 			productName = iCarePill;
 			productReference = F29FD40C260106D500CA43F5 /* iCarePill.app */;
 			productType = "com.apple.product-type.application";
@@ -185,6 +214,11 @@
 				Base,
 			);
 			mainGroup = F29FD403260106D500CA43F5;
+			packageReferences = (
+				F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F23801722601D0DD00B3FEA1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				F23801762601D1FB00B3FEA1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = F29FD40D260106D500CA43F5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -218,6 +252,7 @@
 				F29FD44026010C0400CA43F5 /* Poppins-Black.ttf in Resources */,
 				F29FD43B26010C0400CA43F5 /* Poppins-BlackItalic.ttf in Resources */,
 				F29FD43D26010C0400CA43F5 /* Poppins-Thin.ttf in Resources */,
+				F23801642601CB3000B3FEA1 /* GoogleService-Info.plist in Resources */,
 				F29FD44526010C0400CA43F5 /* Poppins-ThinItalic.ttf in Resources */,
 				F29FD43A26010C0400CA43F5 /* Poppins-BoldItalic.ttf in Resources */,
 			);
@@ -231,6 +266,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F29FD412260106D500CA43F5 /* SignInView.swift in Sources */,
+				F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */,
+				F238018026027ADC00B3FEA1 /* TypeListView.swift in Sources */,
 				F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +330,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -347,6 +385,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -361,7 +400,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iCarePill/Preview Content\"";
-				DEVELOPMENT_TEAM = MT778N5UZ2;
+				DEVELOPMENT_TEAM = 4CZP9C7L6H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iCarePill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -383,7 +422,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iCarePill/Preview Content\"";
-				DEVELOPMENT_TEAM = MT778N5UZ2;
+				DEVELOPMENT_TEAM = 4CZP9C7L6H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iCarePill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -420,6 +459,66 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.8.1;
+			};
+		};
+		F23801722601D0DD00B3FEA1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.2;
+			};
+		};
+		F23801762601D1FB00B3FEA1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F23801672601CED600B3FEA1 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F23801692601CED600B3FEA1 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		F238016B2601CED600B3FEA1 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		F238016D2601CED600B3FEA1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23801722601D0DD00B3FEA1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23801762601D1FB00B3FEA1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F29FD404260106D500CA43F5 /* Project object */;
 }

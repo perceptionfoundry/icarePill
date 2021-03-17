@@ -12,9 +12,11 @@ struct SignInView: View {
     @ObservedObject var emailTF = EmailValidationObj()
     @ObservedObject var passwordTF = PasswordValidationObj()
     
+    @State var isSignUp = false
     
     var body: some View {
         
+        NavigationView{
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
         VStack(alignment:.center){
             
@@ -81,16 +83,25 @@ struct SignInView: View {
                 Text("I'm a new user,")
                     .font(.custom("Poppins-SemiBold", size: 13))
                     .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+//
+                NavigationLink(
+                    destination: SignUpView(),
+                    isActive: $isSignUp,
+                    label: {
+                        
+                        Button(action: {
+                            isSignUp.toggle()
+                        }, label: {
+                            Text("Sign Up")
+                                .font(.custom("Poppins-SemiBold", size: 13))
+                                .foregroundColor(.accentColor)
+                        })
+                        
+                    })
+             
                 
-                Button(action: {
-                    
-                }, label: {
-                    Text("Sign Up")
-                        .font(.custom("Poppins-SemiBold", size: 13))
-                        .foregroundColor(.accentColor)
-                })
                 
-            }
+            }.padding(.bottom, 40)
             
             //MARK: FACEBOOK BUTTON
             Button(action: {
@@ -150,11 +161,11 @@ struct SignInView: View {
         }// Main VStack End
     }// ScrollView
         .padding(.horizontal)
-            
+        }
     }
 }
 
-
+//MARK: EMAIL VALIDATION
 class EmailValidationObj: ObservableObject {
     @Published var email = "" {
         didSet {
@@ -171,7 +182,7 @@ class EmailValidationObj: ObservableObject {
     @Published var error = ""
 }
 
-
+//MARK: PASSWORD VALIDATION
 class PasswordValidationObj: ObservableObject {
     @Published var pass = "" {
         didSet {
@@ -207,6 +218,8 @@ class PasswordValidationObj: ObservableObject {
     }
 }
 
+
+//MARK: STRING EXTENSION
 extension String {
     // TODO: Test cases
     func isValidEmail() -> Bool {
@@ -221,6 +234,9 @@ extension String {
         let emailValidation = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
         return emailValidation.evaluate(with: self)
     }
+    
+    
+    
     
     func isPassword() -> Bool {
         let passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<]{6,}$"
@@ -248,6 +264,13 @@ extension String {
         return NSPredicate(format:"SELF MATCHES %@", digitReqRegex).evaluate(with: self)
     }
 }
+
+
+
+
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
