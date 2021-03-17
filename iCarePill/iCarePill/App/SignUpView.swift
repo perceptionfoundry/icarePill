@@ -37,7 +37,7 @@ struct SignUpView: View {
                     
                     Spacer()
                     Button(action: {
-                        
+                        presentationModel.wrappedValue.dismiss()
                     }, label: {
                         Text("Skip")
                             .font(.custom("Poppins-Regular", size: 13))
@@ -103,7 +103,7 @@ struct SignUpView: View {
                         }
                         .padding()
                         .background(
-                            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                            RoundedRectangle(cornerRadius: 30)
                                 .shadow(radius: 1)
                                 )
                         
@@ -192,7 +192,8 @@ struct InputFieldView: View {
             }
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                RoundedRectangle(cornerRadius: 30)
+                    .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .shadow(radius: 1))
             
             .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
