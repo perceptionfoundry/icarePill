@@ -9,6 +9,13 @@ import SwiftUI
 
 struct SignUpView: View {
     
+    
+    
+    // MARK: Properties
+    
+    
+    var fbViewModel = FirebaseViewModel()
+    
     @Environment(\.presentationMode) var presentationModel
     
     @State  var firstNameTF  = ""
@@ -16,11 +23,16 @@ struct SignUpView: View {
     @State  var typeIndex  = 0
     @State  var userTypeTF  = "US"
     @State  var gender  = ""
-    @State  var birthDate  = ""
+    @State  var birthDate  = Date()
     @State  var zipCode  = ""
     
     @State  var isType  = false
     @State  var isExpand  = false
+    
+    @State  var isMale  = true
+    @State  var isFemale  = false
+    @State  var isOther  = false
+    
     @State private var selectedtype = "Self"
     let type = ["Self", "Caregiver"]
     
@@ -116,12 +128,157 @@ struct SignUpView: View {
                     .padding(.bottom, 10)
                     
                     
-                    InputFieldView(imageName: "calendar", title: "Birth Date", inputTF: lastNameTF, PlaceHolder: "date")
+                    
+                    VStack(alignment: .leading) {
+                        
+                        Text("Gender")
+                            .font(.custom("Poppins-Regular", size: 13))
+                            .padding(.leading, 10)
+                        
+                        HStack{
+                           
+                            
+                            HStack{
+                                
+                                
+                                Button(action: {
+                                    isMale = true
+                                    isFemale = false
+                                    isOther = false
+                                }, label: {
+                                ZStack{
+                                    Circle()
+                                        .stroke(Color(#colorLiteral(red: 0.2117647059, green: 0.3294117647, blue: 0.8156862745, alpha: 1)))
+                                     
+                                        .frame(width: 15, height: 15, alignment: .center)
+                                    
+                                    Circle()
+                                        .foregroundColor(isMale ? .accentColor : .clear)
+                                        .frame(width: 10, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                }
+                               
+                            
+                                    Text("Male")
+                                        .font(.custom("Poppins-Regular", size: 13))
+                                        .foregroundColor(.accentColor)
+                                
+                                })
+                                    
+                            }
+                            Spacer()
+                            HStack{
+                                
+                                
+                                Button(action: {
+                                    isMale = false
+                                    isFemale = true
+                                    isOther = false
+                                }, label: {
+                                ZStack{
+                                    Circle()
+                                        .stroke(Color(#colorLiteral(red: 0.2117647059, green: 0.3294117647, blue: 0.8156862745, alpha: 1)))
+                                     
+                                        .frame(width: 15, height: 15, alignment: .center)
+                                    
+                                    Circle()
+                                        .foregroundColor(isFemale ? .accentColor : .clear)
+                                        .frame(width: 10, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                }
+                               
+                            
+                                    Text("Female")
+                                        .font(.custom("Poppins-Regular", size: 13))
+                                        .foregroundColor(.accentColor)
+                                
+                                })
+                                    
+                            }
+                            Spacer()
+                            HStack{
+                                
+                                
+                                Button(action: {
+                                    isMale = false
+                                    isFemale = false
+                                    isOther = true
+                                }, label: {
+                                ZStack{
+                                    Circle()
+                                        .stroke(Color(#colorLiteral(red: 0.2117647059, green: 0.3294117647, blue: 0.8156862745, alpha: 1)))
+                                     
+                                        .frame(width: 15, height: 15, alignment: .center)
+                                    
+                                    Circle()
+                                        .foregroundColor(isOther ? .accentColor : .clear)
+                                        .frame(width: 10, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                }
+                               
+                            
+                                    Text("Other")
+                                        .font(.custom("Poppins-Regular", size: 13))
+                                        .foregroundColor(.accentColor)
+                                
+                                })
+                                    
+                            }
+                            
+                        
+     
+                           
+                        }
+                        .padding()
+                       
+                        
+                        
+                        
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
+                    
+                    VStack(alignment: .leading) {
+                        
+                        Text("Birth Date")
+                            .font(.custom("Poppins-Regular", size: 13))
+                            .padding(.leading, 10)
+                        
+                        HStack{
+                           
+                            Image("calendar")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            
+
+                            DatePicker("", selection: $birthDate, displayedComponents: .date)
+                                .padding(.trailing, 100)
+                            
+                           
+
+                           
+                            
+                            Spacer()
+                        }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 30)
+                                .shadow(radius: 1)
+                                )
+                        
+                        .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
+                        
+                        
+                        
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
+
+                    
+
                     
                     InputFieldView(imageName: "zip", title: "Zip Code", inputTF: lastNameTF, PlaceHolder: "zip code")
                     
                     Button(action: {
-                        
+                        fbViewModel.signUp()
                     }, label: {
                         
                         ZStack{
@@ -165,6 +322,8 @@ struct SignUpView_Previews: PreviewProvider {
     }
 }
 
+
+// MARK: Subview
 struct InputFieldView: View {
     
     
