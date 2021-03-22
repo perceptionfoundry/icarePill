@@ -13,6 +13,12 @@ struct SignInView: View {
     @ObservedObject var passwordTF = PasswordValidationObj()
     
     @State var isSignUp = false
+    @State var isLogin = false
+    @State var isAlert = false
+    @State var alertMsg = ""
+    
+    let fbViewModel = FirebaseViewModel()
+    
     
     var body: some View {
         
@@ -59,22 +65,47 @@ struct SignInView: View {
             .padding(.top, 40)
             
             //MARK: SIGN IN BUTTON
-            Button(action: {
-                
-            }, label: {
-                
-                ZStack{
-                    RoundedRectangle(cornerRadius: 15)
-                        .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .padding()
+            
+            NavigationLink(
+                destination: Text("Destination"),
+                isActive: $isLogin,
+                label: {
+                    Button(action: {
+                        
+                        fbViewModel.signInWithEmail(Email: emailTF.email, Password: passwordTF.pass) { (status, err) in
+
+                            if status{
+                                isLogin.toggle()
+
+                            }else{
+                                isAlert.toggle()
+                             
+
+                                alertMsg = err!
+                            
+                            }
+                        }
                     
-                    Text("Sign In")
-                        .foregroundColor(.white)
-                        .font(.custom("Poppins-Medium", size: 16))
-                    
-                }
-                
-            })
+                        
+                    }, label: {
+                        
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 15)
+                                .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .padding()
+                            
+                            Text("Sign In")
+                                .foregroundColor(.white)
+                                .font(.custom("Poppins-Medium", size: 16))
+                            
+                        }
+                        
+                    }).alert(isPresented: $isAlert, content: {
+                        
+                        Alert(title: Text("Error"), message: Text(alertMsg), dismissButton: .default(Text("Dismiss")))
+                    })
+                })
+          
             
             
             //MARK: SIGN UP BUTTON
@@ -201,17 +232,19 @@ class PasswordValidationObj: ObservableObject {
         let setPassError = self.pass.isPassword() == false
         
         if setPassError {
-            if self.pass.count < 6 {
-                self.error = "Must be at least 6 characters"
-            } else if !self.pass.isUpperCase() {
-                self.error = "Must contain at least one uppercase."
-            } else if !self.pass.isLowerCase() {
-                self.error = "Must contain at least one lowercase"
-            } else if !self.pass.containsCharacter() {
-                self.error = "Must contain at least one special character"
-            } else if !self.pass.containsDigit() {
-                self.error = "Must contain at least one digit"
-            }
+            
+            self.error = ""
+//            if self.pass.count < 6 {
+//                self.error = "Must be at least 6 characters"
+//            } else if !self.pass.isUpperCase() {
+//                self.error = "Must contain at least one uppercase."
+//            } else if !self.pass.isLowerCase() {
+//                self.error = "Must contain at least one lowercase"
+//            } else if !self.pass.containsCharacter() {
+//                self.error = "Must contain at least one special character"
+//            } else if !self.pass.containsDigit() {
+//                self.error = "Must contain at least one digit"
+//            }
         } else {
             self.error = ""
         }
@@ -286,6 +319,7 @@ struct TF_View: View {
     var isSecure : Bool
     var  title : String
     var  placeHolder : String
+    
     @Binding var tf_value : String
     @Binding  var err_msg : String
     
@@ -309,6 +343,7 @@ struct TF_View: View {
                 
                 if !isSecure{
                 TextField(placeHolder, text: $tf_value)
+                    .autocapitalization(.none)
                     .font(.custom("Poppins-Medium", size: 14))
                     .padding()
                     .padding(.horizontal)

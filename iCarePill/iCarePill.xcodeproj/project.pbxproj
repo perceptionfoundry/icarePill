@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AA260877D10038A925 /* ImagePickerView.swift */; };
+		F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */; };
 		F23801642601CB3000B3FEA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */; };
 		F23801682601CED600B3FEA1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F23801672601CED600B3FEA1 /* FirebaseAnalytics */; };
 		F238016A2601CED600B3FEA1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F23801692601CED600B3FEA1 /* FirebaseStorage */; };
@@ -43,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F223B1AA260877D10038A925 /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageViewModel.swift; sourceTree = "<group>"; };
 		F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Resource/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F238017B2601D82C00B3FEA1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F223B1A9260877C60038A925 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F223B1AA260877D10038A925 /* ImagePickerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F29FD403260106D500CA43F5 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +122,7 @@
 		F29FD40E260106D500CA43F5 /* iCarePill */ = {
 			isa = PBXGroup;
 			children = (
+				F223B1A9260877C60038A925 /* View */,
 				F2D327012604934E009880BE /* Model */,
 				F2D326FC2604906D009880BE /* ViewModel */,
 				F29FD42326010BEC00CA43F5 /* Fonts */,
@@ -170,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				F2D326FD260490B2009880BE /* FirebaseViewModel.swift */,
+				F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -284,10 +298,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */,
 				F29FD412260106D500CA43F5 /* SignInView.swift in Sources */,
 				F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */,
 				F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */,
 				F2D327032604935E009880BE /* User.swift in Sources */,
+				F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */,
 				F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,11 +18,17 @@ struct SignUpView: View {
     
     @Environment(\.presentationMode) var presentationModel
     
+    
+    
+    @State var showImagePicker: Bool = false
+    @State var dpImage: UIImage? = UIImage(named: "dp")
     @State  var firstNameTF  = ""
     @State  var lastNameTF  = ""
+    @State  var emailTF  = ""
+    @State  var passwordTF  = PasswordValidationObj()
     @State  var typeIndex  = 0
-    @State  var userTypeTF  = "US"
-    @State  var gender  = ""
+    @State  var userTypeTF  = "self"
+    @State  var gender  = "male"
     @State  var birthDate  = Date()
     @State  var zipCode  = ""
     
@@ -59,20 +65,72 @@ struct SignUpView: View {
                 .padding(.top, 10)
                 .padding()
                 
-                Image("dp")
+                Image(uiImage: dpImage!)
                   .resizable()
+                    .scaledToFill()
                   .frame(width: 150, height: 150, alignment: .center)
                   .clipShape(Circle())
                     .zIndex(1)
-                    
+                    .onTapGesture {
+                        showImagePicker.toggle()
+                    }
                   
                 ScrollView{
                     
                     
                 VStack{
-                    InputFieldView(imageName: "user", title: "First Name", inputTF: firstNameTF, PlaceHolder: "FIRST NAME")
+                    InputFieldView(imageName: "user", title: "First Name", inputTF: $firstNameTF, PlaceHolder: "FIRST NAME")
                 
-                    InputFieldView(imageName: "user", title: "Last Name", inputTF: lastNameTF, PlaceHolder: "LAST NAME")
+                    InputFieldView(imageName: "user", title: "Last Name", inputTF: $lastNameTF, PlaceHolder: "LAST NAME")
+                    
+                    InputFieldView(imageName: "email", title: "Email Address", inputTF: $emailTF, PlaceHolder: "EMAIL ADDRESS")
+                    
+                    
+                    
+                    VStack(alignment: .leading) {
+                        
+                        HStack{
+                        Text("Password")
+                            .font(.custom("Poppins-Regular", size: 13))
+                            .padding(.leading, 10)
+                        Spacer()
+                        Text(passwordTF.error)
+                            .font(.custom("Poppins-Medium", size: 10))
+                            .foregroundColor(.red)
+                            .padding(.horizontal)
+                            
+                            
+                    }
+                        
+                        HStack{
+                            
+                            Image("password")
+                               
+                                .resizable()
+                                .scaledToFill()
+                                .foregroundColor(.accentColor)
+                                .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            SecureField("PASSWORD", text: $passwordTF.pass)
+                                .font(.custom("Poppins-Regular", size: 12))
+                                .foregroundColor(.accentColor)
+                                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                            
+                        }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 30)
+                                .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .shadow(radius: 1))
+                        
+                        .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
+                        
+                        
+                        
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
+                    
+                    
                     
                     VStack(alignment: .leading) {
                         
@@ -145,6 +203,7 @@ struct SignUpView: View {
                                     isMale = true
                                     isFemale = false
                                     isOther = false
+                                    gender = "male"
                                 }, label: {
                                 ZStack{
                                     Circle()
@@ -173,6 +232,7 @@ struct SignUpView: View {
                                     isMale = false
                                     isFemale = true
                                     isOther = false
+                                    gender = "female"
                                 }, label: {
                                 ZStack{
                                     Circle()
@@ -201,6 +261,7 @@ struct SignUpView: View {
                                     isMale = false
                                     isFemale = false
                                     isOther = true
+                                    gender = "other"
                                 }, label: {
                                 ZStack{
                                     Circle()
@@ -252,7 +313,8 @@ struct SignUpView: View {
                             DatePicker("", selection: $birthDate, displayedComponents: .date)
                                 .padding(.trailing, 100)
                             
-                           
+                            
+                                .foregroundColor(.black)
 
                            
                             
@@ -275,10 +337,37 @@ struct SignUpView: View {
                     
 
                     
-                    InputFieldView(imageName: "zip", title: "Zip Code", inputTF: lastNameTF, PlaceHolder: "zip code")
+                    InputFieldView(imageName: "zip", title: "Zip Code", inputTF: $zipCode, PlaceHolder: "zip code")
                     
                     Button(action: {
-                        fbViewModel.signUp()
+                        
+                   
+                        let Formattor = DateFormatter()
+                        Formattor.dateStyle = .medium
+                        
+                      let dob_string = Formattor.string(from: birthDate)
+                        
+                       
+                        
+                        let inputDetail = [ "first": firstNameTF,
+                                            "last": lastNameTF,
+                                            "type": userTypeTF,
+                                            "gender": gender,
+                                            "dob": dob_string,
+                                            "zip": zipCode,
+                                            "dp":dpImage!] as [String : Any] 
+                        
+                        print(inputDetail)
+                        
+                        fbViewModel.signUpWithEmail(Email: emailTF, Password: passwordTF.pass, userDetail: inputDetail) { (status, err) in
+                            
+                            if status{
+                                presentationModel.wrappedValue.dismiss()
+                            }else{
+                                Alert(title: Text("Error!"), message: Text("\(err!)"), dismissButton: .default(Text("dismiss")))
+                                
+                            }
+                        }
                     }, label: {
                         
                         ZStack{
@@ -307,7 +396,13 @@ struct SignUpView: View {
                 
                
             }// Main VStack end
-   
+            .sheet(isPresented: $showImagePicker) {
+                ImagePickerView(sourceType: .photoLibrary) { (getImage) in
+                    
+                    self.dpImage = getImage
+                }
+            }
+
         .background(
             Color.accentColor
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
@@ -329,7 +424,9 @@ struct InputFieldView: View {
     
     var imageName : String
     var title : String
-    @State var inputTF : String
+    
+    @Binding var inputTF : String
+    
     var PlaceHolder : String
     
     var body: some View {
@@ -347,6 +444,7 @@ struct InputFieldView: View {
                 TextField(PlaceHolder, text: $inputTF)
                     .font(.custom("Poppins-Regular", size: 12))
                     .foregroundColor(.accentColor)
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                 
             }
             .padding()
