@@ -17,6 +17,11 @@
 		F23801742601D0DE00B3FEA1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */; };
 		F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */; };
 		F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238017B2601D82C00B3FEA1 /* SignUpView.swift */; };
+		F242106E2608A30B0046EA2B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F242106D2608A30B0046EA2B /* MainView.swift */; };
+		F24210712608A3550046EA2B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210702608A3550046EA2B /* HomeView.swift */; };
+		F24210742608A3630046EA2B /* MediView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210732608A3630046EA2B /* MediView.swift */; };
+		F24210772608A3720046EA2B /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210762608A3720046EA2B /* TrackerView.swift */; };
+		F242107A2608A3970046EA2B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210792608A3970046EA2B /* ReportView.swift */; };
 		F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD40F260106D500CA43F5 /* iCarePillApp.swift */; };
 		F29FD412260106D500CA43F5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD411260106D500CA43F5 /* SignInView.swift */; };
 		F29FD414260106D600CA43F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29FD413260106D600CA43F5 /* Assets.xcassets */; };
@@ -49,6 +54,11 @@
 		F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageViewModel.swift; sourceTree = "<group>"; };
 		F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Resource/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F238017B2601D82C00B3FEA1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		F242106D2608A30B0046EA2B /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F24210702608A3550046EA2B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F24210732608A3630046EA2B /* MediView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediView.swift; sourceTree = "<group>"; };
+		F24210762608A3720046EA2B /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
+		F24210792608A3970046EA2B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29FD40F260106D500CA43F5 /* iCarePillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCarePillApp.swift; sourceTree = "<group>"; };
 		F29FD411260106D500CA43F5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -175,6 +185,11 @@
 				F29FD40F260106D500CA43F5 /* iCarePillApp.swift */,
 				F29FD411260106D500CA43F5 /* SignInView.swift */,
 				F238017B2601D82C00B3FEA1 /* SignUpView.swift */,
+				F242106D2608A30B0046EA2B /* MainView.swift */,
+				F24210702608A3550046EA2B /* HomeView.swift */,
+				F24210732608A3630046EA2B /* MediView.swift */,
+				F24210792608A3970046EA2B /* ReportView.swift */,
+				F24210762608A3720046EA2B /* TrackerView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -298,13 +313,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F24210712608A3550046EA2B /* HomeView.swift in Sources */,
 				F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */,
+				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
+				F242106E2608A30B0046EA2B /* MainView.swift in Sources */,
 				F29FD412260106D500CA43F5 /* SignInView.swift in Sources */,
 				F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */,
 				F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */,
 				F2D327032604935E009880BE /* User.swift in Sources */,
+				F24210742608A3630046EA2B /* MediView.swift in Sources */,
 				F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */,
 				F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */,
+				F24210772608A3720046EA2B /* TrackerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

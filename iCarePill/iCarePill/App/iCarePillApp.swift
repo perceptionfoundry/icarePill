@@ -18,7 +18,8 @@ struct iCarePillApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SignInView()
+//            SignInView()
+            MainView()
         }
     }
 }

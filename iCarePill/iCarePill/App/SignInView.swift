@@ -67,7 +67,7 @@ struct SignInView: View {
             //MARK: SIGN IN BUTTON
             
             NavigationLink(
-                destination: Text("Destination"),
+                destination: MainView(),
                 isActive: $isLogin,
                 label: {
                     Button(action: {
