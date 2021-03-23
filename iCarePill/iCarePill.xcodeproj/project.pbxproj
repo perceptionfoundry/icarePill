@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AA260877D10038A925 /* ImagePickerView.swift */; };
 		F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */; };
+		F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */; };
+		F22EC6242609C8C1009FCF7F /* QRCodeReader in Frameworks */ = {isa = PBXBuildFile; productRef = F22EC6232609C8C1009FCF7F /* QRCodeReader */; };
+		F22EC6272609C8FE009FCF7F /* QRCodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */; };
 		F23801642601CB3000B3FEA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */; };
 		F23801682601CED600B3FEA1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F23801672601CED600B3FEA1 /* FirebaseAnalytics */; };
 		F238016A2601CED600B3FEA1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F23801692601CED600B3FEA1 /* FirebaseStorage */; };
@@ -22,6 +25,7 @@
 		F24210742608A3630046EA2B /* MediView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210732608A3630046EA2B /* MediView.swift */; };
 		F24210772608A3720046EA2B /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210762608A3720046EA2B /* TrackerView.swift */; };
 		F242107A2608A3970046EA2B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210792608A3970046EA2B /* ReportView.swift */; };
+		F24210812608EFA30046EA2B /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210802608EFA30046EA2B /* Medicine.swift */; };
 		F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD40F260106D500CA43F5 /* iCarePillApp.swift */; };
 		F29FD412260106D500CA43F5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD411260106D500CA43F5 /* SignInView.swift */; };
 		F29FD414260106D600CA43F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29FD413260106D600CA43F5 /* Assets.xcassets */; };
@@ -52,6 +56,8 @@
 /* Begin PBXFileReference section */
 		F223B1AA260877D10038A925 /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageViewModel.swift; sourceTree = "<group>"; };
+		F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
+		F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderView.swift; sourceTree = "<group>"; };
 		F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Resource/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F238017B2601D82C00B3FEA1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		F242106D2608A30B0046EA2B /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -59,6 +65,7 @@
 		F24210732608A3630046EA2B /* MediView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediView.swift; sourceTree = "<group>"; };
 		F24210762608A3720046EA2B /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 		F24210792608A3970046EA2B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		F24210802608EFA30046EA2B /* Medicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29FD40F260106D500CA43F5 /* iCarePillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCarePillApp.swift; sourceTree = "<group>"; };
 		F29FD411260106D500CA43F5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -98,6 +105,7 @@
 				F238016E2601CED600B3FEA1 /* FirebaseFirestore in Frameworks */,
 				F238016C2601CED600B3FEA1 /* FirebaseAuth in Frameworks */,
 				F238016A2601CED600B3FEA1 /* FirebaseStorage in Frameworks */,
+				F22EC6242609C8C1009FCF7F /* QRCodeReader in Frameworks */,
 				F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				F223B1AA260877D10038A925 /* ImagePickerView.swift */,
+				F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +195,7 @@
 				F29FD411260106D500CA43F5 /* SignInView.swift */,
 				F238017B2601D82C00B3FEA1 /* SignUpView.swift */,
 				F242106D2608A30B0046EA2B /* MainView.swift */,
+				F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */,
 				F24210702608A3550046EA2B /* HomeView.swift */,
 				F24210732608A3630046EA2B /* MediView.swift */,
 				F24210792608A3970046EA2B /* ReportView.swift */,
@@ -207,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				F2D327022604935E009880BE /* User.swift */,
+				F24210802608EFA30046EA2B /* Medicine.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,6 +245,7 @@
 				F238016D2601CED600B3FEA1 /* FirebaseFirestore */,
 				F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */,
 				F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */,
+				F22EC6232609C8C1009FCF7F /* QRCodeReader */,
 			);
 			productName = iCarePill;
 			productReference = F29FD40C260106D500CA43F5 /* iCarePill.app */;
@@ -266,6 +278,7 @@
 				F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F23801722601D0DD00B3FEA1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				F23801762601D1FB00B3FEA1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */,
 			);
 			productRefGroup = F29FD40D260106D500CA43F5 /* Products */;
 			projectDirPath = "";
@@ -314,12 +327,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F24210712608A3550046EA2B /* HomeView.swift in Sources */,
+				F24210812608EFA30046EA2B /* Medicine.swift in Sources */,
 				F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */,
 				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
+				F22EC6272609C8FE009FCF7F /* QRCodeReaderView.swift in Sources */,
 				F242106E2608A30B0046EA2B /* MainView.swift in Sources */,
 				F29FD412260106D500CA43F5 /* SignInView.swift in Sources */,
 				F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */,
 				F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */,
+				F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */,
 				F2D327032604935E009880BE /* User.swift in Sources */,
 				F24210742608A3630046EA2B /* MediView.swift in Sources */,
 				F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */,
@@ -517,6 +533,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yannickl/QRCodeReader.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.1.1;
+			};
+		};
 		F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -544,6 +568,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F22EC6232609C8C1009FCF7F /* QRCodeReader */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */;
+			productName = QRCodeReader;
+		};
 		F23801672601CED600B3FEA1 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

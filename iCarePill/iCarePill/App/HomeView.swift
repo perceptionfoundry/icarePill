@@ -8,6 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    
+    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken"),
+                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "injection", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false, status: "skip"),
+                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken")]
+    
+    
+    
+        @State  var isNewEntry = false
+    
+
+    
     var body: some View {
         
         
@@ -37,17 +49,24 @@ struct HomeView: View {
                            
                     }
                     Spacer()
-                    Button(action: {
-                        
-                    }, label: {
-                        Image("add_button")
-                            .padding(.trailing)
-                    })
+                    
+                    NavigationLink(
+                        destination: AddMedicineView(),
+                        isActive: $isNewEntry,
+                        label: {
+                            Button(action: {
+                                isNewEntry.toggle()
+                            }, label: {
+                                Image("add_button")
+                                    .padding(.trailing)
+                            })
+                        })
+                   
                 }.background(
                     Rectangle()
                         .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
                         .shadow(radius: 6 )
-                        .frame(width: .infinity,height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .edgesIgnoringSafeArea(.all)
                         
                 )
@@ -73,7 +92,7 @@ struct HomeView: View {
                 
                 HomeCenterButtonView(imageName: "moon", title: " Night")
                     
-            }.padding()
+            }
             
     
                 
@@ -87,96 +106,30 @@ struct HomeView: View {
                         .foregroundColor(.black)
                         .padding()
                     
-                    List{
-                        
-                        VStack{
-                            
-                            ZStack{
-                            
-                            RoundedRectangle(cornerRadius: 12)
-                                .foregroundColor(.white)
-                                .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                .shadow(radius: 5)
-                               
-                                HStack{
-                            Image("capsule")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                    
-                                    VStack(alignment:.leading){
-                                        Text("Asprin")
-                                        .font(.custom("Poppins-Medium", size: 12))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.4979991317, green: 0.4980617762, blue: 0.4979779124, alpha: 1)))
-                                        
-                                        Text("Asprin")
-                                        .font(.custom("Poppins-Medium", size: 10))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-                                        
-                                        Text("Asprin")
-                                        .font(.custom("Poppins-Medium", size: 10))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Image("taken")
-                                }.padding()
-                                
-                            
-                            }
-                        }
-                       
-                        
-                       VStack {
-                            
-                            ZStack{
-                            
-                            RoundedRectangle(cornerRadius: 12)
-                                .foregroundColor(.white)
-                                .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                .shadow(radius: 5)
-                               
-                                HStack{
-                            Image("tablet")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 40, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                    
-                                    VStack(alignment:.leading){
-                                        Text("Asprin")
-                                        .font(.custom("Poppins-Medium", size: 12))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.4979991317, green: 0.4980617762, blue: 0.4979779124, alpha: 1)))
-                                        
-                                        Text("Asprin")
-                                        .font(.custom("Poppins-Medium", size: 10))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-                                        
-                                        Text("Asprin")
-                                        .font(.custom("Poppins-Medium", size: 10))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Image("skip")
-                                }.padding()
-                                
-                            
-                            }
-                        }
-                        
-                    }
                     
+                    ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+                    LazyVStack{
+                        
+                        
+                        ForEach(tempData){value in
+                            
+                            HomeCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Dose: "\(value.Strength)\(value.unit)", Time: "08:00", status: value.status)
+                                .padding(.bottom, 10)
+                        }
+    
+                    }
+                    .padding()
+                    }
                     
                 }
                 .background(
                     Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1))
                 )
+                
         
          
             Spacer()
-    }
+    }.navigationBarHidden(true)
             
         
         
@@ -203,7 +156,7 @@ struct HomeCenterButtonView: View {
                 
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
-                    .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: 150, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .shadow(radius: 1 )
                 
                 VStack{
@@ -224,5 +177,54 @@ struct HomeCenterButtonView: View {
         
         }
         .padding()
+    }
+}
+
+struct HomeCellView: View {
+    
+    var ImageTitle: String
+    var MedicineTitle : String
+    var Dose : String
+    var Time : String
+    var status : String
+    
+    var body: some View {
+        VStack{
+            
+            ZStack{
+                
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(.white)
+                    .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .shadow(radius: 3)
+                
+                HStack{
+                    Image(ImageTitle)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    
+                    VStack(alignment:.leading){
+                        Text(MedicineTitle)
+                            .font(.custom("Poppins-Medium", size: 12))
+                            .foregroundColor(Color(#colorLiteral(red: 0.4979991317, green: 0.4980617762, blue: 0.4979779124, alpha: 1)))
+                        
+                        Text(Dose)
+                            .font(.custom("Poppins-Medium", size: 10))
+                            .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
+                        
+                        Text(Time)
+                            .font(.custom("Poppins-Medium", size: 10))
+                            .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
+                    }
+                    
+                    Spacer()
+                    
+                    Image(status)
+                }.padding()
+                
+                
+            }
+        }
     }
 }

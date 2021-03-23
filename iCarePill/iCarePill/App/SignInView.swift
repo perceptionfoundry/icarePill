@@ -72,19 +72,21 @@ struct SignInView: View {
                 label: {
                     Button(action: {
                         
-                        fbViewModel.signInWithEmail(Email: emailTF.email, Password: passwordTF.pass) { (status, err) in
-
-                            if status{
-                                isLogin.toggle()
-
-                            }else{
-                                isAlert.toggle()
-                             
-
-                                alertMsg = err!
-                            
-                            }
-                        }
+                        isLogin.toggle()
+                        
+//                        fbViewModel.signInWithEmail(Email: emailTF.email, Password: passwordTF.pass) { (status, err) in
+//
+//                            if status{
+//                                isLogin.toggle()
+//
+//                            }else{
+//                                isAlert.toggle()
+//
+//
+//                                alertMsg = err!
+//
+//                            }
+//                        }
                     
                         
                     }, label: {

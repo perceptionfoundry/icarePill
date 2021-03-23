@@ -15,7 +15,7 @@ struct MainView: View {
     
     var body: some View {
         
-
+      
         TabView(selection: $selectedIndex){
             HomeView()
                 .tabItem {
@@ -25,7 +25,7 @@ struct MainView: View {
                         .foregroundColor(Color(#colorLiteral(red: 0.213047266, green: 0.3305280805, blue: 0.8173508048, alpha: 1)))
 
                 }.tag(1)
-
+                
 
             MediView()
                 .tabItem {
@@ -50,7 +50,7 @@ struct MainView: View {
                 }.tag(4)
             Text("More")
                 .tabItem {
-                    Image("more_tab")
+                    Image(selectedIndex == 5 ? "more_tab_selected":"more_tab")
                     Text("More")
                         .foregroundColor(.accentColor)
 
@@ -59,6 +59,8 @@ struct MainView: View {
         .edgesIgnoringSafeArea(.top)
         .accentColor(Color(#colorLiteral(red: 0.213047266, green: 0.3305280805, blue: 0.8173508048, alpha: 1)))
         
+    
+    
     }
 }
 
