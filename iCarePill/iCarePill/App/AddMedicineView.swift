@@ -12,7 +12,25 @@ struct AddMedicineView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var MedicationTitle = ""
+    @State var conditionValue = ""
     @State var isQRScanning = false
+    @State private var selectedStrength = "1"
+    let strengthValue = ["1", "2.5","5","7.5"]
+    @State private var selectedUnit = "mg"
+    let UnitValue = ["mg", "ml"]
+    @State var DoE = Date()
+    @State var stockValue = ""
+    @State var reminderStatus = false
+
+    
+    
+    @State  var isTablet  = false
+    @State  var isCapsule  = true
+    @State  var isSyrup  = false
+    
+    @State  var isExpand  = false
+    @State  var isExpand2  = false
+    
     var body: some View {
         
         ScrollView{
@@ -36,6 +54,7 @@ struct AddMedicineView: View {
                             
                             TextField("Medication Name", text: $MedicationTitle)
                                 .font(.custom("Poppins-Medium", size: 14))
+                                .foregroundColor(.accentColor)
 
                         }
                         .padding()
@@ -70,7 +89,8 @@ struct AddMedicineView: View {
                         .shadow(radius: 4)
                     
                   
-                        TextField("Condition", text: $MedicationTitle)
+                        TextField("Condition", text: $conditionValue)
+                            .foregroundColor(.accentColor)
                             .font(.custom("Poppins-Medium", size: 14))
                             .padding()
                   
@@ -97,25 +117,32 @@ struct AddMedicineView: View {
                     
                         
                     Button(action: {
+                        isCapsule = true
+                        isTablet = false
+                        isSyrup = false
                         
                     }, label: {
                         
-                        AppearanceButtonView(imageTitle: "capsule")
+                        AppearanceButtonView(imageTitle: "capsule", isTick: isCapsule)
                     })
                     
                     
                     Button(action: {
-                        
+                        isCapsule = false
+                        isTablet = true
+                        isSyrup = false
                     }, label: {
                         
-                        AppearanceButtonView(imageTitle: "tablet")
+                        AppearanceButtonView(imageTitle: "tablet", isTick: isTablet)
                     })
                     
                     Button(action: {
-                        
+                        isCapsule = false
+                        isTablet = false
+                        isSyrup = true
                     }, label: {
                         
-                        AppearanceButtonView(imageTitle: "injection")
+                        AppearanceButtonView(imageTitle: "syrup", isTick: isSyrup)
                     })
                             
                  
@@ -131,35 +158,53 @@ struct AddMedicineView: View {
                 
             //MARK: Strength & Unit
             HStack{
+                
+                
                 VStack(alignment: .leading){
                     Text("Strength ")
                         .font(.custom("Poppins-Medium", size: 16))
                         .foregroundColor(.accentColor)
                    
                     HStack{
-                    ZStack{
-                        Rectangle()
-                            .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.white)
-                            .shadow(radius: 4)
+
                         
-                      
-                            TextField("1", text: $MedicationTitle)
-                                .font(.custom("Poppins-Medium", size: 14))
-                                .padding()
-                      
-                        
-                       
-                        
+                        VStack{
+                        DisclosureGroup(selectedStrength, isExpanded: $isExpand) {
+                            
+                            VStack{
+                                ForEach(strengthValue, id:\.self){ value  in
+                                    
+                                    Text("\(value)")
+                                        .foregroundColor(.accentColor)
+                                        .padding(.bottom)
+                                        .onTapGesture {
+                                            self.selectedStrength = value
+                                            
+                                            withAnimation{
+                                                self.isExpand.toggle()
+                                            }
+                                       
+                                        }
+                                    
+                                }
+                            }
+                        }.foregroundColor(.accentColor)
+                        .font(.custom("Poppins-Medium", size: 13))
+                        .padding()
+                        .background(
+                            Rectangle()
+//                                .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(.white)
+                                .shadow(radius: 4)
+                        )
+                  
                     }
-                     
-                   
-                        
-                    }
+
+
                 }
+                
                 .padding(.trailing, 15)
-                
-                
+                }
                 
                 VStack(alignment: .leading){
                     Text("Unit")
@@ -167,29 +212,49 @@ struct AddMedicineView: View {
                         .foregroundColor(.accentColor)
                    
                     HStack{
-                    ZStack{
-                        Rectangle()
-                            .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(.white)
-                            .shadow(radius: 4)
+
                         
-                      
-                            TextField("mg", text: $MedicationTitle)
-                                .font(.custom("Poppins-Medium", size: 14))
-                                .padding()
-                      
-                        
-                       
-                        
+                        VStack{
+                            DisclosureGroup(selectedUnit, isExpanded: $isExpand2) {
+                            
+                            VStack{
+                                ForEach(UnitValue, id:\.self){ value  in
+                                    
+                                    Text("\(value)")
+                                        .foregroundColor(.accentColor)
+                                        .padding(.bottom)
+                                        .onTapGesture {
+                                            self.selectedUnit = value
+                                            
+                                            withAnimation{
+                                                self.isExpand2.toggle()
+                                            }
+                                       
+                                        }
+                                    
+                                }
+                            }
+                        }.foregroundColor(.accentColor)
+                        .font(.custom("Poppins-Medium", size: 13))
+                        .padding()
+                  
                     }
-                     
-                   
-                        
-                    }
+                        .background(
+                            Rectangle()
+//                                .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(.white)
+                                .shadow(radius: 4)
+                        )
+
                 }
+                
+                .padding(.trailing, 15)
+                }
+               
             }
         
     
+                
             //MARK: DoE
             VStack(alignment: .leading){
                 Text("DoE (Date of Expiration) ")
@@ -197,18 +262,23 @@ struct AddMedicineView: View {
                     .foregroundColor(.accentColor)
                
                 HStack{
-                ZStack{
+                    ZStack{
                     Rectangle()
                         .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
                         .shadow(radius: 4)
                     
                   
-                        TextField("Condition", text: $MedicationTitle)
-                            .font(.custom("Poppins-Medium", size: 14))
-                            .padding()
-                  
+//                        TextField("Condition", text: $MedicationTitle)
+//                            .font(.custom("Poppins-Medium", size: 14))
+//                            .padding()
+                    HStack{
+                        
+                    DatePicker("", selection: $DoE, displayedComponents: .date)
+                        .padding(.trailing, 100)
                     
+                  
+                    }
                    
                     
                 }
@@ -233,8 +303,9 @@ struct AddMedicineView: View {
                         .shadow(radius: 4)
                     
                   
-                        TextField("1", text: $MedicationTitle)
+                        TextField("1", text: $stockValue)
                             .font(.custom("Poppins-Medium", size: 14))
+                            .foregroundColor(.accentColor)
                             .padding()
                   
                     
@@ -262,10 +333,12 @@ struct AddMedicineView: View {
                   
                        
                             
-                    Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
+                    Toggle(isOn: $reminderStatus) {
                         Text("Refill Reminder")
                             .font(.custom("Poppins-Medium", size: 14))
                             .foregroundColor(.accentColor)
+                        
+                        
                     }
                     .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                     .padding()
@@ -343,6 +416,7 @@ struct AddMedicineView_Previews: PreviewProvider {
 struct AppearanceButtonView: View {
     
     var imageTitle: String
+    var isTick : Bool
     
     var body: some View {
         ZStack{
@@ -354,6 +428,11 @@ struct AppearanceButtonView: View {
             
             Image(imageTitle)
             
-        }
+        }.overlay(
+        Image(isTick ? "tick" : "")
+            .padding(.vertical, 5)
+            .padding(.horizontal, 5)
+            ,alignment: .topTrailing
+        )
     }
 }

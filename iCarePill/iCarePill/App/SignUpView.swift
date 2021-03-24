@@ -15,6 +15,8 @@ struct SignUpView: View {
     
     
     var fbViewModel = FirebaseViewModel()
+    @State var alertMsg = ""
+    @State var isAlert = false
     
     @Environment(\.presentationMode) var presentationModel
     
@@ -364,7 +366,10 @@ struct SignUpView: View {
                             if status{
                                 presentationModel.wrappedValue.dismiss()
                             }else{
-                                Alert(title: Text("Error!"), message: Text("\(err!)"), dismissButton: .default(Text("dismiss")))
+                                
+                                isAlert.toggle()
+                                self.alertMsg = err!
+                              
                                 
                             }
                         }
@@ -381,6 +386,9 @@ struct SignUpView: View {
                             
                         }
                         
+                    }).alert(isPresented: $isAlert, content: {
+                        
+                        Alert(title: Text("Error"), message: Text(alertMsg), dismissButton: .default(Text("Dismiss")))
                     })
 
    
