@@ -19,7 +19,9 @@ struct iCarePillApp: App {
     var body: some Scene {
         WindowGroup {
             SignInView()
+                .preferredColorScheme(.light)
 //            MainView()
         }
+        
     }
 }

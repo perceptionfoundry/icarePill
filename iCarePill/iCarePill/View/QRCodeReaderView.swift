@@ -12,7 +12,95 @@ import QRCodeReader
  
 
 
-//public struct QRCodeReaderView: UIViewControllerRepresentable{
+public struct QRCodeReaderView: UIViewControllerRepresentable{
+   
+    
+    @Binding var qrCodeValue : String
+    @Environment(\.presentationMode) var presentationMode
+    
+    
+    
+    
+    public func makeUIViewController(context: Context) -> QRCodeReaderViewController {
+        
+        let builder = QRCodeReaderViewControllerBuilder {
+                      $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+        
+                      // Configure the view controller (optional)
+                      $0.showTorchButton        = false
+                      $0.showSwitchCameraButton = false
+                      $0.showCancelButton       = false
+                      $0.showOverlayView        = true
+                      $0.rectOfInterest         = CGRect(x: 0.2, y: 0.2, width: 0.6, height: 0.6)
+                  }
+        
+        let readerVC = QRCodeReaderViewController(builder: builder)
+        
+        readerVC.modalPresentationStyle = .formSheet
+        
+        
+        
+//        readerVC.completionBlock = { (result: QRCodeReaderResult?) in
+//          print(result)
+//        }
+        readerVC.delegate = context.coordinator
+            
+                  return readerVC
+        
+    }
+    
+    public func updateUIViewController(_ uiViewController: QRCodeReaderViewController, context: Context) {
+        
+    }
+    
+    
+    
+    public class Coordinator: NSObject, QRCodeReaderViewControllerDelegate{
+        
+        let parentView : QRCodeReaderView
+        
+        init(parent: QRCodeReaderView){
+            self.parentView = parent
+        }
+        
+        public func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        
+            reader.stopScanning()
+
+            
+            print(result.value)
+            
+            parentView.qrCodeValue = "\(result.value)"
+           
+            
+//            dismiss(animated: true, completion: nil)
+            
+            parentView.presentationMode.wrappedValue.dismiss()
+            
+            
+        }
+        
+        public func readerDidCancel(_ reader: QRCodeReaderViewController) {
+        
+            reader.stopScanning()
+
+//            dismiss(animated: true, completion: nil)
+            parentView.presentationMode.wrappedValue.dismiss()
+            
+        }
+        
+        
+    }
+   
+    
+    public func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
+    
+    
+    
+    
+}
 //    public func makeUIViewController(context: Context) -> QRCodeReaderViewController {
 //        return self.readerVC
 //    }

@@ -12,6 +12,7 @@ struct AddMedicineView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var MedicationTitle = ""
+    @State var isQRScanning = false
     var body: some View {
         
         ScrollView{
@@ -44,14 +45,16 @@ struct AddMedicineView: View {
                     }
                      
                         Button(action: {
-                            
+                            isQRScanning.toggle()
                         }, label: {
                             Image("qrcode")
                         })
                         
                     }
                 }
-            
+                .sheet(isPresented: $isQRScanning, content: {
+                    QRCodeReaderView(qrCodeValue: $MedicationTitle)
+                })
             
             //MARK: Condition
             VStack(alignment: .leading){
