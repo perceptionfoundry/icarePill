@@ -130,7 +130,7 @@ struct HomeView: View {
          
             Spacer()
     }.navigationBarHidden(true)
-            
+    
         
         
        
@@ -167,13 +167,7 @@ struct HomeCenterButtonView: View {
                 }
                 
             }
-       
-           
-           
-            
-         
-                
-            
+
         
         }
         .padding()

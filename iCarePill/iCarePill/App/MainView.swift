@@ -48,7 +48,7 @@ struct MainView: View {
                         .foregroundColor(.accentColor)
 
                 }.tag(4)
-            Text("More")
+            MoreView()
                 .tabItem {
                     Image(selectedIndex == 5 ? "more_tab_selected":"more_tab")
                     Text("More")
@@ -58,8 +58,8 @@ struct MainView: View {
         }
         .edgesIgnoringSafeArea(.top)
         .accentColor(Color(#colorLiteral(red: 0.213047266, green: 0.3305280805, blue: 0.8173508048, alpha: 1)))
-        
-    
+       
+        .navigationBarHidden(true)
     
     }
 }

@@ -30,6 +30,7 @@ struct AddMedicineView: View {
     
     @State  var isExpand  = false
     @State  var isExpand2  = false
+    @State  var  isNext = false
     
     var body: some View {
         
@@ -353,25 +354,34 @@ struct AddMedicineView: View {
                 }
             }
             
-                Button(action: {
-                    
-               
+                
+                //MARK: Next Button
+                
+                NavigationLink(
+                    destination: ScheduleView(),
+                    isActive: $isNext,
+                    label: {
+                        Button(action: {
+                            
+                            isNext.toggle()
 
-                    
-                }, label: {
-                    
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 30)
-                            .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .padding()
-                        
-                        Text("Next")
-                            .foregroundColor(.white)
-                            .font(.custom("Poppins-Medium", size: 16))
-                        
-                    }
-                    
-                })
+                            
+                        }, label: {
+                            
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 30)
+                                    .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .padding()
+                                
+                                Text("Next")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Poppins-Medium", size: 16))
+                                
+                            }
+                            
+                        })
+                    })
+               
             
             
             Spacer()

@@ -26,6 +26,12 @@
 		F24210772608A3720046EA2B /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210762608A3720046EA2B /* TrackerView.swift */; };
 		F242107A2608A3970046EA2B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210792608A3970046EA2B /* ReportView.swift */; };
 		F24210812608EFA30046EA2B /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24210802608EFA30046EA2B /* Medicine.swift */; };
+		F256BD6C260C8B250046C6D8 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD6B260C8B250046C6D8 /* MoreView.swift */; };
+		F256BD6F260C96860046C6D8 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD6E260C96860046C6D8 /* AppointmentsView.swift */; };
+		F256BD72260C97270046C6D8 /* DoctorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD71260C97270046C6D8 /* DoctorsView.swift */; };
+		F256BD75260C97790046C6D8 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD74260C97790046C6D8 /* NotesView.swift */; };
+		F256BD78260C9E750046C6D8 /* NoRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD77260C9E750046C6D8 /* NoRecordView.swift */; };
+		F256BD7B260CAD5C0046C6D8 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD7A260CAD5C0046C6D8 /* FAQView.swift */; };
 		F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD40F260106D500CA43F5 /* iCarePillApp.swift */; };
 		F29FD412260106D500CA43F5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD411260106D500CA43F5 /* SignInView.swift */; };
 		F29FD414260106D600CA43F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29FD413260106D600CA43F5 /* Assets.xcassets */; };
@@ -51,6 +57,7 @@
 		F29FD44726010C0400CA43F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29FD43526010C0400CA43F5 /* Poppins-Light.ttf */; };
 		F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D326FD260490B2009880BE /* FirebaseViewModel.swift */; };
 		F2D327032604935E009880BE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D327022604935E009880BE /* User.swift */; };
+		F2E9ACF8260BA08C004DF836 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E9ACF7260BA08C004DF836 /* ScheduleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +73,12 @@
 		F24210762608A3720046EA2B /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 		F24210792608A3970046EA2B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		F24210802608EFA30046EA2B /* Medicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
+		F256BD6B260C8B250046C6D8 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		F256BD6E260C96860046C6D8 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		F256BD71260C97270046C6D8 /* DoctorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsView.swift; sourceTree = "<group>"; };
+		F256BD74260C97790046C6D8 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		F256BD77260C9E750046C6D8 /* NoRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRecordView.swift; sourceTree = "<group>"; };
+		F256BD7A260CAD5C0046C6D8 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29FD40F260106D500CA43F5 /* iCarePillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCarePillApp.swift; sourceTree = "<group>"; };
 		F29FD411260106D500CA43F5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -93,6 +106,7 @@
 		F29FD43526010C0400CA43F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		F2D326FD260490B2009880BE /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		F2D327022604935E009880BE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F2E9ACF7260BA08C004DF836 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +132,7 @@
 			children = (
 				F223B1AA260877D10038A925 /* ImagePickerView.swift */,
 				F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */,
+				F256BD77260C9E750046C6D8 /* NoRecordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,10 +211,16 @@
 				F238017B2601D82C00B3FEA1 /* SignUpView.swift */,
 				F242106D2608A30B0046EA2B /* MainView.swift */,
 				F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */,
+				F2E9ACF7260BA08C004DF836 /* ScheduleView.swift */,
 				F24210702608A3550046EA2B /* HomeView.swift */,
 				F24210732608A3630046EA2B /* MediView.swift */,
 				F24210792608A3970046EA2B /* ReportView.swift */,
 				F24210762608A3720046EA2B /* TrackerView.swift */,
+				F256BD6B260C8B250046C6D8 /* MoreView.swift */,
+				F256BD6E260C96860046C6D8 /* AppointmentsView.swift */,
+				F256BD71260C97270046C6D8 /* DoctorsView.swift */,
+				F256BD74260C97790046C6D8 /* NotesView.swift */,
+				F256BD7A260CAD5C0046C6D8 /* FAQView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -327,10 +348,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F24210712608A3550046EA2B /* HomeView.swift in Sources */,
+				F256BD72260C97270046C6D8 /* DoctorsView.swift in Sources */,
+				F256BD75260C97790046C6D8 /* NotesView.swift in Sources */,
 				F24210812608EFA30046EA2B /* Medicine.swift in Sources */,
 				F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */,
 				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
+				F256BD78260C9E750046C6D8 /* NoRecordView.swift in Sources */,
 				F22EC6272609C8FE009FCF7F /* QRCodeReaderView.swift in Sources */,
+				F2E9ACF8260BA08C004DF836 /* ScheduleView.swift in Sources */,
 				F242106E2608A30B0046EA2B /* MainView.swift in Sources */,
 				F29FD412260106D500CA43F5 /* SignInView.swift in Sources */,
 				F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */,
@@ -338,9 +363,12 @@
 				F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */,
 				F2D327032604935E009880BE /* User.swift in Sources */,
 				F24210742608A3630046EA2B /* MediView.swift in Sources */,
+				F256BD6C260C8B250046C6D8 /* MoreView.swift in Sources */,
+				F256BD6F260C96860046C6D8 /* AppointmentsView.swift in Sources */,
 				F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */,
 				F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */,
 				F24210772608A3720046EA2B /* TrackerView.swift in Sources */,
+				F256BD7B260CAD5C0046C6D8 /* FAQView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
