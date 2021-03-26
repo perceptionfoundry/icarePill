@@ -251,7 +251,7 @@ struct AddAppointmentView: View {
         
     
                 
-            //MARK: DoE
+            //MARK: Location
             VStack(alignment: .leading){
                 Text("Add Location")
                     .font(.custom("Poppins-Medium", size: 16))
@@ -265,9 +265,7 @@ struct AddAppointmentView: View {
                         .shadow(radius: 4)
                     
                   
-//                        TextField("Condition", text: $MedicationTitle)
-//                            .font(.custom("Poppins-Medium", size: 14))
-//                            .padding()
+
                     HStack{
                         
                         TextField("location", text: $locationValue)
@@ -280,8 +278,7 @@ struct AddAppointmentView: View {
                    
                     
                 }
-                 
-               
+  
                     
                 }
             }
@@ -296,15 +293,14 @@ struct AddAppointmentView: View {
                 HStack{
                 ZStack{
                     Rectangle()
-                        .frame(height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
                         .shadow(radius: 4)
                     
                   
-                        TextField("Add Notes", text: $NoteValue)
-                            .frame(height: 140, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .lineLimit(4)
-                            .multilineTextAlignment(.leading)
+//                    
+                        MultilineTextView(text: $NoteValue)
+                            .foregroundColor(.accentColor)
                             .font(.custom("Poppins-Medium", size: 14))
                             .foregroundColor(.accentColor)
                             .padding()
@@ -387,3 +383,6 @@ struct AddAppointmentView_Previews: PreviewProvider {
         AddAppointmentView()
     }
 }
+
+
+
