@@ -43,7 +43,10 @@ struct AppointmentsView: View {
             Spacer()
             //MARK: Done Button
             
-            
+            NavigationLink(
+                destination: AddAppointmentView(),
+                isActive: $isNext,
+                label: {
                     Button(action: {
                         
                         isNext.toggle()
@@ -53,7 +56,7 @@ struct AppointmentsView: View {
                         
                         ZStack{
                             RoundedRectangle(cornerRadius: 30)
-                                .foregroundColor(.accentColor)
+                                .fill(Color(#colorLiteral(red: 0.2117647059, green: 0.3294117647, blue: 0.8156862745, alpha: 1)))
                                 .frame(width: 250, height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                 .padding()
                             
@@ -64,6 +67,8 @@ struct AppointmentsView: View {
                         }
                         
                     })
+                })
+                   
             
         }.padding()
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
