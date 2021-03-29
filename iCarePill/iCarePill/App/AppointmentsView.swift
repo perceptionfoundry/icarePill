@@ -12,7 +12,7 @@ struct AppointmentsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     
-    @State var count = 0
+    @State var count = 1
     
     @State var isNext = false
     
@@ -27,7 +27,7 @@ struct AppointmentsView: View {
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                 LazyVStack(content: {
                     ForEach(1...10, id: \.self) { count in
-                        DoctorCellView()
+                        AppointmentCellView()
                             
                     }.padding(.horizontal)
                     .padding(.vertical, 7)
@@ -107,7 +107,7 @@ struct AppointmentsView_Previews: PreviewProvider {
     }
 }
 
-struct DoctorCellView: View {
+struct AppointmentCellView: View {
     var body: some View {
         HStack{
             Image("sample")

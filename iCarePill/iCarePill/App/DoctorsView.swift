@@ -11,25 +11,54 @@ struct DoctorsView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State var count = 1
+    
+    @State var isNext = false
+    
     var body: some View {
         VStack{
        
+            if count == 0{
         NoRecordView(imageName: "no_doctor")
-            
+            }
+            else{
+                ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+                LazyVStack(content: {
+                    ForEach(1...10, id: \.self) { count in
+                       
+                       
+                          
+                           
+                        DoctorCellView()
+                      
+                    }.padding(.horizontal)
+                    .padding(.vertical, 7)
+                })
+                
+                }
+                
+                
+              
+                
+
+            }
             Spacer()
             //MARK: Done Button
             
-            
+            NavigationLink(
+                destination: AddDoctorView(),
+                isActive: $isNext,
+                label: {
                     Button(action: {
                         
-                       
+                        isNext.toggle()
 
                         
                     }, label: {
                         
                         ZStack{
                             RoundedRectangle(cornerRadius: 30)
-                                .foregroundColor(.accentColor)
+                                .fill(Color(#colorLiteral(red: 0.2117647059, green: 0.3294117647, blue: 0.8156862745, alpha: 1)))
                                 .frame(width: 250, height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                 .padding()
                             
@@ -40,7 +69,9 @@ struct DoctorsView: View {
                         }
                         
                     })
-
+                })
+                   
+            
         }.padding()
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
@@ -61,7 +92,7 @@ struct DoctorsView: View {
                     
                     ToolbarItem(placement: .principal) {
                         VStack {
-                            Text("Appointments")
+                            Text("Doctors")
                                 .font(.custom("Poppins-Medium", size: 18))
                                 .foregroundColor(.accentColor)
                            
@@ -75,5 +106,41 @@ struct DoctorsView: View {
 struct DoctorsView_Previews: PreviewProvider {
     static var previews: some View {
         DoctorsView()
+    }
+}
+
+struct DoctorCellView: View {
+    var body: some View {
+        HStack{
+            ZStack{
+                RoundedRectangle(cornerRadius: 12)
+                    .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(.white)
+                    .shadow(radius: 4)
+                
+                
+                HStack {
+                    
+                    Image("sample")
+                        .resizable()
+                        .frame(width: 60, height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        .padding(.leading)
+                    Text("Doctor Name")
+                        .foregroundColor(.accentColor)
+                        .font(.custom("Poppins-Medium", size: 14))
+                        .padding()
+                    Spacer()
+                    
+                }
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
     }
 }

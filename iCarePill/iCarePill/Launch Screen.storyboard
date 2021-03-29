@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="uJz-fF-3MF">
-                                <rect key="frame" x="117.5" y="358.5" width="179" height="179"/>
+                                <rect key="frame" x="28" y="269" width="358" height="358"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uJz-fF-3MF" secondAttribute="height" multiplier="1:1" id="2v3-OE-33z"/>
                                 </constraints>
@@ -42,7 +42,7 @@
                             <constraint firstItem="uJz-fF-3MF" firstAttribute="centerY" secondItem="FZO-La-mfj" secondAttribute="centerY" id="Y0G-Tf-0nu"/>
                             <constraint firstAttribute="bottom" secondItem="obG-Y5-kRd" secondAttribute="bottom" constant="20" id="Y44-ml-fuU"/>
                             <constraint firstItem="FZO-La-mfj" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="dFc-Qf-J7K"/>
-                            <constraint firstItem="uJz-fF-3MF" firstAttribute="height" secondItem="FZO-La-mfj" secondAttribute="height" multiplier="0.2" id="uQr-U0-t99"/>
+                            <constraint firstItem="uJz-fF-3MF" firstAttribute="height" secondItem="FZO-La-mfj" secondAttribute="height" multiplier="0.4" id="uQr-U0-t99"/>
                             <constraint firstAttribute="bottom" secondItem="FZO-La-mfj" secondAttribute="bottom" id="vet-f4-h33"/>
                         </constraints>
                     </view>
