@@ -33,6 +33,7 @@
 		F256BD78260C9E750046C6D8 /* NoRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD77260C9E750046C6D8 /* NoRecordView.swift */; };
 		F256BD7B260CAD5C0046C6D8 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD7A260CAD5C0046C6D8 /* FAQView.swift */; };
 		F26E454E2611C04B0054511E /* AddDoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E454D2611C04B0054511E /* AddDoctorView.swift */; };
+		F26E45522611CC520054511E /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E45512611CC520054511E /* AddNoteView.swift */; };
 		F287547E260E159A00D2D051 /* AddAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F287547D260E159A00D2D051 /* AddAppointmentView.swift */; };
 		F2875481260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */; };
 		F2875485260E317400D2D051 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2875484260E317400D2D051 /* MultilineTextView.swift */; };
@@ -84,6 +85,7 @@
 		F256BD77260C9E750046C6D8 /* NoRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRecordView.swift; sourceTree = "<group>"; };
 		F256BD7A260CAD5C0046C6D8 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		F26E454D2611C04B0054511E /* AddDoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDoctorView.swift; sourceTree = "<group>"; };
+		F26E45512611CC520054511E /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		F287547D260E159A00D2D051 /* AddAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAppointmentView.swift; sourceTree = "<group>"; };
 		F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDateOrTimeViewModel.swift; sourceTree = "<group>"; };
 		F2875484260E317400D2D051 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				F256BD71260C97270046C6D8 /* DoctorsView.swift */,
 				F26E454D2611C04B0054511E /* AddDoctorView.swift */,
 				F256BD74260C97790046C6D8 /* NotesView.swift */,
+				F26E45512611CC520054511E /* AddNoteView.swift */,
 				F256BD7A260CAD5C0046C6D8 /* FAQView.swift */,
 			);
 			path = App;
@@ -365,6 +368,7 @@
 				F24210812608EFA30046EA2B /* Medicine.swift in Sources */,
 				F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */,
 				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
+				F26E45522611CC520054511E /* AddNoteView.swift in Sources */,
 				F256BD78260C9E750046C6D8 /* NoRecordView.swift in Sources */,
 				F22EC6272609C8FE009FCF7F /* QRCodeReaderView.swift in Sources */,
 				F2E9ACF8260BA08C004DF836 /* ScheduleView.swift in Sources */,
