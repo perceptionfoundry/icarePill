@@ -102,10 +102,58 @@ struct TrackerView: View {
             
             HStack{
                 
+               
+                
+                
                 VStack{
+                    
+                    ZStack{
+                                                
+                                                
+                                             
+                                                Circle()
+                                                    .trim(from: 0.0, to: CGFloat(1))
+                                                    .stroke(style: StrokeStyle(lineWidth: 12, lineCap: .round, lineJoin: .round))
+                                                    .foregroundColor(Color(#colorLiteral(red: 0.7022312284, green: 0.8690876365, blue: 0.7566004992, alpha: 1)))
+                                                    .frame(width: 100, height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                                    .shadow(color: Color("Button_Color"), radius: 10, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+                                                    
+                                                    .opacity(0.8)
+                                                
+                                                
+                                            
+                                                
+            
+                                                    
+                                                
+                                                
+                                                Circle()
+                                                    .trim(from: 0.0, to: CGFloat(0.5))
+                                                    .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                                                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0.7959628105, blue: 0, alpha: 1)))
+                                                    .frame(width: 100, height: 100, alignment: .top)
+                                                    .rotationEffect(.degrees(-90))
+                                                    .animation(Animation.linear(duration: 2.0))
+                                                
+                                                
+                                                
+                                          
+                                                  
+                          
+                                                Circle()
+                                                    .foregroundColor(.red)
+                                                    .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                                
+
+                                                
+                                            }
                     Text("Excellent")
-                        .font(.custom("Poppins-Medium", size: 14))
+                        .font(.custom("Poppins-Medium", size: 16))
                         .foregroundColor(Color(#colorLiteral(red: 0, green: 0.7959591746, blue: 0, alpha: 1)))
+                    
+                    Text("Keep going")
+                        .font(.custom("Poppins-Medium", size: 10))
+                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                 }
                 .padding()
                 
