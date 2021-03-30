@@ -135,7 +135,7 @@ struct MoreView: View {
             
             //MARK: SETTING
             NavigationLink(
-                destination: Text("setting"),
+                destination: SettingView(),
                 isActive: $isSetting,
                 label: {
                     Button(action: {

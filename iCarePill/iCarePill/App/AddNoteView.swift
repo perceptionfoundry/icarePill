@@ -35,9 +35,7 @@ struct AddNoteView: View {
                
                 //MARK:  NOTE
                 VStack(alignment: .leading){
-                    Text("Add Notes ")
-                        .font(.custom("Poppins-Medium", size: 16))
-                        .foregroundColor(.accentColor)
+             
                    
                     HStack{
                     ZStack{

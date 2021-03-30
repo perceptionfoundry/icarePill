@@ -194,7 +194,10 @@ struct SignInView: View {
         }// Main VStack End
     }// ScrollView
         .padding(.horizontal)
+        
         }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
