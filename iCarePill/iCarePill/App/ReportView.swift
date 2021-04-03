@@ -11,6 +11,10 @@ struct ReportView: View {
     
     @State  var isNewEntry = false
     
+    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken"),
+                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false, status: "skip"),
+                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken")]
+    
     var body: some View {
         
         VStack(spacing: 10){
@@ -139,6 +143,32 @@ struct ReportView: View {
                 
         }
           
+            VStack(alignment:.leading){
+                
+                Text("medication expiration in 10 days")
+                    .font(.custom("Poppins-Medium", size: 14))
+                    .foregroundColor(.black)
+                    .padding()
+                
+                
+                ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+                LazyVStack{
+                    
+                    
+                    ForEach(tempData){value in
+                        
+                        ReportCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "5 days")
+                            .padding(.bottom, 10)
+                    }
+
+                }
+                .padding()
+                }
+                
+            }
+            .background(
+                Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1))
+            )
           
           
             Spacer()
@@ -180,5 +210,52 @@ struct ReportTopView: View {
                         .foregroundColor(.accentColor)
                         .padding(.bottom, 15)
         )
+    }
+}
+
+
+
+struct ReportCellView: View {
+    
+    var ImageTitle: String
+    var MedicineTitle : String
+    var Time : String
+    
+    var body: some View {
+        VStack{
+            
+            ZStack{
+                
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(.white)
+                    .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .shadow(radius: 3)
+                
+                HStack{
+                    Image(ImageTitle)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    
+                    VStack(alignment:.leading){
+                        Text(MedicineTitle)
+                            .font(.custom("Poppins-Medium", size: 12))
+                            .foregroundColor(Color(#colorLiteral(red: 0.4979991317, green: 0.4980617762, blue: 0.4979779124, alpha: 1)))
+                        
+                    
+                        
+                    }
+                    
+                    Spacer()
+                    
+                    
+                    Text(Time)
+                        .font(.custom("Poppins-Medium", size: 10))
+                        .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
+                }.padding()
+                
+                
+            }
+        }
     }
 }
