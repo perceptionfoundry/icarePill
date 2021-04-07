@@ -16,11 +16,28 @@ struct iCarePillApp: App {
         FirebaseApp.configure()
     }
     
+    
+    @AppStorage("Auth") var isAuth = false
+    @AppStorage("UserId") var userId = ""
+    
+    
     var body: some Scene {
         WindowGroup {
-            SignInView()
+            
+            if !isAuth{
+                SignInView()
+                    .preferredColorScheme(.light)
+            }else{
+                MainView()
+                    .onAppear(){
+                        print(userId)
+                    }
+                    .preferredColorScheme(.light)
+                
+            }
+            
 //            AddAppointmentView()
-                .preferredColorScheme(.light)
+                
 
         }
         

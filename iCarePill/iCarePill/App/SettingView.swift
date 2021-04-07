@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SettingView: View {
     
@@ -16,7 +17,12 @@ struct SettingView: View {
     @State var isOpen = false
     @State var isLogin = false
     @State var isPasscode = false
+    @State var islogout = false
     
+    
+    
+    @AppStorage("Auth") var isAuth : Bool?
+    @AppStorage("UserId") var userId : String?
     var body: some View {
         
         VStack{
@@ -135,6 +141,39 @@ struct SettingView: View {
                
                 
               } .foregroundColor(.accentColor)
+            
+            
+            
+            //MARK: LOGOUT
+            Button(action: {
+                do {
+                    try Auth.auth().signOut()
+                    isAuth = false
+                    userId = ""
+                    islogout.toggle()
+                }catch{
+                    print(error.localizedDescription)
+                }
+       
+            }, label: {
+                
+                ZStack{
+                    RoundedRectangle(cornerRadius: 30)
+                        .foregroundColor(.red)
+                        .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .padding()
+                    
+                    Text("Log Out")
+                        .foregroundColor(.white)
+                        .font(.custom("Poppins-Medium", size: 16))
+                    
+                }
+                
+            })
+            .foregroundColor(.red)
+            .fullScreenCover(isPresented: $islogout, content: {
+            SignInView()
+        })
               
            
     }

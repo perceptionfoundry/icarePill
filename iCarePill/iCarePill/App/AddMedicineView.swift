@@ -24,6 +24,7 @@ struct AddMedicineView: View {
 
     
     
+    
     @State  var isTablet  = false
     @State  var isCapsule  = true
     @State  var isSyrup  = false
@@ -31,6 +32,8 @@ struct AddMedicineView: View {
     @State  var isExpand  = false
     @State  var isExpand2  = false
     @State  var  isNext = false
+    
+    @State  var  isAlert = false
     
     var body: some View {
         
@@ -363,6 +366,35 @@ struct AddMedicineView: View {
                     label: {
                         Button(action: {
                             
+                            var appearanceValue = ""
+                            
+                            if isSyrup{
+                                appearanceValue = "syrup"
+                            } else if isTablet {
+                                appearanceValue = "tablet"
+                            }else if isCapsule{
+                                appearanceValue = "capsule"
+                            }
+                            
+                            
+                            
+                            let formattor = DateFormatter()
+                            
+                            formattor.dateFormat = "dd/MM/yyyy"
+                           let dateString = formattor.string(from: DoE)
+                            
+                            
+                            if MedicationTitle.isEmpty == false,conditionValue.isEmpty == false,stockValue.isEmpty == false{
+                                
+                                previousMediValue = Medicine(id: "", Title: MedicationTitle, Condition: conditionValue, Apperance: appearanceValue, Strength: Double(selectedStrength)!, unit: selectedUnit, DoE: dateString, Stock: Int(stockValue)!, reminder: reminderStatus, dosage: "", giveAt: "", days: [""], notification: [""])
+                                
+                            }else{
+                                isAlert.toggle()
+                            }
+                            
+                          
+                            
+                            
                             isNext.toggle()
 
                             
@@ -386,6 +418,10 @@ struct AddMedicineView: View {
             
             Spacer()
         }.padding()
+            .alert(isPresented: $isAlert, content: {
+                Alert(title: Text("Textfield Empty"), message: Text(" Please assure all fields are filled"), dismissButton: .default(Text("Dismiss")))
+                
+            })
     }
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)

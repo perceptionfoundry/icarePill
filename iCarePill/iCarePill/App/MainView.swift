@@ -12,6 +12,7 @@ struct MainView: View {
     @State var selectedIndex = 1
   @State var isHome = false
     @State var isMedi = false
+    @State var date = Date()
     
     var body: some View {
         
@@ -27,7 +28,7 @@ struct MainView: View {
                 }.tag(1)
                 
 
-            MediView()
+            MediView(dateValue: $date)
                 .tabItem {
                     Image(selectedIndex == 2 ? "medi_tab_selected":"medi_tab")
                     Text("Medication")

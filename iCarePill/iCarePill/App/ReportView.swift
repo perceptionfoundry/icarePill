@@ -11,9 +11,9 @@ struct ReportView: View {
     
     @State  var isNewEntry = false
     
-    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken"),
-                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false, status: "skip"),
-                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken")]
+    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
+                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
+                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, dosage: "", giveAt: "", days: [], notification: [])]
     
     var body: some View {
         
@@ -157,7 +157,7 @@ struct ReportView: View {
                     
                     ForEach(tempData){value in
                         
-                        ReportCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "5 days")
+                        ReportCellView(ImageTitle: value.Apperance, MedicineTitle: "skip", Time: "5 days")
                             .padding(.bottom, 10)
                     }
 
@@ -174,7 +174,7 @@ struct ReportView: View {
             Spacer()
             
         }
-        
+        .navigationBarHidden(true)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
     }

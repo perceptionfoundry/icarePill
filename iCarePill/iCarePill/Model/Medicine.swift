@@ -18,5 +18,10 @@ struct Medicine: Identifiable, Codable {
     var DoE : String
     var Stock : Int
     var reminder : Bool
-    var status : String
+    var dosage : String
+    var giveAt : String
+    var days : [String]
+    var notification : [String]
+    
+   
 }

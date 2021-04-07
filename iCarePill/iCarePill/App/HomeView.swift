@@ -10,9 +10,9 @@ import SwiftUI
 struct HomeView: View {
     
     
-    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken"),
-                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false, status: "skip"),
-                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, status: "taken")]
+    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
+                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false,dosage: "", giveAt: "", days: [], notification: []),
+                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false,dosage: "", giveAt: "", days: [], notification: [])]
     
     
     
@@ -113,7 +113,7 @@ struct HomeView: View {
                         
                         ForEach(tempData){value in
                             
-                            HomeCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Dose: "\(value.Strength)\(value.unit)", Time: "08:00", status: value.status)
+                            HomeCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Dose: "\(value.Strength)\(value.unit)", Time: "08:00", status: "taken")
                                 .padding(.bottom, 10)
                         }
     

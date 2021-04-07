@@ -7,17 +7,32 @@
 
 import SwiftUI
 
+
+var previousMediValue : Medicine?
+
 struct ScheduleView: View {
     
     
     @Environment(\.presentationMode) var presentationMode
     
+   
     @State var dosageValue = ""
     @State var pillConditionValue = ""
     @State var selectedDays = [String]()
-    var Days = ["Everyday", "Monday","Tuesday"]
     
-    @State private var selectedStrength =  "After Breakfast, "
+    
+    @State var DaysValue = [String]()
+    @State var isEveryDay = false
+    @State var isMonday = false
+    @State var isTuesday = false
+    @State var isWednesday = false
+    @State var isThursday = false
+    @State var isFriday = false
+    @State var isSaturday = false
+    @State var isSunday = false
+    
+    
+    @State private var selectedGiveTime =  "After Breakfast, "
     let strengthValue = ["Before Breakfast", "After Breakfast",
                          "Before Lunch", "After lunch",
                          "Before Dinner", "After Dinner,"]
@@ -25,7 +40,7 @@ struct ScheduleView: View {
     
     @State var selectedDate = Date()
     
-    @State var value = [String]()
+    @State var notificationValue = [String]()
     
     
     @State var isNext = false
@@ -70,7 +85,7 @@ struct ScheduleView: View {
             
             //MARK: Pill Condition
             VStack(alignment: .leading){
-                Text("Strength ")
+                Text("Pill Condition ")
                     .font(.custom("Poppins-Medium", size: 16))
                     .foregroundColor(.accentColor)
                
@@ -78,7 +93,7 @@ struct ScheduleView: View {
 
                     
                     VStack{
-                    DisclosureGroup(selectedStrength, isExpanded: $isExpand) {
+                    DisclosureGroup(selectedGiveTime, isExpanded: $isExpand) {
                         
                         VStack{
                             ForEach(strengthValue, id:\.self){ value  in
@@ -87,7 +102,7 @@ struct ScheduleView: View {
                                     .foregroundColor(.accentColor)
                                     .padding(.bottom)
                                     .onTapGesture {
-                                        self.selectedStrength = value
+                                        self.selectedGiveTime = value
                                         
                                         withAnimation{
                                             self.isExpand.toggle()
@@ -127,21 +142,198 @@ struct ScheduleView: View {
                         
                         HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 25){
 
-                        DaysView(dayTitle: "Everyday", isSelected: true)
+                            Button(action: {
+                                
+                                
+                                if isEveryDay{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Everyday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isEveryDay = false
+                                    isMonday = false
+                                    isTuesday = false
+                                    isWednesday = false
+                                    isThursday = false
+                                    isFriday = false
+                                    isSaturday = false
+                                    isSunday = false
+                                    
+                                    DaysValue.removeAll()
+                                    
+                                }else{
+                                    self.DaysValue.append("Everyday")
+                                    isEveryDay.toggle()
+                                    
+                                    isMonday = true
+                                    isTuesday = true
+                                    isWednesday = true
+                                    isThursday = true
+                                    isFriday = true
+                                    isSaturday = true
+                                    isSunday = true
+                                    
+                                    DaysValue.removeAll()
+                                    DaysValue = ["Everyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satursday", "Sunday"]
+                                    
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Everyday", isSelected: isEveryDay)
+                                
+                            })
+                       
+                            
+                            
+                            Button(action: {
+                               
+                                
+                                if isMonday{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Monday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isMonday = false
+                                    isEveryDay = false
+                                    
+                                }else{
+                                    self.DaysValue.append("Monday")
+                                    isMonday.toggle()
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Monday", isSelected: isMonday)
+                            })
+                       
+                            
+                            
+                            Button(action: {
+                                
+                                
+                                if isTuesday{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Tuesday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isTuesday = false
+                                    isEveryDay = false
+                                }else{
+                                    self.DaysValue.append("Tuesday")
+                                    isTuesday.toggle()
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Tuesday", isSelected: isTuesday)
+                            })
+                       
+                            
+                            Button(action: {
+                                
+                                
+                                if isWednesday{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Wednesday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isWednesday = false
+                                    isEveryDay = false
+                                }else{
+                                    self.DaysValue.append("Wednesday")
+                                    isWednesday.toggle()
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Wednesday", isSelected: isWednesday)
+                            })
+                       
+                            
+                            Button(action: {
+                                
+                                
+                                if isThursday{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Thursday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isThursday = false
+                                    isEveryDay = false
+                                }else{
+                                    self.DaysValue.append("Thursday")
+                                    isThursday.toggle()
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Thursday", isSelected: isThursday)
+                            })
+                       
 
-                        DaysView(dayTitle: "Monday", isSelected: false)
-
-                        DaysView(dayTitle: "Tuesday", isSelected: false)
-
-                        DaysView(dayTitle: "Wednesday", isSelected: true)
-
-                        DaysView(dayTitle: "Thursday", isSelected: true)
-
-                        DaysView(dayTitle: "Friday", isSelected: false)
-
-                        DaysView(dayTitle: "Saturday", isSelected: true)
-
-                        DaysView(dayTitle: "Sunday", isSelected: false)
+                            
+                            Button(action: {
+                                
+                                
+                                if isFriday{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Friday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isFriday = false
+                                    
+                                }else{
+                                    self.DaysValue.append("Friday")
+                                    isFriday.toggle()
+                                    isEveryDay = false
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Friday", isSelected: isFriday)
+                            })
+                       
+                            
+                            
+                            Button(action: {
+                                
+                                
+                                if isSaturday{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Satursday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isSaturday = false
+                                    isEveryDay = false
+                                    
+                                }else{
+                                    self.DaysValue.append("Satursday")
+                                    isSaturday.toggle()
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Satursday", isSelected: isSaturday)
+                            })
+                       
+                            
+                            
+                            
+                            Button(action: {
+                                
+                                
+                                if isSunday{
+                                    
+                                   let index =  DaysValue.firstIndex(of: "Sunday")
+                                    DaysValue.remove(at: index!)
+                                    
+                                    isSunday = false
+                                    isEveryDay = false
+                                    
+                                }else{
+                                    self.DaysValue.append("Sunday")
+                                    isSunday.toggle()
+                                }
+                                
+                            }, label: {
+                                DaysView(dayTitle: "Sunday", isSelected: isSunday)
+                                
+                            })
+                       
 
                         }
                         .padding(.horizontal)
@@ -161,7 +353,7 @@ struct ScheduleView: View {
                     
                     LazyVStack{
                         
-                        ForEach(value, id: \.self){ v in
+                        ForEach(notificationValue, id: \.self){ v in
                             NotificatioView(time: "\(v)")
                         }
                         
@@ -189,7 +381,24 @@ struct ScheduleView: View {
             
                     Button(action: {
                         
-                        isNext.toggle()
+                        
+                        let dict = ["id" : "",
+                                    "Title" : previousMediValue?.Title,
+                                    "Condition" : previousMediValue?.Condition,
+                                    "Apperance" : previousMediValue?.Apperance,
+                                    "Strength" : previousMediValue?.Strength,
+                                    "unit" : previousMediValue?.unit,
+                                    "DoE" : previousMediValue?.DoE,
+                                    "Stock" : previousMediValue?.Stock,
+                                    "reminder" : previousMediValue?.reminder,
+                         "dosage" : dosageValue,
+                         "giveAt" : selectedGiveTime,
+                         "days" : DaysValue,
+                         "notification" : notificationValue
+                        ] as [String : Any]
+                        
+                        
+//                        isNext.toggle()
 
                         
                     }, label: {
@@ -211,6 +420,9 @@ struct ScheduleView: View {
                 .fullScreenCover(isPresented: $isNext, content: {
                     MainView()
                 })
+        }
+        .onAppear(){
+            print("check")
         }
         .padding()
     .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
@@ -258,7 +470,7 @@ struct ScheduleView: View {
                 let formattor = DateFormatter()
                 formattor.dateFormat = "hh:mm a"
                 
-                value.append(formattor.string(from: selectedDate))
+                notificationValue.append(formattor.string(from: selectedDate))
             }
             alertVC.addAction(okAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

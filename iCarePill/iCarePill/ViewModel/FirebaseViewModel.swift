@@ -12,6 +12,9 @@ class FirebaseViewModel{
     
     private var dbRef = Firestore.firestore()
     
+    @AppStorage("Auth") var isAuth : Bool?
+    @AppStorage("UserId") var userId : String?
+    
     func signUpWithEmail(Email: String, Password:String, userDetail: [String:Any], completion: @escaping(_ status : Bool, _ error: String?)->()){
         
         
@@ -69,11 +72,19 @@ class FirebaseViewModel{
     func signInWithEmail(Email: String, Password:String,completion: @escaping(_ status : Bool, _ error: String?)->()){
         
         
-        Auth.auth().signIn(withEmail: Email, password: Password) { (authResult, err) in
+        Auth.auth().signIn(withEmail: Email, password: Password) { [self] (authResult, err) in
             
             if err == nil{
+                
+                
+                print(authResult?.user.uid)
+                
+                isAuth = true
+                userId = authResult?.user.uid
+                
                 completion(true, nil)
             }else{
+                isAuth = false
                 completion(false,err?.localizedDescription)
             }
         }
