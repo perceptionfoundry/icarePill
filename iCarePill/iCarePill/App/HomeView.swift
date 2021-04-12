@@ -7,16 +7,21 @@
 
 import SwiftUI
 
+
+var userDetail : User?
+
 struct HomeView: View {
     
     
-    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
-                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false,dosage: "", giveAt: "", days: [], notification: []),
-                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false,dosage: "", giveAt: "", days: [], notification: [])]
+//    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
+//                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false,dosage: "", giveAt: "", days: [], notification: []),
+//                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false,dosage: "", giveAt: "", days: [], notification: [])]
     
     
-    
+    @State var tempData = [Medicine]()
         @State  var isNewEntry = false
+    @State  var userName = ""
+
     
 
     
@@ -36,7 +41,7 @@ struct HomeView: View {
                         .padding()
                     
                     VStack(alignment:.leading){
-                        Text("Hello, Shahrukh!")
+                        Text("Hello, \(userName)!")
                             .font(.custom("Poppins-Medium", size: 18))
                             
                            
@@ -113,7 +118,7 @@ struct HomeView: View {
                         
                         ForEach(tempData){value in
                             
-                            HomeCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Dose: "\(value.Strength)\(value.unit)", Time: "08:00", status: "taken")
+                            HomeCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Dose: "\(value.Strength)\(value.unit)", Time: "\((value.notification.first)!)", status: "taken")
                                 .padding(.bottom, 10)
                         }
     
@@ -130,7 +135,40 @@ struct HomeView: View {
          
             Spacer()
     }.navigationBarHidden(true)
-    
+        .onAppear(){
+            let VM = FirebaseViewModel()
+            
+            
+            //USER
+            VM.GetUser(collectionTitle: "Users") { (status, details, err) in
+                
+                if status{
+                    userDetail = details
+                    
+                    print((userDetail?.first)!)
+                    
+                    userName = (details!.first)!
+                }else{
+                    print("\(err!)")
+                }
+                
+            }
+            
+            //MEDICINE
+            VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
+                
+                if status{
+                    let temp = details
+                    
+                    print((temp.first?.Title))
+                    
+                    tempData = details
+                }else{
+                    print("\(err!)")
+                }
+                
+            }
+        }
         
         
        

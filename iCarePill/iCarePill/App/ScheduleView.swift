@@ -404,7 +404,7 @@ struct ScheduleView: View {
                             ] as [String : Any]
                             
                             
-                            firebaseVM.CreateCollection(collectionTitle: "Medicine", uploadData: dict) { (status, err) in
+                            firebaseVM.CreateCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock", uploadData: dict) { (status, err) in
                                 
                                 if status{
                                     isNext.toggle()

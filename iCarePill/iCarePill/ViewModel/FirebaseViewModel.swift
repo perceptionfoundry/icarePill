@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import CodableFirebase
 
 class FirebaseViewModel{
     
@@ -97,15 +98,17 @@ class FirebaseViewModel{
     
     //MARK: CREATE COLLECTION
     
-    func CreateCollection(collectionTitle: String, uploadData: [String:Any], completion: @escaping(_ status : Bool, _ err : String?)->() ){
+    func CreateCollection(collectionTitle: String, subCollectionTitle: String, uploadData: [String:Any], completion: @escaping(_ status : Bool, _ err : String?)->() ){
         
+        
+        let collectionRef = dbRef.collection(collectionTitle).document(userId!).collection(subCollectionTitle).document()
         
         var temp = uploadData
         
-        temp["id"] = userId!
+        temp["id"] = collectionRef.documentID
         
         
-        dbRef.collection(collectionTitle).document(userId!).setData(temp) { (err) in
+        collectionRef.setData(temp) { (err) in
             
             if err == nil{
                 
@@ -115,6 +118,111 @@ class FirebaseViewModel{
             }
         }
     
+        
+    }
+    
+    
+    
+    //MARK: GET USER
+    
+    func GetUser(collectionTitle: String, completion: @escaping(_ status : Bool,_ getData : User? ,_ err : String?)->() ){
+        
+        
+       
+            
+            
+         
+            
+            dbRef.collection(collectionTitle).document(userId!).getDocument { (snapShot, err) in
+                
+                if err == nil{
+                    
+                    guard let value = snapShot?.data() else{return}
+                    
+                    
+                    
+                    let fetchData = try! FirestoreDecoder().decode(User.self, from: value)
+                    
+                   
+                    
+
+                    
+                    
+                    completion(true, fetchData, nil)
+                    
+                    
+                }else{
+                    completion(false, nil, err?.localizedDescription)
+                }
+            }
+            
+        
+        
+        
+        
+        
+        
+    }
+
+    
+    
+    //MARK: GET COLLECTION
+    
+    func GetCollection<T: Decodable>(collectionTitle: String, subCollectionTitle: String, completion: @escaping(_ status : Bool,_ getData : [T] ,_ err : String?)->() ){
+        
+        
+        if subCollectionTitle !=  ""{
+            
+            
+            var fetchData = [T]()
+            
+            dbRef.collection(collectionTitle).document(userId!).collection(subCollectionTitle).getDocuments { (snapShot, err) in
+                
+                if err == nil{
+                    
+                    guard let data = snapShot?.documents else{return}
+                    
+                    
+                    data.forEach { (value) in
+                        
+                        let temp = try! FirestoreDecoder().decode(T.self, from: value.data())
+                        fetchData.append(temp)
+                    }
+                    
+
+                    
+                    
+                    completion(true, fetchData, nil)
+                    
+                    
+                }else{
+                    completion(false, [], err?.localizedDescription)
+                }
+            }
+            
+        }else{
+            dbRef.collection(collectionTitle).document(userId!).getDocument { (snapShot, err) in
+                
+                if err == nil{
+                    
+                    guard let data = snapShot?.data() else{return}
+
+                    let fetchData = try! FirestoreDecoder().decode(T.self, from: data)
+                    
+                    completion(true, fetchData as! [T], nil)
+                    
+                    
+                }else{
+                    completion(false, [], err?.localizedDescription)
+                }
+            }
+            
+
+        }
+        
+        
+        
+        
         
     }
 }
