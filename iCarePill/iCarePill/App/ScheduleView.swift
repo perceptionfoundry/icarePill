@@ -15,6 +15,10 @@ struct ScheduleView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    
+    private var firebaseVM = FirebaseViewModel()
+    @State private var alertTitle = ""
+    @State private var alertMsg = ""
    
     @State var dosageValue = ""
     @State var pillConditionValue = ""
@@ -30,7 +34,7 @@ struct ScheduleView: View {
     @State var isFriday = false
     @State var isSaturday = false
     @State var isSunday = false
-    
+    @State var isAlert = false
     
     @State private var selectedGiveTime =  "After Breakfast, "
     let strengthValue = ["Before Breakfast", "After Breakfast",
@@ -381,24 +385,46 @@ struct ScheduleView: View {
             
                     Button(action: {
                         
+                        if dosageValue.isEmpty == false && DaysValue.isEmpty == false && notificationValue.isEmpty == false{
+                            
+                            
+                            let dict = ["id" : "",
+                                        "Title" : (previousMediValue?.Title)!,
+                                        "Condition" : (previousMediValue?.Condition)!,
+                                        "Apperance" : (previousMediValue?.Apperance)!,
+                                        "Strength" : (previousMediValue?.Strength)!,
+                                        "unit" : (previousMediValue?.unit)!,
+                                        "DoE" : (previousMediValue?.DoE)!,
+                                        "Stock" : (previousMediValue?.Stock)!,
+                                        "reminder" : (previousMediValue?.reminder)!,
+                             "dosage" : dosageValue,
+                             "giveAt" : selectedGiveTime,
+                             "days" : DaysValue,
+                             "notification" : notificationValue
+                            ] as [String : Any]
+                            
+                            
+                            firebaseVM.CreateCollection(collectionTitle: "Medicine", uploadData: dict) { (status, err) in
+                                
+                                if status{
+                                    isNext.toggle()
+                                }else{
+                                    alertTitle = "Server Error"
+                                    alertMsg = err!
+                                    isAlert.toggle()
+                                }
+                            }
+                            
+                            
+                        }else{
+                            alertTitle = "Text Field Empty"
+                            alertMsg = "Please assure all fields are filled"
+                            isAlert.toggle()
+                        }
                         
-                        let dict = ["id" : "",
-                                    "Title" : previousMediValue?.Title,
-                                    "Condition" : previousMediValue?.Condition,
-                                    "Apperance" : previousMediValue?.Apperance,
-                                    "Strength" : previousMediValue?.Strength,
-                                    "unit" : previousMediValue?.unit,
-                                    "DoE" : previousMediValue?.DoE,
-                                    "Stock" : previousMediValue?.Stock,
-                                    "reminder" : previousMediValue?.reminder,
-                         "dosage" : dosageValue,
-                         "giveAt" : selectedGiveTime,
-                         "days" : DaysValue,
-                         "notification" : notificationValue
-                        ] as [String : Any]
                         
                         
-//                        isNext.toggle()
+//
 
                         
                     }, label: {
@@ -421,6 +447,11 @@ struct ScheduleView: View {
                     MainView()
                 })
         }
+        .alert(isPresented: $isAlert, content: {
+            Alert(title: Text(alertTitle), message: Text(alertMsg), dismissButton: .default(Text("Dismiss")))
+            
+        })
+
         .onAppear(){
             print("check")
         }

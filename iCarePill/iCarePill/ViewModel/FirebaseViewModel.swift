@@ -12,9 +12,13 @@ class FirebaseViewModel{
     
     private var dbRef = Firestore.firestore()
     
+    
     @AppStorage("Auth") var isAuth : Bool?
     @AppStorage("UserId") var userId : String?
     
+    
+    
+    //MARK: SIGN UP
     func signUpWithEmail(Email: String, Password:String, userDetail: [String:Any], completion: @escaping(_ status : Bool, _ error: String?)->()){
         
         
@@ -68,7 +72,7 @@ class FirebaseViewModel{
     }
     
     
-    
+    //MARK: SIGN IN VIA EMAIL
     func signInWithEmail(Email: String, Password:String,completion: @escaping(_ status : Bool, _ error: String?)->()){
         
         
@@ -77,7 +81,6 @@ class FirebaseViewModel{
             if err == nil{
                 
                 
-                print(authResult?.user.uid)
                 
                 isAuth = true
                 userId = authResult?.user.uid
@@ -89,6 +92,29 @@ class FirebaseViewModel{
             }
         }
         
+        
+    }
+    
+    //MARK: CREATE COLLECTION
+    
+    func CreateCollection(collectionTitle: String, uploadData: [String:Any], completion: @escaping(_ status : Bool, _ err : String?)->() ){
+        
+        
+        var temp = uploadData
+        
+        temp["id"] = userId!
+        
+        
+        dbRef.collection(collectionTitle).document(userId!).setData(temp) { (err) in
+            
+            if err == nil{
+                
+                completion(true, nil)
+            }else{
+                completion(false, err?.localizedDescription)
+            }
+        }
+    
         
     }
 }

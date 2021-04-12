@@ -27,13 +27,14 @@ struct iCarePillApp: App {
             if !isAuth{
                 SignInView()
                     .preferredColorScheme(.light)
+                    .environment(\.colorScheme, .light)
             }else{
                 MainView()
                     .onAppear(){
                         print(userId)
                     }
                     .preferredColorScheme(.light)
-                
+                    .environment(\.colorScheme, .light)
             }
             
 //            AddAppointmentView()

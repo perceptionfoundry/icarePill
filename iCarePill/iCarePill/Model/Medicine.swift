@@ -21,7 +21,5 @@ struct Medicine: Identifiable, Codable {
     var dosage : String
     var giveAt : String
     var days : [String]
-    var notification : [String]
-    
-   
+    var notification : [String] 
 }
