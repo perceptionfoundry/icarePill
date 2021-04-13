@@ -19,10 +19,12 @@ struct AddDoctorView: View {
     @State var mobileNumberValue = ""
     @State var officeNumberValue = ""
     @State var locationValue = ""
-  
     @State  var  isNext = false
+    @State  var  isAlert = false
+    @State  var  alertTitle = ""
+    @State  var  alertMessage = ""
     
-    
+    let saveImageVM = SaveImageViewModel()
     
     
     var body: some View {
@@ -232,7 +234,68 @@ struct AddDoctorView: View {
                         Button(action: {
                             
                             
-                            presentationMode.wrappedValue.dismiss()
+                            if dpImage != UIImage(named: "dp"){
+                                
+                                if nameValue.isEmpty == false && specialityValue.isEmpty == false &&
+                                mobileNumberValue.isEmpty == false &&
+                                officeNumberValue.isEmpty == false &&
+                                    locationValue.isEmpty == false{
+                                
+                                saveImageVM.SaveImage(Title: "Doctor_\(nameValue)", selectedImage: dpImage!) { (imageUrl, status, err) in
+                                    
+                                    if status{
+                                        
+                                 
+                                            let doctorInfo = Doctor(Name: nameValue, Speciality: specialityValue, Mobile: mobileNumberValue, Office: officeNumberValue, Location: locationValue, ImageURL: imageUrl!)
+                                            
+                                            let infoDict = doctorInfo.getDict()
+                                            
+                                            print(infoDict)
+                                            
+                                            let firebaseVM = FirebaseViewModel()
+                                        
+                                        firebaseVM.CreateCollection(collectionTitle: "Doctors", subCollectionTitle: "Physicians", uploadData: infoDict) { (status, fb_err) in
+                                            
+                                            if status{
+                                                presentationMode.wrappedValue.dismiss()
+                                            }else{
+                                                self.alertTitle = "Server Error!"
+                                                self.alertMessage = "\(fb_err ?? "unknown error")"
+                                                isAlert.toggle()
+
+                                            }
+                                        }
+//
+                                      
+                                        
+                                    }else{
+                                        self.alertTitle = "Upload Image Error!"
+                                        self.alertMessage = "\(err ?? "unknown error")"
+                                        isAlert.toggle()
+                                    }
+                                }
+                                
+                            }
+                                
+                                
+                                else{
+                                    self.alertTitle = "Textfield Empty"
+                                    self.alertMessage = "Please assure all textfield are filled.."
+                                    isAlert.toggle()
+                                    
+                                }
+                                
+                            }else{
+                                self.alertTitle = "Image Missing"
+                                self.alertMessage = "Please add Doctor refers image"
+                                isAlert.toggle()
+                                
+                            }
+                            
+                           
+                            
+                            
+                            
                             
                         }, label: {
                             
@@ -251,6 +314,9 @@ struct AddDoctorView: View {
                         })
         }.padding()
     }
+        .alert(isPresented: $isAlert, content: {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Dismiss")))
+        })
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)

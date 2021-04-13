@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DoctorsView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
     @State var count = 1
+    @State var docArray = [Doctor]()
+    
     
     @State var isNext = false
     
@@ -24,12 +27,12 @@ struct DoctorsView: View {
             else{
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                 LazyVStack(content: {
-                    ForEach(1...10, id: \.self) { count in
+                    ForEach(docArray) { value in
                        
                        
                           
                            
-                        DoctorCellView()
+                        DoctorCellView(imageString: value.image, name: value.name)
                       
                     }.padding(.horizontal)
                     .padding(.vertical, 7)
@@ -72,7 +75,23 @@ struct DoctorsView: View {
                 })
                    
             
-        }.padding()
+        }
+        .onAppear(){
+            let firebaseVM = FirebaseViewModel()
+            
+            firebaseVM.GetCollection(collectionTitle: "Doctors", subCollectionTitle: "Physicians") { (status, details: [Doctor], err) in
+                
+                if status{
+                    
+                    docArray = details
+                }else{
+                    
+                    print(err!)
+                }
+            }
+        }
+        
+        .padding()
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
@@ -110,6 +129,11 @@ struct DoctorsView_Previews: PreviewProvider {
 }
 
 struct DoctorCellView: View {
+    
+    var imageString : String
+    var name : String
+    
+    
     var body: some View {
         HStack{
             ZStack{
@@ -121,12 +145,16 @@ struct DoctorCellView: View {
                 
                 HStack {
                     
-                    Image("sample")
+                    let imageurl  = URL(string: imageString)
+                    
+                    WebImage(url: imageurl)
+                        .placeholder(Image(uiImage: UIImage(named: "dp")!
+                        ))
                         .resizable()
                         .frame(width: 60, height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                         .padding(.leading)
-                    Text("Doctor Name")
+                    Text(name)
                         .foregroundColor(.accentColor)
                         .font(.custom("Poppins-Medium", size: 14))
                         .padding()

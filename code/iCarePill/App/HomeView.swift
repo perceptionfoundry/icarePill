@@ -145,7 +145,6 @@ struct HomeView: View {
                 if status{
                     userDetail = details
                     
-                    print((userDetail?.first)!)
                     
                     userName = (details!.first)!
                 }else{
@@ -160,7 +159,6 @@ struct HomeView: View {
                 if status{
                     let temp = details
                     
-                    print((temp.first?.Title))
                     
                     tempData = details
                 }else{
