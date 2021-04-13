@@ -18,12 +18,14 @@ struct AddNoteView: View {
     @State var dateValue = Date()
     @State var dateValue_String = "yyyy/mm/dd"
     
-    @State private var selectedStrength = "Emergency"
-    let strengthValue = ["Emergency", "Normal"]
+    @State private var selectedType = "Emergency"
+    let typeValue = ["Emergency", "Normal"]
     @State  var isExpand  = false
     @State  var  isNext = false
     
-    
+    @State  var  isAlert = false
+    @State  var  alertTitle = ""
+    @State  var  alertMessage = ""
     
     
     var body: some View {
@@ -43,22 +45,20 @@ struct AddNoteView: View {
                             .frame(height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .foregroundColor(.white)
                             .shadow(radius: 4)
-                        
-                      
+
+
     //
-                            MultilineTextView(text: $NoteValue)
+                            TextEditor(text: $NoteValue)
                                 .foregroundColor(.accentColor)
                                 .font(.custom("Poppins-Medium", size: 14))
                                 .foregroundColor(.accentColor)
                                 .padding()
-                      
-                        
-                       
-                        
+
+
+
+
                     }
                      
-                   
-                        
                     }
                 }
           
@@ -175,17 +175,17 @@ struct AddNoteView: View {
                             .padding()
                         
                       
-                        DisclosureGroup("\t\t\t\t\(selectedStrength)", isExpanded: $isExpand) {
+                        DisclosureGroup("\t\t\t\t\(selectedType)", isExpanded: $isExpand) {
                             
                             VStack{
-                                ForEach(strengthValue, id:\.self){ value  in
+                                ForEach(typeValue, id:\.self){ value  in
                                     
                                     Text("\(value)")
                                         .foregroundColor(.accentColor)
                                         .padding(.bottom)
                                         .padding(.top)
                                         .onTapGesture {
-                                            self.selectedStrength = value
+                                            self.selectedType = value
                                             
                                             withAnimation{
                                                 self.isExpand.toggle()
@@ -228,8 +228,33 @@ struct AddNoteView: View {
               
                         Button(action: {
                             
-                            
-                            presentationMode.wrappedValue.dismiss()
+                            if NoteValue.isEmpty == false && dateValue_String != "yyyy/mm/dd" && timeValue_String != "hh:mm"{
+
+                                let noteInfo = Note(Note: NoteValue, Type: selectedType, Date: dateValue_String, Time: timeValue_String)
+
+                                let noteDict = noteInfo.getDict()
+
+                                let firebaseVM = FirebaseViewModel()
+
+                                firebaseVM.CreateCollection(collectionTitle: "Notes", subCollectionTitle: "lists", uploadData: noteDict) { (status, err) in
+
+                                    if status{
+
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                    else{
+                                        self.alertTitle = "Upload Image Error!"
+                                        self.alertMessage = "\(err ?? "unknown error")"
+                                        isAlert.toggle()
+                                    }
+                                }
+                            }else{
+
+                                self.alertTitle = "Textfield Empty"
+                                self.alertMessage = "Please assure all textfield are filled.."
+                                isAlert.toggle()
+                            }
+//
                             
                         }, label: {
                             
@@ -253,6 +278,9 @@ struct AddNoteView: View {
          
         }.padding()
     }
+        .alert(isPresented: $isAlert, content: {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Dismiss")))
+        })
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
