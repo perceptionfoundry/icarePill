@@ -243,7 +243,7 @@ struct AddNoteView: View {
                                         presentationMode.wrappedValue.dismiss()
                                     }
                                     else{
-                                        self.alertTitle = "Upload Image Error!"
+                                        self.alertTitle = "Server Error!"
                                         self.alertMessage = "\(err ?? "unknown error")"
                                         isAlert.toggle()
                                     }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct AppointmentsView: View {
     
@@ -15,7 +16,7 @@ struct AppointmentsView: View {
     @State var count = 1
     
     @State var isNext = false
-    
+    @State var appointmentArray = [Appointment]()
     
     var body: some View {
         VStack{
@@ -26,8 +27,8 @@ struct AppointmentsView: View {
             else{
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                 LazyVStack(content: {
-                    ForEach(1...10, id: \.self) { count in
-                        AppointmentCellView()
+                    ForEach(appointmentArray) { value in
+                        AppointmentCellView(imageString: value.doctorImage, docName: value.doctorName, specialist: value.doctorSpeciality, time: value.appointmentTime, location: value.location)
                             
                     }.padding(.horizontal)
                     .padding(.vertical, 7)
@@ -70,7 +71,22 @@ struct AppointmentsView: View {
                 })
                    
             
-        }.padding()
+        }.onAppear(){
+            let firebaseVM = FirebaseViewModel()
+            
+            firebaseVM.GetCollection(collectionTitle: "Appointments", subCollectionTitle: "lists") { (status, details: [Appointment], err) in
+                
+                if status{
+                    
+                    appointmentArray = details
+                }else{
+                    
+                    print(err!)
+                }
+            }
+        }
+       
+        .padding()
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
@@ -108,25 +124,37 @@ struct AppointmentsView_Previews: PreviewProvider {
 }
 
 struct AppointmentCellView: View {
+    
+    var imageString : String
+    var docName : String
+    var specialist : String
+    var time : String
+    var location :String
+    
     var body: some View {
         HStack{
-            Image("sample")
+            
+            let imageurl  = URL(string: imageString)
+            
+            WebImage(url: imageurl)
+                .placeholder(Image(uiImage: UIImage(named: "dp")!
+                ))
                 .resizable()
                 .frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .scaledToFill()
             
             VStack(alignment:.leading){
-                Text("Dr Name")
+                Text(docName)
                     .font(.custom("Poppins-Medium", size: 15))
                     .foregroundColor(.black)
-                Text("Specialist")
+                Text(specialist)
                     .font(.custom("Poppins-Medium", size: 11))
                     .foregroundColor(.accentColor)
                     .padding(.bottom, 5)
                 
                 VStack(alignment:.center, spacing: 2){
-                    Text("Appointment Time")
+                    Text(time)
                         .font(.custom("Poppins-Medium", size: 10))
                         .foregroundColor(.gray)
                     
@@ -135,7 +163,7 @@ struct AppointmentCellView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 10, height:10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        Text("Location")
+                        Text(location)
                             .font(.custom("Poppins-Medium", size: 10))
                             .foregroundColor(.gray)
                         

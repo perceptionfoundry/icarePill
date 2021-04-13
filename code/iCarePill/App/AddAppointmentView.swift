@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
+
+
+var selectedDocInfo : Doctor?
 
 struct AddAppointmentView: View {
     
@@ -22,9 +26,9 @@ struct AddAppointmentView: View {
     
     @State var locationValue = ""
     @State var NoteValue = ""
-    @State var calendarStatus = false
+    @State var reminderStatus = false
 
-    
+    @State var isDoctorSelector = false
     
     @State  var isTablet  = false
     @State  var isCapsule  = true
@@ -34,8 +38,10 @@ struct AddAppointmentView: View {
     @State  var isExpand2  = false
     @State  var  isNext = false
     
-    
-    
+   
+    @State  var  isAlert = false
+    @State  var  alertTitle = ""
+    @State  var  alertMessage = ""
     
     var body: some View {
         
@@ -58,7 +64,7 @@ struct AddAppointmentView: View {
                         HStack {
                             
                             
-                            TextField("Appoitment Title", text: $appointmentTitle)
+                            TextField("Appointment Title", text: $appointmentTitle)
                                 .font(.custom("Poppins-Medium", size: 14))
                                 .foregroundColor(.accentColor)
 
@@ -90,22 +96,37 @@ struct AddAppointmentView: View {
                         .foregroundColor(.white)
                         .shadow(radius: 4)
                     
+                    
+                    NavigationLink(
+                        destination: DoctorsView(),
+                        isActive: $isDoctorSelector,
+                        label: {
+                            
+                            Button(action: {
+                                isDoctorSelector.toggle()
+                            }, label: {
+                                HStack {
+                                    
+                                    WebImage(url: (URL(string: selectedDocInfo?.image ?? "")))
+                                        .placeholder(Image(uiImage: UIImage(named: "dp")!
+                                        ))
+                                        .resizable()
+                                        .frame(width: 40, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                                        .padding(.leading)
+                                    Text(selectedDocInfo?.name ?? "")
+                                            .foregroundColor(.accentColor)
+                                            .font(.custom("Poppins-Medium", size: 14))
+                                        .padding()
+                                    Spacer()
+                                    Image("arrow_next")
+                                        .padding(.trailing)
+                                }
+                            })
+                        })
                   
-                    HStack {
-                        
-                        Image("sample")
-                            .resizable()
-                            .frame(width: 40, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                            .padding(.leading)
-                        Text("Condition")
-                                .foregroundColor(.accentColor)
-                                .font(.custom("Poppins-Medium", size: 14))
-                            .padding()
-                        Spacer()
-                        Image("arrow_next")
-                            .padding(.trailing)
-                    }
+                    
+                   
                   
                     
                    
@@ -131,7 +152,7 @@ struct AddAppointmentView: View {
                       
                            
                                 
-                        Toggle(isOn: $calendarStatus) {
+                        Toggle(isOn: $reminderStatus) {
                             Text("Refill Reminder")
                                 .font(.custom("Poppins-Medium", size: 14))
                                 .foregroundColor(.accentColor)
@@ -299,7 +320,7 @@ struct AddAppointmentView: View {
                     
                   
 //                    
-                        MultilineTextView(text: $NoteValue)
+                        TextEditor(text: $NoteValue)
                             .foregroundColor(.accentColor)
                             .font(.custom("Poppins-Medium", size: 14))
                             .foregroundColor(.accentColor)
@@ -325,7 +346,37 @@ struct AddAppointmentView: View {
                         Button(action: {
                             
                             
-                            presentationMode.wrappedValue.dismiss()
+                            
+                            if appointmentTitle.isEmpty == false && selectedDocInfo?.name.isEmpty == false &&  dateValue_String != "yyyy/mm/dd" && timeValue_String != "hh:mm" && locationValue.isEmpty == false && NoteValue.isEmpty == false{
+
+                                let appointmentInfo = Appointment(Title: appointmentTitle, DoctorName: (selectedDocInfo?.name)!, DoctorID: (selectedDocInfo?.id)!, DoctorSpecialize: (selectedDocInfo?.speciality)!, DoctorImage:(selectedDocInfo?.image)!,Date: dateValue_String, Time: timeValue_String, Location: locationValue, Note: NoteValue, Reminder: reminderStatus)
+                                let appointmentDict = appointmentInfo.getDict()
+
+                                let firebaseVM = FirebaseViewModel()
+
+                                firebaseVM.CreateCollection(collectionTitle: "Appointments", subCollectionTitle: "lists", uploadData: appointmentDict) { (status, err) in
+
+                                    if status{
+
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                    else{
+                                        self.alertTitle = "Server Error!"
+                                        self.alertMessage = "\(err ?? "unknown error")"
+                                        isAlert.toggle()
+                                    }
+                                }
+                            }else{
+
+                                self.alertTitle = "Textfield Empty"
+                                self.alertMessage = "Please assure all textfield are filled.."
+                                isAlert.toggle()
+                            }
+
+                            
+                            
+                            
+                            
                             
                         }, label: {
                             
@@ -349,6 +400,10 @@ struct AddAppointmentView: View {
             Spacer()
         }.padding()
     }
+        
+        .alert(isPresented: $isAlert, content: {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Dismiss")))
+        })
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)

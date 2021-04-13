@@ -15,6 +15,7 @@ struct DoctorsView: View {
     @State var count = 1
     @State var docArray = [Doctor]()
     
+   
     
     @State var isNext = false
     
@@ -28,11 +29,12 @@ struct DoctorsView: View {
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                 LazyVStack(content: {
                     ForEach(docArray) { value in
-                       
-                       
-                          
-                           
+             
                         DoctorCellView(imageString: value.image, name: value.name)
+                            .onTapGesture {
+                                selectedDocInfo = value
+                                presentationMode.wrappedValue.dismiss()
+                            }
                       
                     }.padding(.horizontal)
                     .padding(.vertical, 7)
@@ -172,3 +174,7 @@ struct DoctorCellView: View {
         }
     }
 }
+
+
+
+

@@ -12,7 +12,10 @@ import Foundation
 class Appointment : Identifiable, Codable{
     var id : String
     var title : String
+    var doctorId : String
     var doctorName : String
+    var doctorImage : String
+    var doctorSpeciality : String
     var appointmentDate : String
     var appointmentTime : String
     var location : String
@@ -21,10 +24,13 @@ class Appointment : Identifiable, Codable{
     
     
     
-    init(Title:String, Doctor: String,Date:String,Time:String,Location:String, Note: String, Reminder : Bool){
+    init(Title:String, DoctorName: String,DoctorID: String, DoctorSpecialize:String,DoctorImage:String,Date:String,Time:String,Location:String, Note: String, Reminder : Bool){
         self.id  = ""
         self.title = Title
-        self.doctorName = Doctor
+        self.doctorId = DoctorID
+        self.doctorSpeciality = DoctorSpecialize
+        self.doctorName = DoctorName
+        self.doctorImage = DoctorImage
         self.appointmentDate = Date
         self.appointmentTime = Time
         self.location = Location
@@ -39,7 +45,10 @@ class Appointment : Identifiable, Codable{
         
         return[ "id"  : "",
                 "title" : self.title,
+                "doctorId":self.doctorId,
                 "doctorName" : self.doctorName,
+                "doctorSpeciality": self.doctorSpeciality,
+                "doctorImage":self.doctorImage,
                 "appointmentDate" : self.appointmentDate,
                 "appointmentTime" : self.appointmentTime,
                 "location" : self.location,

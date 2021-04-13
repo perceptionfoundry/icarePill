@@ -41,7 +41,6 @@
 		F272D17B26257D3D009D648F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272D17A26257D3D009D648F /* Note.swift */; };
 		F287547E260E159A00D2D051 /* AddAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F287547D260E159A00D2D051 /* AddAppointmentView.swift */; };
 		F2875481260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */; };
-		F2875485260E317400D2D051 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2875484260E317400D2D051 /* MultilineTextView.swift */; };
 		F296CF6E2613883B00BB1331 /* GeneralSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */; };
 		F296CF712613915B00BB1331 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F296CF702613915B00BB1331 /* PasscodeView.swift */; };
 		F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD40F260106D500CA43F5 /* iCarePillApp.swift */; };
@@ -101,7 +100,6 @@
 		F272D17A26257D3D009D648F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		F287547D260E159A00D2D051 /* AddAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAppointmentView.swift; sourceTree = "<group>"; };
 		F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDateOrTimeViewModel.swift; sourceTree = "<group>"; };
-		F2875484260E317400D2D051 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingView.swift; sourceTree = "<group>"; };
 		F296CF702613915B00BB1331 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,7 +175,6 @@
 				F223B1AA260877D10038A925 /* ImagePickerView.swift */,
 				F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */,
 				F256BD77260C9E750046C6D8 /* NoRecordView.swift */,
-				F2875484260E317400D2D051 /* MultilineTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -466,7 +463,6 @@
 				F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */,
 				F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */,
 				F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */,
-				F2875485260E317400D2D051 /* MultilineTextView.swift in Sources */,
 				F2D327032604935E009880BE /* User.swift in Sources */,
 				F25D558226130C1000E9152B /* SettingView.swift in Sources */,
 				F24210742608A3630046EA2B /* MediView.swift in Sources */,
