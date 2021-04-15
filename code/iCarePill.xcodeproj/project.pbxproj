@@ -8,16 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		27B2FC0C2F966E82661F69AA /* Pods_iCarePill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC10C62CD34B2E20672282A /* Pods_iCarePill.framework */; };
+		F21653A5262806470035950D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F21653A4262806470035950D /* FirebaseAnalytics */; };
+		F21653A7262806470035950D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F21653A6262806470035950D /* FirebaseStorage */; };
+		F21653A9262806470035950D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F21653A8262806470035950D /* FirebaseAuth */; };
+		F21653AB262806470035950D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F21653AA262806470035950D /* FirebaseFirestore */; };
+		F21653AD262806470035950D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F21653AC262806470035950D /* FirebaseDatabase */; };
+		F21653D3262810030035950D /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21653D2262810030035950D /* SocialLogin.swift */; };
 		F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AA260877D10038A925 /* ImagePickerView.swift */; };
 		F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */; };
 		F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */; };
 		F22EC6242609C8C1009FCF7F /* QRCodeReader in Frameworks */ = {isa = PBXBuildFile; productRef = F22EC6232609C8C1009FCF7F /* QRCodeReader */; };
 		F22EC6272609C8FE009FCF7F /* QRCodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */; };
 		F23801642601CB3000B3FEA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */; };
-		F23801682601CED600B3FEA1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F23801672601CED600B3FEA1 /* FirebaseAnalytics */; };
-		F238016A2601CED600B3FEA1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F23801692601CED600B3FEA1 /* FirebaseStorage */; };
-		F238016C2601CED600B3FEA1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F238016B2601CED600B3FEA1 /* FirebaseAuth */; };
-		F238016E2601CED600B3FEA1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F238016D2601CED600B3FEA1 /* FirebaseFirestore */; };
 		F23801742601D0DE00B3FEA1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */; };
 		F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */; };
 		F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238017B2601D82C00B3FEA1 /* SignUpView.swift */; };
@@ -74,6 +76,7 @@
 /* Begin PBXFileReference section */
 		33821C87FC00771B0927DF60 /* Pods-iCarePill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCarePill.release.xcconfig"; path = "Target Support Files/Pods-iCarePill/Pods-iCarePill.release.xcconfig"; sourceTree = "<group>"; };
 		CAC10C62CD34B2E20672282A /* Pods_iCarePill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iCarePill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F21653D2262810030035950D /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
 		F223B1AA260877D10038A925 /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageViewModel.swift; sourceTree = "<group>"; };
 		F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
@@ -139,13 +142,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F23801742601D0DE00B3FEA1 /* SDWebImageSwiftUI in Frameworks */,
-				F23801682601CED600B3FEA1 /* FirebaseAnalytics in Frameworks */,
-				F238016E2601CED600B3FEA1 /* FirebaseFirestore in Frameworks */,
-				F238016C2601CED600B3FEA1 /* FirebaseAuth in Frameworks */,
-				F238016A2601CED600B3FEA1 /* FirebaseStorage in Frameworks */,
 				F22EC6242609C8C1009FCF7F /* QRCodeReader in Frameworks */,
 				F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */,
+				F21653A5262806470035950D /* FirebaseAnalytics in Frameworks */,
 				27B2FC0C2F966E82661F69AA /* Pods_iCarePill.framework in Frameworks */,
+				F21653AB262806470035950D /* FirebaseFirestore in Frameworks */,
+				F21653AD262806470035950D /* FirebaseDatabase in Frameworks */,
+				F21653A9262806470035950D /* FirebaseAuth in Frameworks */,
+				F21653A7262806470035950D /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +179,7 @@
 				F223B1AA260877D10038A925 /* ImagePickerView.swift */,
 				F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */,
 				F256BD77260C9E750046C6D8 /* NoRecordView.swift */,
+				F21653D2262810030035950D /* SocialLogin.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				F29FD409260106D500CA43F5 /* Frameworks */,
 				F29FD40A260106D500CA43F5 /* Resources */,
 				A3A3C45613C2C4E68E26000A /* [CP] Embed Pods Frameworks */,
+				956866268549E28B81A3AAF1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -316,13 +322,14 @@
 			);
 			name = iCarePill;
 			packageProductDependencies = (
-				F23801672601CED600B3FEA1 /* FirebaseAnalytics */,
-				F23801692601CED600B3FEA1 /* FirebaseStorage */,
-				F238016B2601CED600B3FEA1 /* FirebaseAuth */,
-				F238016D2601CED600B3FEA1 /* FirebaseFirestore */,
 				F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */,
 				F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */,
 				F22EC6232609C8C1009FCF7F /* QRCodeReader */,
+				F21653A4262806470035950D /* FirebaseAnalytics */,
+				F21653A6262806470035950D /* FirebaseStorage */,
+				F21653A8262806470035950D /* FirebaseAuth */,
+				F21653AA262806470035950D /* FirebaseFirestore */,
+				F21653AC262806470035950D /* FirebaseDatabase */,
 			);
 			productName = iCarePill;
 			productReference = F29FD40C260106D500CA43F5 /* iCarePill.app */;
@@ -352,10 +359,10 @@
 			);
 			mainGroup = F29FD403260106D500CA43F5;
 			packageReferences = (
-				F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F23801722601D0DD00B3FEA1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				F23801762601D1FB00B3FEA1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */,
+				F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F29FD40D260106D500CA43F5 /* Products */;
 			projectDirPath = "";
@@ -421,6 +428,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		956866268549E28B81A3AAF1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iCarePill/Pods-iCarePill-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iCarePill/Pods-iCarePill-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iCarePill/Pods-iCarePill-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A3A3C45613C2C4E68E26000A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -467,6 +491,7 @@
 				F25D558226130C1000E9152B /* SettingView.swift in Sources */,
 				F24210742608A3630046EA2B /* MediView.swift in Sources */,
 				F26E454E2611C04B0054511E /* AddDoctorView.swift in Sources */,
+				F21653D3262810030035950D /* SocialLogin.swift in Sources */,
 				F256BD6C260C8B250046C6D8 /* MoreView.swift in Sources */,
 				F256BD6F260C96860046C6D8 /* AppointmentsView.swift in Sources */,
 				F287547E260E159A00D2D051 /* AddAppointmentView.swift in Sources */,
@@ -671,20 +696,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.0;
+			};
+		};
 		F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yannickl/QRCodeReader.swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.1.1;
-			};
-		};
-		F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.8.1;
 			};
 		};
 		F23801722601D0DD00B3FEA1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
@@ -706,30 +731,35 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F21653A4262806470035950D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F21653A6262806470035950D /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		F21653A8262806470035950D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		F21653AA262806470035950D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		F21653AC262806470035950D /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
 		F22EC6232609C8C1009FCF7F /* QRCodeReader */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */;
 			productName = QRCodeReader;
-		};
-		F23801672601CED600B3FEA1 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		F23801692601CED600B3FEA1 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
-		F238016B2601CED600B3FEA1 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		F238016D2601CED600B3FEA1 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F23801662601CED600B3FEA1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
 		};
 		F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

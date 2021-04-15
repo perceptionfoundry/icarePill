@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 import CodableFirebase
 
-class FirebaseViewModel{
+class FirebaseViewModel: ObservableObject{
     
     private var dbRef = Firestore.firestore()
     
@@ -17,6 +17,8 @@ class FirebaseViewModel{
     @AppStorage("Auth") var isAuth : Bool?
     @AppStorage("UserId") var userId : String?
     
+    
+    @Published var isSocialAuth : Bool = false
     
     
     //MARK: SIGN UP
@@ -72,6 +74,75 @@ class FirebaseViewModel{
         
     }
     
+    
+    
+    func SocialNetworkAuth(credential: AuthCredential, completion: @escaping(_ Status : Bool)->()){
+        
+        
+        //MARK: Sign up with Email
+        
+        Auth.auth().signIn(with: credential) { (userInfo, error) in
+            if let error = error {
+                // ...
+                print(error.localizedDescription)
+            }
+            
+            print("Google Sign IN Successfully")
+            let userID = (userInfo?.user.uid)!
+            
+            
+            
+            
+            self.dbRef.collection("Users").whereField("userUID", isEqualTo: userID).getDocuments { (checkResult, checkErr) in
+                
+                let checkCount = (checkResult?.count)!
+                
+                
+                if checkCount == 0{
+                    
+                    let collectionRef =  self.dbRef.collection("Users").document((userInfo?.user.uid)!)
+                    
+          
+                    
+                    let initialData = ["id": userID,
+                        "first": (userInfo?.user.displayName ?? ""),
+                                        "last": "-",
+                                        "type": "Self",
+                                        "gender": "-",
+                                        "dob": "01/01/1970",
+                                        "zip": "-",
+                                        "dp":"-"] 
+                    
+                    print(initialData)
+                    
+                    
+                    collectionRef.setData(initialData)
+                    self.isAuth = true
+                    self.userId = userID
+                    
+                    self.isSocialAuth = true
+                    completion(true)
+                                          
+                
+                }
+                    
+                else{
+                    self.isAuth = true
+                    self.userId = userID
+                    
+                    completion(false)
+                    
+                }
+            }
+            
+            
+        }
+        
+      
+        
+        
+        
+    }
     
     //MARK: SIGN IN VIA EMAIL
     func signInWithEmail(Email: String, Password:String,completion: @escaping(_ status : Bool, _ error: String?)->()){

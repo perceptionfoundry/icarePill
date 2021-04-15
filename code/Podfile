@@ -8,4 +8,5 @@ target 'iCarePill' do
   # Pods for iCarePill
 
 pod 'CodableFirebase'
+pod 'GoogleSignIn'
 end

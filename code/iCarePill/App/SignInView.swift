@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 struct SignInView: View {
     
     @ObservedObject var emailTF = EmailValidationObj()
     @ObservedObject var passwordTF = PasswordValidationObj()
+    @ObservedObject var firebaseObj = FirebaseViewModel()
+    
+    
+  
     
     @State var isSignUp = false
     @State var isLogin = false
@@ -166,6 +171,10 @@ struct SignInView: View {
             //MARK: GOOGLE BUTTON
             Button(action: {
                 
+                SocialLogin().attemptLoginGoogle()
+                
+                isLogin = firebaseObj.isSocialAuth
+                
             }, label: {
                 
                 ZStack{
@@ -196,6 +205,7 @@ struct SignInView: View {
         .padding(.horizontal)
         
         }
+      
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
@@ -373,3 +383,5 @@ struct TF_View: View {
         .padding(.horizontal, 20)
     }
 }
+
+
