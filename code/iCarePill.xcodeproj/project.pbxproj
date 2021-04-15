@@ -14,6 +14,7 @@
 		F21653AB262806470035950D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F21653AA262806470035950D /* FirebaseFirestore */; };
 		F21653AD262806470035950D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F21653AC262806470035950D /* FirebaseDatabase */; };
 		F21653D3262810030035950D /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21653D2262810030035950D /* SocialLogin.swift */; };
+		F21653D8262827930035950D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = F21653D7262827930035950D /* FacebookLogin */; };
 		F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AA260877D10038A925 /* ImagePickerView.swift */; };
 		F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */; };
 		F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */; };
@@ -141,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21653D8262827930035950D /* FacebookLogin in Frameworks */,
 				F23801742601D0DE00B3FEA1 /* SDWebImageSwiftUI in Frameworks */,
 				F22EC6242609C8C1009FCF7F /* QRCodeReader in Frameworks */,
 				F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */,
@@ -330,6 +332,7 @@
 				F21653A8262806470035950D /* FirebaseAuth */,
 				F21653AA262806470035950D /* FirebaseFirestore */,
 				F21653AC262806470035950D /* FirebaseDatabase */,
+				F21653D7262827930035950D /* FacebookLogin */,
 			);
 			productName = iCarePill;
 			productReference = F29FD40C260106D500CA43F5 /* iCarePill.app */;
@@ -363,6 +366,7 @@
 				F23801762601D1FB00B3FEA1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */,
 				F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F21653D6262827930035950D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = F29FD40D260106D500CA43F5 /* Products */;
 			projectDirPath = "";
@@ -704,6 +708,14 @@
 				minimumVersion = 7.10.0;
 			};
 		};
+		F21653D6262827930035950D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
 		F22EC6222609C8C1009FCF7F /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yannickl/QRCodeReader.swift.git";
@@ -755,6 +767,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F21653A3262806470035950D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		F21653D7262827930035950D /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21653D6262827930035950D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
 		};
 		F22EC6232609C8C1009FCF7F /* QRCodeReader */ = {
 			isa = XCSwiftPackageProductDependency;

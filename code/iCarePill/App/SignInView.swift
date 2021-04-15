@@ -7,6 +7,13 @@
 
 import SwiftUI
 import GoogleSignIn
+import FBSDKLoginKit
+import FacebookLogin
+import FacebookCore
+import Firebase
+
+
+
 
 struct SignInView: View {
     
@@ -21,6 +28,8 @@ struct SignInView: View {
     @State var isLogin = false
     @State var isAlert = false
     @State var alertMsg = ""
+    
+    @State var manager = LoginManager()
     
     let fbViewModel = FirebaseViewModel()
     
@@ -143,6 +152,30 @@ struct SignInView: View {
             
             //MARK: FACEBOOK BUTTON
             Button(action: {
+              
+
+                
+                manager.logIn(permissions: ["email","public_profile"], from: nil) { (result, err) in
+                    
+                    
+                    if err == nil && result?.token != nil{
+
+                        guard let accessToken = result?.token?.tokenString else{
+                                       return
+                                   }
+
+                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken)
+                        
+                       let vm = FirebaseViewModel()
+                        vm.SocialNetworkAuth(credential: credential) { (status) in
+                            if status{
+                            isLogin.toggle()
+                            }
+                        }
+                    }else{
+                        print(err?.localizedDescription)
+                    }
+                }
                 
             }, label: {
                 

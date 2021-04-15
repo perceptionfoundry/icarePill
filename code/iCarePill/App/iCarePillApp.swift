@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
 
 @main
 struct iCarePillApp: App {
@@ -37,7 +38,17 @@ struct iCarePillApp: App {
         @available(iOS 9.0, *)
         func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
           -> Bool {
-          return GIDSignIn.sharedInstance().handle(url)
+            
+            let google = GIDSignIn.sharedInstance().handle(url)
+            
+            let facebook =  ApplicationDelegate.shared.application(
+                UIApplication.shared,
+                open: url,
+                sourceApplication: nil,
+                annotation: [UIApplication.OpenURLOptionsKey.annotation]
+            )
+            
+          return  google || facebook
         }
         
         
