@@ -25,7 +25,12 @@ struct iCarePillApp: App {
      
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-            print("Your code here")
+           
+            
+            ApplicationDelegate.shared.application(
+                       application,
+                       didFinishLaunchingWithOptions: launchOptions
+                   )
             
             GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
             GIDSignIn.sharedInstance().delegate = self
