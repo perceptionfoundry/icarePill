@@ -12,6 +12,7 @@ var previousMediValue : Medicine?
 
 struct ScheduleView: View {
     
+ 
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -36,10 +37,10 @@ struct ScheduleView: View {
     @State var isSunday = false
     @State var isAlert = false
     
-    @State private var selectedGiveTime =  "After Breakfast, "
+    @State private var selectedGiveTime =  "After Breakfast"
     let strengthValue = ["Before Breakfast", "After Breakfast",
                          "Before Lunch", "After lunch",
-                         "Before Dinner", "After Dinner,"]
+                         "Before Dinner", "After Dinner"]
     @State  var isExpand  = false
     
     @State var selectedDate = Date()

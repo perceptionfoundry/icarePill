@@ -296,5 +296,42 @@ class FirebaseViewModel: ObservableObject{
         
         
     }
+    
+    
+    
+    //MARK: Specific COLLECTION
+    
+    func GetSpecificCollection<T: Decodable>(collectionTitle: String, subCollectionTitle: String, completion: @escaping(_ status : Bool,_ getData : [T] ,_ err : String?)->() ){
+        
+        
+        var fetchData = [T]()
+        
+        dbRef.collection(collectionTitle).document(userId!).collection(subCollectionTitle).whereField("days", arrayContains: "Tuesday").getDocuments { (snapShot, err) in
+            
+            if err == nil{
+                
+                guard let data = snapShot?.documents else{return}
+                
+                
+                data.forEach { (value) in
+                    
+                    let temp = try! FirestoreDecoder().decode(T.self, from: value.data())
+                    fetchData.append(temp)
+                }
+                
+
+                
+                
+                completion(true, fetchData, nil)
+                
+                
+            }else{
+                completion(false, [], err?.localizedDescription)
+            }
+        }
+        
+    }
+    
+    
 }
 

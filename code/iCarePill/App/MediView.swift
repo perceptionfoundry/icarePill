@@ -18,11 +18,15 @@ struct MediView: View {
     @State  var isNewEntry = false
     @State var count = 0
     @State var selectDate = 0
+    @State var morningDrug = [Medicine]()
+    @State var afternoonDrug = [Medicine]()
+    @State var eveningDrug = [Medicine]()
+    @State var nightDrug = [Medicine]()
     
     
-    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
-                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
-                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false,dosage: "", giveAt: "", days: [], notification: [])]
+
+    
+    let tempData = [Medicine]()
     
 
     
@@ -45,7 +49,7 @@ struct MediView: View {
                         .padding()
                     
                     VStack(alignment:.leading){
-                        Text("Hello, Shahrukh!")
+                        Text("Hello, \((userDetail?.first)!)")
                             .font(.custom("Poppins-Medium", size: 18))
                             
                            
@@ -127,7 +131,7 @@ struct MediView: View {
                 LazyVStack{
                     
                     
-                    ForEach(tempData){value in
+                    ForEach(morningDrug){value in
                         
                         MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "08:00 am")
                             .padding(.bottom, 10)
@@ -161,7 +165,7 @@ struct MediView: View {
                     LazyVStack{
                         
                         
-                        ForEach(tempData){value in
+                        ForEach(afternoonDrug){value in
                             
                             MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "08:00 am")
                                 .padding(.bottom, 10)
@@ -195,7 +199,7 @@ struct MediView: View {
                     LazyVStack{
                         
                         
-                        ForEach(tempData){value in
+                        ForEach(eveningDrug){value in
                             
                             MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "08:00 am")
                                 .padding(.bottom, 10)
@@ -229,12 +233,21 @@ struct MediView: View {
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                     LazyVStack{
                         
-                        
-                        ForEach(tempData){value in
+                        if !nightDrug.isEmpty {
+                            ForEach(nightDrug){value in
+                                
+                                MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: value.giveAt)
+                                    .padding(.bottom, 10)
+                            }
+                        }else{
+                           
+                                
+                                MediCellView(ImageTitle: "", MedicineTitle: "", Time: "")
+                                    .padding(.bottom, 10)
                             
-                            MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "08:00 am")
-                                .padding(.bottom, 10)
                         }
+                        
+                      
 
                     }
                     .padding()
@@ -260,7 +273,11 @@ struct MediView: View {
                 self.count = i
                 
             self.newDate()
+                
+               
             }
+            
+            self.displayValue()
             
         })
         
@@ -274,6 +291,7 @@ struct MediView: View {
         self.dateValue = Calendar.current.date(byAdding: .day, value: 1, to: self.dateValue)!
         self.UpdateDate()
 
+        
     }
 
     
@@ -295,10 +313,39 @@ struct MediView: View {
         
        
             self.calendarData.append(self.data)
+        
+        
 
 
+//        print(self.calendarData)
+    }
+    
+    func displayValue(){
+        
+        let vm = FirebaseViewModel()
+        vm.GetSpecificCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
+            
+            
+            print(details.count)
+            
+            
+            
+            details.forEach { (value) in
+                
+                if value.giveAt == "Before Breakfast" || value.giveAt == "After Breakfast" {
+                    morningDrug.append(value)
+                }else if value.giveAt == "Before Lunch" || value.giveAt == "After lunch" {
+                    afternoonDrug.append(value)
+                }else if value.giveAt == "Before Dinner"{
+                   eveningDrug.append(value)
+                }else if value.giveAt == "After Dinner"{
+                    nightDrug.append(value)
+                    
+                }
+            }
+            
 
-        print(self.calendarData)
+        }
     }
 }
 
