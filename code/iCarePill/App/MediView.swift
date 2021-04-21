@@ -18,6 +18,7 @@ struct MediView: View {
     @State  var isNewEntry = false
     @State var count = 0
     @State var selectDate = 0
+    @State var selectDay = ""
     @State var morningDrug = [Medicine]()
     @State var afternoonDrug = [Medicine]()
     @State var eveningDrug = [Medicine]()
@@ -98,6 +99,10 @@ struct MediView: View {
                                                           Button(action: {
                   
                                                               selectDate = value.id
+                                                            
+                                                            print(value.Day)
+                                                            
+                                                            self.displayValue(dayName: value.Day)
                   
                                                           }, label: {
                                                               MediTopView(DateValue: value.Date, DayValue:  value.Day, isSelected: selectDate == value.id ? true : false)
@@ -130,12 +135,20 @@ struct MediView: View {
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                 LazyVStack{
                     
-                    
-                    ForEach(morningDrug){value in
-                        
-                        MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "08:00 am")
-                            .padding(.bottom, 10)
+                    if !morningDrug.isEmpty {
+                        ForEach(morningDrug){value in
+                            
+                            MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: value.giveAt)
+                                .padding(.bottom, 10)
+                        }
+                    }else{
+                       
+            
+                            MediCellView_blank(ImageTitle: "", MedicineTitle: "", Time: "")
+                                .padding(.bottom, 10)
                     }
+                    
+                  
 
                 }
                 .padding()
@@ -164,12 +177,20 @@ struct MediView: View {
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                     LazyVStack{
                         
-                        
-                        ForEach(afternoonDrug){value in
-                            
-                            MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "08:00 am")
-                                .padding(.bottom, 10)
+                        if !afternoonDrug.isEmpty {
+                            ForEach(afternoonDrug){value in
+                                
+                                MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: value.giveAt)
+                                    .padding(.bottom, 10)
+                            }
+                        }else{
+                           
+                
+                                MediCellView_blank(ImageTitle: "", MedicineTitle: "", Time: "")
+                                    .padding(.bottom, 10)
                         }
+                        
+                      
 
                     }
                     .padding()
@@ -198,12 +219,20 @@ struct MediView: View {
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                     LazyVStack{
                         
-                        
-                        ForEach(eveningDrug){value in
-                            
-                            MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: "08:00 am")
-                                .padding(.bottom, 10)
+                        if !eveningDrug.isEmpty {
+                            ForEach(eveningDrug){value in
+                                
+                                MediCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Time: value.giveAt)
+                                    .padding(.bottom, 10)
+                            }
+                        }else{
+                           
+                
+                                MediCellView_blank(ImageTitle: "", MedicineTitle: "", Time: "")
+                                    .padding(.bottom, 10)
                         }
+                        
+                      
 
                     }
                     .padding()
@@ -241,10 +270,9 @@ struct MediView: View {
                             }
                         }else{
                            
-                                
-                                MediCellView(ImageTitle: "", MedicineTitle: "", Time: "")
+                
+                                MediCellView_blank(ImageTitle: "", MedicineTitle: "", Time: "")
                                     .padding(.bottom, 10)
-                            
                         }
                         
                       
@@ -277,7 +305,7 @@ struct MediView: View {
                
             }
             
-            self.displayValue()
+           
             
         })
         
@@ -286,7 +314,7 @@ struct MediView: View {
     }
     
     
-    
+    //MARK: NewDate
     func newDate(){
         self.dateValue = Calendar.current.date(byAdding: .day, value: 1, to: self.dateValue)!
         self.UpdateDate()
@@ -294,7 +322,7 @@ struct MediView: View {
         
     }
 
-    
+    //MARK: UPDATE
     func UpdateDate(){
         
         
@@ -315,34 +343,54 @@ struct MediView: View {
             self.calendarData.append(self.data)
         
         
+        if self.selectDay == ""{
+            self.selectDay = day
+            
+            self.displayValue(dayName: self.selectDay)
+        }
 
-
-//        print(self.calendarData)
     }
     
-    func displayValue(){
+    
+    
+    //MARK: DISPLAY VALUE
+    func displayValue(dayName: String){
+        
+        self.morningDrug.removeAll()
+        self.afternoonDrug.removeAll()
+        self.eveningDrug.removeAll()
+        self.nightDrug.removeAll()
         
         let vm = FirebaseViewModel()
-        vm.GetSpecificCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
-            
-            
-            print(details.count)
+        vm.GetSpecificCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock", specificValue:dayName) { (status, details : [Medicine], err) in
             
             
             
-            details.forEach { (value) in
-                
-                if value.giveAt == "Before Breakfast" || value.giveAt == "After Breakfast" {
-                    morningDrug.append(value)
-                }else if value.giveAt == "Before Lunch" || value.giveAt == "After lunch" {
-                    afternoonDrug.append(value)
-                }else if value.giveAt == "Before Dinner"{
-                   eveningDrug.append(value)
-                }else if value.giveAt == "After Dinner"{
-                    nightDrug.append(value)
+            
+            
+            
+            if status{
+ 
+                details.forEach { (value) in
                     
+                    print(value.Apperance)
+                    
+                    if value.giveAt == "Before Breakfast" || value.giveAt == "After Breakfast" {
+                        morningDrug.append(value)
+                    }else if value.giveAt == "Before Lunch" || value.giveAt == "After lunch" {
+                        afternoonDrug.append(value)
+                    }else if value.giveAt == "Before Dinner"{
+                       eveningDrug.append(value)
+                    }else if value.giveAt == "After Dinner"{
+                        nightDrug.append(value)
+                        
+                    }
                 }
+            }else{
+                print(err!)
             }
+            
+         
             
 
         }
@@ -446,6 +494,61 @@ struct MediCellView: View {
     }
 }
 
+
+struct MediCellView_blank: View {
+    
+    var ImageTitle: String
+    var MedicineTitle : String
+    var Time : String
+    
+    var body: some View {
+        VStack{
+            
+            ZStack{
+                
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
+                    .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                
+                HStack{
+                    Image(ImageTitle)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    
+                    VStack(alignment:.leading){
+                        Text(MedicineTitle)
+                            .font(.custom("Poppins-Medium", size: 15))
+                            .foregroundColor(.accentColor)
+                        
+                        
+                        Text(MedicineTitle)
+                            .font(.custom("Poppins-Regular", size: 14))
+                            .foregroundColor(Color(#colorLiteral(red: 0.4979991317, green: 0.4980617762, blue: 0.4979779124, alpha: 1)))
+                        
+                    
+                        
+                    }
+                    
+                    Spacer()
+                    
+                    VStack{
+                    
+                    Text(Time)
+                        .font(.custom("Poppins-Regular", size: 12))
+                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                        
+                        Spacer()
+                        
+                    }
+                    
+                }.padding()
+                
+                
+            }
+        }
+    }
+}
 
 
 

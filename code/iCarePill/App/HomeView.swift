@@ -12,18 +12,21 @@ var userDetail : User?
 
 struct HomeView: View {
     
-    
-//    let tempData = [Medicine(id: "jsfjks", Title: "Aspirin", Condition: "normal", Apperance: "capsule", Strength: 5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false, dosage: "", giveAt: "", days: [], notification: []),
-//                    Medicine(id: "wrtrewt", Title: "DEXA", Condition: "normal", Apperance: "syrup", Strength: 50, unit: "ml", DoE: "1/10/2000", Stock: 5, reminder: false,dosage: "", giveAt: "", days: [], notification: []),
-//                    Medicine(id: "dddsds", Title: "histop", Condition: "normal", Apperance: "tablet", Strength: 2.5, unit: "mg", DoE: "1/1/2000", Stock: 10, reminder: false,dosage: "", giveAt: "", days: [], notification: [])]
-    
-    
-    @State var tempData = [Medicine]()
-        @State  var isNewEntry = false
+
+    @State var medicineData = [Medicine]()
+    @State  var isNewEntry = false
+    @State  var isActiveAlert = false
     @State  var userName = ""
+    @State  var selectedIndex = -1
+    
+    
+    
+    @State  var takenStatus = [Int]()
+    @State  var skipStatus = [Int]()
 
     
-
+    
+    
     
     var body: some View {
         
@@ -112,14 +115,46 @@ struct HomeView: View {
                         .padding()
                     
                     
+                    
+                    
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                     LazyVStack{
                         
                         
-                        ForEach(tempData){value in
+                    
+                    
+                        
+                        ForEach(0..<medicineData.count, id:\.self){ i in
+            
                             
-                            HomeCellView(ImageTitle: value.Apperance, MedicineTitle: value.Title, Dose: "\(value.Strength)\(value.unit)", Time: "\((value.notification.first)!)", status: "taken")
-                                .padding(.bottom, 10)
+                            Button(action: {
+                                isActiveAlert.toggle()
+                                
+                                self.selectedIndex = i
+                                
+                            }, label: {
+                                
+                                
+                                
+                                if self.takenStatus.contains(i){
+                                    HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "taken")
+                                        .padding(.bottom, 10).tag(medicineData[i].id)
+                                }
+                             
+                                
+                                else if self.skipStatus.contains(i){
+                                    HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "skip")
+                                        .padding(.bottom, 10).tag(medicineData[i].id)
+                                }
+                                
+                                else{
+                                HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "")
+                                    .padding(.bottom, 10).tag(medicineData[i].id)
+                            }
+                            })
+
+                            
+                           
                         }
     
                     }
@@ -157,15 +192,85 @@ struct HomeView: View {
             VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
                 
                 if status{
-                    let temp = details
                     
                     
-                    tempData = details
+                    medicineData = details
                 }else{
                     print("\(err!)")
                 }
                 
             }
+        }
+        .actionSheet(isPresented: $isActiveAlert) { () -> ActionSheet in
+            
+            let takenButton = ActionSheet.Button.default(Text("Taken")) {
+                print("TAKEN")
+                
+                print(medicineData[self.selectedIndex].Title)
+                
+                
+                //*SKIP*
+                let skipIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
+                
+                print(skipIndex)
+                
+                if let value = skipIndex{
+                    print("remove \(value)")
+                    
+                    self.skipStatus.remove(at: value)
+                }
+                
+                
+                //*TAKEN*
+                let takenIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
+                
+                print(takenIndex)
+                
+                if let value = takenIndex{
+                    print("remove \(value)")
+                    
+                    self.takenStatus.remove(at: value)
+                }else{
+                    print("added")
+                    self.takenStatus.append(self.selectedIndex)
+                }
+                
+                
+                
+            }
+            let skipButton = ActionSheet.Button.destructive(Text("Skip")) {
+                print("SKIP")
+                
+                let TakenIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
+                
+                print(TakenIndex)
+                
+                if let value = TakenIndex{
+                    print("remove \(value)")
+                    
+                    self.takenStatus.remove(at: value)
+                }
+                
+                
+                //*TAKEN*
+                let skipIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
+                
+                print(skipIndex)
+                
+                if let value = skipIndex{
+                    print("remove \(value)")
+                    
+                    self.skipStatus.remove(at: value)
+                }else{
+                    print("added")
+                    self.skipStatus.append(self.selectedIndex)
+                }
+                
+            }
+            
+            return ActionSheet(title: Text("Action"), message: nil, buttons: [takenButton, skipButton])
+            
+            
         }
         
         
@@ -223,6 +328,9 @@ struct HomeCellView: View {
             
             ZStack{
                 
+                
+                
+                
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(.white)
                     .frame(height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -246,6 +354,9 @@ struct HomeCellView: View {
                         Text(Time)
                             .font(.custom("Poppins-Medium", size: 10))
                             .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
+                        
+                        
+                        
                     }
                     
                     Spacer()

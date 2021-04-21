@@ -301,12 +301,31 @@ class FirebaseViewModel: ObservableObject{
     
     //MARK: Specific COLLECTION
     
-    func GetSpecificCollection<T: Decodable>(collectionTitle: String, subCollectionTitle: String, completion: @escaping(_ status : Bool,_ getData : [T] ,_ err : String?)->() ){
+    func GetSpecificCollection<T: Decodable>(collectionTitle: String, subCollectionTitle: String, specificValue:String, completion: @escaping(_ status : Bool,_ getData : [T] ,_ err : String?)->() ){
         
         
         var fetchData = [T]()
+        var selectedValue = ""
         
-        dbRef.collection(collectionTitle).document(userId!).collection(subCollectionTitle).whereField("days", arrayContains: "Tuesday").getDocuments { (snapShot, err) in
+        switch specificValue {
+        case "Mon":
+            selectedValue = "Monday"
+        case "Tue":
+            selectedValue = "Tuesday"
+        case "Wed":
+            selectedValue = "Wednesday"
+        case "Thu":
+            selectedValue = "Thursday"
+        case "Fri":
+            selectedValue = "Friday"
+        case "Sat":
+            selectedValue = "Saturday"
+        default:
+            selectedValue = "Sunday"
+        }
+        
+        
+        dbRef.collection(collectionTitle).document(userId!).collection(subCollectionTitle).whereField("days", arrayContains: selectedValue).getDocuments { (snapShot, err) in
             
             if err == nil{
                 
