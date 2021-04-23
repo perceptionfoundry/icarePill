@@ -12,7 +12,7 @@ struct DoctorsView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var count = 1
+//    @State var count = 1
     @State var docArray = [Doctor]()
     
    
@@ -22,7 +22,7 @@ struct DoctorsView: View {
     var body: some View {
         VStack{
        
-            if count == 0{
+            if docArray.count == 0{
         NoRecordView(imageName: "no_doctor")
             }
             else{

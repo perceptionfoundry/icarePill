@@ -11,7 +11,7 @@ import Foundation
 
 class User: Identifiable, Codable{
     var id : String!
-    var dp : String!
+    var dp : String?
     var first : String!
     var last  : String!
     var type : String!

@@ -11,7 +11,7 @@ struct NotesView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var count = 1
+//    @State var count = 1
     
     @State var isNext = false
     @State var noteArray = [Note]()
@@ -19,7 +19,7 @@ struct NotesView: View {
     var body: some View {
         VStack{
        
-            if count == 0{
+            if noteArray.count == 0{
         NoRecordView(imageName: "no_doctor")
             }
             else{

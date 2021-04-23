@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ReportView: View {
     
@@ -31,7 +32,11 @@ struct ReportView: View {
                         VStack{
                         HStack{
                             
-                            Image("sample")
+                            let imageurl  = URL(string: userDetail?.dp ?? "")
+                            
+                            WebImage(url: imageurl)
+                                .placeholder(Image(uiImage: UIImage(named: "dp")!
+                                ))
                                 .resizable()
                                 .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                 .scaledToFill()
@@ -40,7 +45,7 @@ struct ReportView: View {
                                 .padding()
                             
                             VStack(alignment:.leading){
-                                Text("Hello, Shahrukh!")
+                                Text("Hello, \(userDetail?.first ?? "")!")
                                     .font(.custom("Poppins-Medium", size: 18))
                                     
                                    

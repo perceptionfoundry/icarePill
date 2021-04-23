@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct MoreView: View {
     
@@ -25,8 +26,11 @@ struct MoreView: View {
             //MARK: Top Part
                 HStack{
                     
-                    Image("sample")
-                        .resizable()
+                    let imageurl  = URL(string: userDetail?.dp ?? "")
+                    
+                    WebImage(url: imageurl)
+                        .placeholder(Image(uiImage: UIImage(named: "dp")!
+                        ))                        .resizable()
                         .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .scaledToFill()
                         .clipShape(Circle())
@@ -36,7 +40,7 @@ struct MoreView: View {
                     
                     
                     VStack(alignment:.leading){
-                        Text("Hello, Shahrukh!")
+                        Text("Hello, \(userDetail?.first ?? "")!")
                             .font(.custom("Poppins-Medium", size: 18))
                             
                            

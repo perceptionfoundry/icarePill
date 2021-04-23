@@ -21,7 +21,7 @@ struct AppointmentsView: View {
     var body: some View {
         VStack{
        
-            if count == 0{
+            if appointmentArray.count == 0{
         NoRecordView(imageName: "no_appointment")
             }
             else{

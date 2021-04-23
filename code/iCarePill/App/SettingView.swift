@@ -11,7 +11,8 @@ import Firebase
 struct SettingView: View {
     
     @Environment(\.presentationMode) var presentationMode
-
+   
+    
     @State var isGeneral = false
     @State var isPlace = false
     @State var isOpen = false
@@ -149,11 +150,13 @@ struct SettingView: View {
                 do {
                     try Auth.auth().signOut()
                     isAuth = false
-                    userId = ""
+                    userId = " "
                     islogout.toggle()
                 }catch{
                     print(error.localizedDescription)
                 }
+                
+               
        
             }, label: {
                 

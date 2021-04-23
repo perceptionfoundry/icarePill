@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct MediView: View {
     
@@ -41,7 +42,11 @@ struct MediView: View {
                 VStack{
                 HStack{
                     
-                    Image("sample")
+                    let imageurl  = URL(string: userDetail?.dp ?? "")
+                    
+                    WebImage(url: imageurl)
+                        .placeholder(Image(uiImage: UIImage(named: "dp")!
+                        ))
                         .resizable()
                         .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .scaledToFill()
