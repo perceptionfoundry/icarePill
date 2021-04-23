@@ -152,6 +152,7 @@ struct SettingView: View {
                     isAuth = false
                     userId = " "
                     islogout.toggle()
+                    
                 }catch{
                     print(error.localizedDescription)
                 }
@@ -167,6 +168,7 @@ struct SettingView: View {
                         .padding()
                     
                     Text("Log Out")
+                        .bold()
                         .foregroundColor(.white)
                         .font(.custom("Poppins-Medium", size: 16))
                     
