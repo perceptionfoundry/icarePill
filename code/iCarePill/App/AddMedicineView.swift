@@ -24,7 +24,7 @@ struct AddMedicineView: View {
 
     
     
-    
+    @State var isSearchBar = false
     @State  var isTablet  = false
     @State  var isCapsule  = true
     @State  var isSyrup  = false
@@ -53,15 +53,25 @@ struct AddMedicineView: View {
                             .foregroundColor(.white)
                             .shadow(radius: 4)
                         
-                        HStack {
-                            Image("medi_tab")
-                            
-                            TextField("Medication Name", text: $MedicationTitle)
-                                .font(.custom("Poppins-Medium", size: 14))
-                                .foregroundColor(.accentColor)
-
-                        }
+                        
+                        Button( action:{
+                            isSearchBar = true
+                        }, label:{
+                            HStack {
+                                Image("medi_tab")
+                                
+                                
+                                Text(MedicationTitle)
+                                    .font(.custom("Poppins-Medium", size: 14))
+                                    .foregroundColor(.accentColor)
+                                    
+                                Spacer()
+                            }
+                        })
+                       
+                       
                         .padding()
+                        
                         
                        
                         
@@ -75,8 +85,9 @@ struct AddMedicineView: View {
                         
                     }
                 }
+              
                 .sheet(isPresented: $isQRScanning, content: {
-                    QRCodeReaderView(qrCodeValue: $MedicationTitle)
+                    SearchbarView(selection: $MedicationTitle)
                 })
             
             //MARK: Condition
@@ -417,12 +428,17 @@ struct AddMedicineView: View {
             
             
             Spacer()
-        }.padding()
+            }
+            .sheet(isPresented: $isSearchBar, content: {
+                SearchbarView(selection: $MedicationTitle)
+            })
+            .padding()
             .alert(isPresented: $isAlert, content: {
                 Alert(title: Text("Textfield Empty"), message: Text(" Please assure all fields are filled"), dismissButton: .default(Text("Dismiss")))
                 
             })
     }
+        
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)

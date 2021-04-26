@@ -72,6 +72,9 @@
 		F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D326FD260490B2009880BE /* FirebaseViewModel.swift */; };
 		F2D327032604935E009880BE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D327022604935E009880BE /* User.swift */; };
 		F2E9ACF8260BA08C004DF836 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E9ACF7260BA08C004DF836 /* ScheduleView.swift */; };
+		F2F493032636778D009E9BA5 /* SearchbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F493022636778D009E9BA5 /* SearchbarView.swift */; };
+		F2F49306263678E8009E9BA5 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F49305263678E8009E9BA5 /* SwiftUIView.swift */; };
+		F2F4930926367906009E9BA5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F4930826367906009E9BA5 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +137,9 @@
 		F2D326FD260490B2009880BE /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		F2D327022604935E009880BE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F2E9ACF7260BA08C004DF836 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		F2F493022636778D009E9BA5 /* SearchbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchbarView.swift; sourceTree = "<group>"; };
+		F2F49305263678E8009E9BA5 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		F2F4930826367906009E9BA5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		F7B0B38D2F743DFAA77EAEED /* Pods-iCarePill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCarePill.debug.xcconfig"; path = "Target Support Files/Pods-iCarePill/Pods-iCarePill.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +188,8 @@
 				F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */,
 				F256BD77260C9E750046C6D8 /* NoRecordView.swift */,
 				F21653D2262810030035950D /* SocialLogin.swift */,
+				F2F49305263678E8009E9BA5 /* SwiftUIView.swift */,
+				F2F4930826367906009E9BA5 /* SearchBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 				F238017B2601D82C00B3FEA1 /* SignUpView.swift */,
 				F242106D2608A30B0046EA2B /* MainView.swift */,
 				F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */,
+				F2F493022636778D009E9BA5 /* SearchbarView.swift */,
 				F2E9ACF7260BA08C004DF836 /* ScheduleView.swift */,
 				F24210702608A3550046EA2B /* HomeView.swift */,
 				F24210732608A3630046EA2B /* MediView.swift */,
@@ -478,6 +487,7 @@
 				F256BD75260C97790046C6D8 /* NotesView.swift in Sources */,
 				F24210812608EFA30046EA2B /* Medicine.swift in Sources */,
 				F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */,
+				F2F4930926367906009E9BA5 /* SearchBar.swift in Sources */,
 				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
 				F26E45522611CC520054511E /* AddNoteView.swift in Sources */,
 				F256BD78260C9E750046C6D8 /* NoRecordView.swift in Sources */,
@@ -502,7 +512,9 @@
 				F2875481260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift in Sources */,
 				F272D17826257D22009D648F /* Appointment.swift in Sources */,
 				F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */,
+				F2F49306263678E8009E9BA5 /* SwiftUIView.swift in Sources */,
 				F272D17B26257D3D009D648F /* Note.swift in Sources */,
+				F2F493032636778D009E9BA5 /* SearchbarView.swift in Sources */,
 				F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */,
 				F24210772608A3720046EA2B /* TrackerView.swift in Sources */,
 				F256BD7B260CAD5C0046C6D8 /* FAQView.swift in Sources */,

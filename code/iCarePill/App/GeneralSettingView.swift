@@ -12,6 +12,10 @@ struct GeneralSettingView: View {
     @Environment(\.presentationMode) var presentationMode
 
     
+    @State var isSound = false
+    @State var isVibrate = false
+    @State var isZone = false
+    
     
     
     var body: some View {
@@ -186,7 +190,7 @@ struct GeneralSettingView: View {
                           
                             //********** Sound  ***********
                               Button(action: {
-                                  
+                                isSound.toggle()
                               }, label: {
                                   
                                   HStack {
@@ -201,7 +205,7 @@ struct GeneralSettingView: View {
                                         Rectangle()
                                          .stroke(Color(#colorLiteral(red: 0.2128868997, green: 0.3307233751, blue: 0.8132392764, alpha: 1)))
                                          .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                        Image("tick_selected")
+                                        Image(isSound ? "tick_selected" : "")
                                             .resizable()
                                             .frame(width: 18, height: 18, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                     }
@@ -213,7 +217,7 @@ struct GeneralSettingView: View {
                           
                             //********** Sound  ***********
                               Button(action: {
-                                  
+                                isVibrate.toggle()
                               }, label: {
                                   
                                   HStack {
@@ -228,7 +232,7 @@ struct GeneralSettingView: View {
                                         Rectangle()
                                          .stroke(Color(#colorLiteral(red: 0.2128868997, green: 0.3307233751, blue: 0.8132392764, alpha: 1)))
                                          .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                        Image("tick_selected")
+                                        Image(isVibrate ? "tick_selected" : "")
                                             .resizable()
                                             .frame(width: 18, height: 18, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                     }
@@ -251,7 +255,7 @@ struct GeneralSettingView: View {
                           
                             //********** Sound  ***********
                               Button(action: {
-                                  
+                                isZone.toggle()
                               }, label: {
                                   
                                   HStack {
@@ -266,7 +270,7 @@ struct GeneralSettingView: View {
                                         Rectangle()
                                          .stroke(Color(#colorLiteral(red: 0.2128868997, green: 0.3307233751, blue: 0.8132392764, alpha: 1)))
                                          .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                        Image("tick_selected")
+                                        Image(isZone ? "tick_selected" : "")
                                             .resizable()
                                             .frame(width: 18, height: 18, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                     }

@@ -121,7 +121,6 @@ struct iCarePillApp: App {
                     .environment(\.colorScheme, .light)
             }
             
-//            AddAppointmentView()
                 
 
         }
