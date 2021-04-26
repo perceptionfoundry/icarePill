@@ -108,20 +108,20 @@ struct iCarePillApp: App {
     var body: some Scene {
         WindowGroup {
             
-            if !isAuth{
-                SignInView()
-                    .preferredColorScheme(.light)
-                    .environment(\.colorScheme, .light)
-            }else{
-                MainView()
-                    .onAppear(){
-                        print(userId)
-                    }
-                    .preferredColorScheme(.light)
-                    .environment(\.colorScheme, .light)
-            }
+//            if !isAuth{
+//                SignInView()
+//                    .preferredColorScheme(.light)
+//                    .environment(\.colorScheme, .light)
+//            }else{
+//                MainView()
+//                    .onAppear(){
+//                        print(userId)
+//                    }
+//                    .preferredColorScheme(.light)
+//                    .environment(\.colorScheme, .light)
+//            }
             
-                
+            DayReminderView(dateValue: .constant(Date()))
 
         }
         
