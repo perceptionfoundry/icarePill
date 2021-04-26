@@ -17,7 +17,7 @@ struct AddMedicineView: View {
     @State private var selectedStrength = "1"
     let strengthValue = ["1", "2.5","5","7.5"]
     @State private var selectedUnit = "mg"
-    let UnitValue = ["mg", "ml"]
+    let UnitValue = ["mg","g","IU","mcg","mcg/hr","mcg/ml","mEq","mg/cm2","mg/g","mL"]
     @State var DoE = Date()
     @State var stockValue = ""
     @State var reminderStatus = false
