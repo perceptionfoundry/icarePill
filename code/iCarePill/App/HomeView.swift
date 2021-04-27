@@ -95,10 +95,30 @@ struct HomeView: View {
                     Button(action: {
                         isDayReminder.toggle()
                     }, label: {
-                        
+                        VStack{
+                            
+                            
+                            HStack{
+                                HomeCenterButtonView(imageName: "morning", title: " Morning")
+                                  
+                                
+                                HomeCenterButtonView(imageName: "sun", title: " Afternoon")
+                                                    }
+
+                            HStack{
+                                HomeCenterButtonView(imageName: "evening", title: " Evening")
+                                   
+                                
+                                HomeCenterButtonView(imageName: "moon", title: " Night")
+                                    
+                            }
+                            
+                    
+                                
+                        }
                     })
                 })
-       
+      
     
           
                 VStack(alignment:.leading){

@@ -217,25 +217,25 @@ struct DayReminderView: View {
                                         .padding(.trailing)
                                         
                                         
-//                                        Button(action: {
-//                                            self.selectedIndex = i
-//                                        }, label: {
-//                                            ZStack {
-//                                                Circle()
-//                                                    .fill(Color(#colorLiteral(red: 0, green: 0.6891491413, blue: 0.6618481874, alpha: 1)))
-//                                                    .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//
-//                                                Image(systemName: "alarm")
-//                                                    .resizable()
-//                                                    .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                                    .foregroundColor(.white)
-//                                            }
-//
-//                                            Text("Snooze")
-//                                                .font(.custom("Poppins-Medium", size: 10))
-//                                                .foregroundColor(Color(#colorLiteral(red: 0, green: 0.6891491413, blue: 0.6618481874, alpha: 1)))
-//                                        })
-//                                       .padding(.trailing)
+                                        Button(action: {
+                                            self.selectedIndex = i
+                                        }, label: {
+                                            ZStack {
+                                                Circle()
+                                                    .fill(Color(#colorLiteral(red: 0, green: 0.6891491413, blue: 0.6618481874, alpha: 1)))
+                                                    .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+
+                                                Image(systemName: "alarm")
+                                                    .resizable()
+                                                    .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                                    .foregroundColor(.white)
+                                            }
+
+                                            Text("Snooze")
+                                                .font(.custom("Poppins-Medium", size: 10))
+                                                .foregroundColor(Color(#colorLiteral(red: 0, green: 0.6891491413, blue: 0.6618481874, alpha: 1)))
+                                        })
+                                       .padding(.trailing)
 
                                         Button(action: {
                                             self.selectedIndex = i
@@ -248,25 +248,27 @@ struct DayReminderView: View {
 
                                         })
                                         .padding(.trailing)
-//                                        Button(action: {
-//                                            self.selectedIndex = i
-//                                        }, label: {
-//
-//                                            ZStack {
-//                                                Circle()
-//                                                    .fill(Color(#colorLiteral(red: 1, green: 0.6175212264, blue: 0.04734752327, alpha: 1)))
-//                                                    .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//
-//                                                Image(systemName: "alarm")
-//                                                    .resizable()
-//                                                    .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                                    .foregroundColor(.white)
-//                                            }
-//                                            Text("Reschedule")
-//                                                .font(.custom("Poppins-Medium", size: 10))
-//                                                .foregroundColor(Color(#colorLiteral(red: 1, green: 0.6175212264, blue: 0.04734752327, alpha: 1)))
-//
-//                                        })
+                                        
+                                        
+                                        Button(action: {
+                                            self.selectedIndex = i
+                                        }, label: {
+
+                                            ZStack {
+                                                Circle()
+                                                    .fill(Color(#colorLiteral(red: 1, green: 0.6175212264, blue: 0.04734752327, alpha: 1)))
+                                                    .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+
+                                                Image(systemName: "alarm")
+                                                    .resizable()
+                                                    .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                                    .foregroundColor(.white)
+                                            }
+                                            Text("Reschedule")
+                                                .font(.custom("Poppins-Medium", size: 10))
+                                                .foregroundColor(Color(#colorLiteral(red: 1, green: 0.6175212264, blue: 0.04734752327, alpha: 1)))
+
+                                        })
 
 
                                     }
