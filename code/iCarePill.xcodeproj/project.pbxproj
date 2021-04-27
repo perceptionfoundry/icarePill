@@ -275,6 +275,7 @@
 				F2F493022636778D009E9BA5 /* SearchbarView.swift */,
 				F2E9ACF7260BA08C004DF836 /* ScheduleView.swift */,
 				F24210702608A3550046EA2B /* HomeView.swift */,
+				F27328652636A4520059BA3E /* DayReminderView.swift */,
 				F24210732608A3630046EA2B /* MediView.swift */,
 				F24210792608A3970046EA2B /* ReportView.swift */,
 				F24210762608A3720046EA2B /* TrackerView.swift */,
@@ -289,7 +290,6 @@
 				F25D558126130C1000E9152B /* SettingView.swift */,
 				F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */,
 				F296CF702613915B00BB1331 /* PasscodeView.swift */,
-				F27328652636A4520059BA3E /* DayReminderView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";

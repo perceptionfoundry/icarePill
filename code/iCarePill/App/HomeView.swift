@@ -16,6 +16,7 @@ struct HomeView: View {
 
     @State var medicineData = [Medicine]()
     @State  var isNewEntry = false
+    @State  var isDayReminder = false
     @State  var isActiveAlert = false
     @State  var userName = ""
     @State  var selectedIndex = -1
@@ -87,29 +88,17 @@ struct HomeView: View {
                
                 
        
-            
-        
-        VStack{
-            
-            
-            HStack{
-                HomeCenterButtonView(imageName: "morning", title: " Morning")
-                  
-                
-                HomeCenterButtonView(imageName: "sun", title: " Afternoon")
-                                    }
-
-            HStack{
-                HomeCenterButtonView(imageName: "evening", title: " Evening")
-                   
-                
-                HomeCenterButtonView(imageName: "moon", title: " Night")
-                    
-            }
-            
-    
-                
-        }
+            NavigationLink(
+                destination: DayReminderView(dateValue: .constant(Date())),
+                isActive: $isDayReminder,
+                label: {
+                    Button(action: {
+                        isDayReminder.toggle()
+                    }, label: {
+                        
+                    })
+                })
+       
     
           
                 VStack(alignment:.leading){
