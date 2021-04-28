@@ -10,15 +10,15 @@ import SwiftUI
 struct PasscodeView: View {
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     
     
     
     var body: some View {
         
         VStack{
-           
-           
+            
+            
             HStack{
                 
                 Spacer()
@@ -31,7 +31,7 @@ struct PasscodeView: View {
                             .foregroundColor(.white)
                             .shadow(radius: 3)
                     )
-                    
+                
                 Spacer()
                 //SECOND NUMBER
                 TextField("", text: .constant("5"))
@@ -64,48 +64,48 @@ struct PasscodeView: View {
                             .foregroundColor(.white)
                             .shadow(radius: 3)
                     )
-                   
+                
                 Spacer()
             }
             .foregroundColor(.accentColor)
             .font(.custom("Poppins-Bold", size: 20))
             .padding(.top,140)
             .padding(.bottom, 50)
-           
+            
             Text("Enter the verification code sent \n in your email address")
                 .multilineTextAlignment(.center)
                 .font(.custom("Poppins-Medium", size: 16))
                 .foregroundColor(.gray)
-              
+            
             Spacer()
-           
-    }
+            
+        }
         .preferredColorScheme(.light)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing:
-        
+                                
                                 Button(action: {
                                     presentationMode.wrappedValue.dismiss()
                                 }) {
-                                   Text("Cancel")
+                                    Text("Cancel")
                                 }
-        
+                            
         )
         .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-              
+        .toolbar {
+            
+            
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("Verification Code")
+                        .font(.custom("Poppins-Medium", size: 18))
+                        .foregroundColor(.accentColor)
                     
-                    ToolbarItem(placement: .principal) {
-                        VStack {
-                            Text("Verification Code")
-                                .font(.custom("Poppins-Medium", size: 18))
-                                .foregroundColor(.accentColor)
-                           
-                        }
-                    }
                 }
+            }
+        }
         
     }
 }
