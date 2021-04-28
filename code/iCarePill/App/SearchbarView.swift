@@ -43,10 +43,10 @@ struct SearchbarView: View {
             }
         }
         
-
+        .preferredColorScheme(.light)
        
         
-    }.preferredColorScheme(.light)
+    }
 }
 
 struct SearchbarView_Previews: PreviewProvider {

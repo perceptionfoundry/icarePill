@@ -186,10 +186,10 @@ struct MoreView: View {
     }.navigationBarHidden(true)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)
-        
+        .preferredColorScheme(.light)
         
        
-    }.preferredColorScheme(.light)
+    }
 }
 
 struct MoreView_Previews: PreviewProvider {
