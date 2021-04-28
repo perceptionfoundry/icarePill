@@ -238,7 +238,7 @@ struct SignInView: View {
         .padding(.horizontal)
         
         }
-      
+        .preferredColorScheme(.light)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }

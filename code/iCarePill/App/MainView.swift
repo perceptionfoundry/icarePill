@@ -58,6 +58,7 @@ struct MainView: View {
                 }.tag(5)
         }
         }
+        .preferredColorScheme(.light)
         .edgesIgnoringSafeArea(.top)
         .accentColor(Color(#colorLiteral(red: 0.213047266, green: 0.3305280805, blue: 0.8173508048, alpha: 1)))
        

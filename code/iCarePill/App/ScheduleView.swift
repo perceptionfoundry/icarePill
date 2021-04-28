@@ -486,7 +486,6 @@ struct ScheduleView: View {
     }
     
     
-    
     func showDatePickerAlert() {
         let alertVC = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
             let datePicker: UIDatePicker = UIDatePicker()

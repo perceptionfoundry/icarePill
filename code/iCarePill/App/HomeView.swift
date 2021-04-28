@@ -380,6 +380,6 @@ struct HomeCellView: View {
                 
                 
             }
-        }
+        }.preferredColorScheme(.light)
     }
 }

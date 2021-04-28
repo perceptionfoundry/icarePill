@@ -410,7 +410,7 @@ struct SignUpView: View {
                     self.dpImage = getImage
                 }
             }
-
+            .preferredColorScheme(.light)
         .background(
             Color.accentColor
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))

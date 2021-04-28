@@ -77,7 +77,7 @@ struct DoctorsView: View {
                 })
                    
             
-        }
+        }.preferredColorScheme(.light)
         .onAppear(){
             let firebaseVM = FirebaseViewModel()
             

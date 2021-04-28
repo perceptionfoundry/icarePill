@@ -73,7 +73,7 @@ struct NotesView: View {
                 })
                    
             
-        }
+        }.preferredColorScheme(.light)
         .onAppear(){
             let firebaseVM = FirebaseViewModel()
             

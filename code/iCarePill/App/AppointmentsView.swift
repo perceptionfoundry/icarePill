@@ -172,7 +172,7 @@ struct AppointmentCellView: View {
             }
             
             Spacer()
-        }
+        }.preferredColorScheme(.light)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10)

@@ -189,7 +189,7 @@ struct MoreView: View {
         
         
        
-    }
+    }.preferredColorScheme(.light)
 }
 
 struct MoreView_Previews: PreviewProvider {
