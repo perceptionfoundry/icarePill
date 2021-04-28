@@ -145,122 +145,78 @@ struct DayReminderView: View {
                     
                     if self.takenStatus.contains(i){
                         
-                        HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "taken")
+                        DayReminderCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "taken")
+                            .shadow(radius: 3)
                             .padding(.bottom, 10).tag(medicineData[i].id)
                             .padding(.horizontal)
+
                     }
                     
                     
                     else if self.skipStatus.contains(i){
-//                        Group{
-//                        HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "skip")
-//                            .padding(.bottom, 10).tag(medicineData[i].id)
-//                            .padding(.horizontal)
-//                        }
+
+                        DayReminderCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "skip")
+                            .shadow(radius: 3)
+                            .padding(.bottom, 10).tag(medicineData[i].id)
+                            .padding(.horizontal)
+
                     }
                     
                     else{
-//                        DayReminderCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "")
-//                        .padding(.bottom, 10).tag(medicineData[i].id)
+
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 12)
+                                .foregroundColor(.white)
+                                .frame(height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .shadow(radius: 2)
+                            
+                            VStack{
+                            DayReminderCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "")
+                                .padding(.bottom, 10).tag(medicineData[i].id)
+                                .padding(.horizontal)
+                                
+                                
+                                Rectangle()
+                                    .fill(Color.gray)
+                                    .frame(height:1)
+                                Spacer()
+                                
+                                HStack{
+                                    Button(action:{
+                                        self.selectedIndex = i
+                                        self.skipAction()
+                                    }, label:{
+                                        Image("skip_1")
+                                            .resizable()
+                                            .frame(width: 70, height: 36, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    })
+                                    Button(action:{
+                                        self.selectedIndex = i
+                                        self.takenAction()
+                                    }, label:{
+                                        Image("take")
+                                            .resizable()
+                                            .frame(width: 70, height: 26, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    })
+                                    Button(action:{}, label:{
+                                        Image("snooze")
+                                            .resizable()
+                                            .frame(width: 70, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    })
+                                    Button(action:{}, label:{
+                                        Image("reschedule")
+                                            .resizable()
+                                            .frame(width: 100, height: 26, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                            .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                                    })
+                                }
+                            }
+                        }.padding(.horizontal)
+                        .padding(.bottom, 10)
                         
-//                        VStack{
-//
-//                            ZStack{
-//
-//                                RoundedRectangle(cornerRadius: 12)
-//                                    .foregroundColor(.white)
-//                                    .frame(height: 130, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                    .shadow(radius: 3)
-//
-//                                VStack{
-//                                    Group{
-//                                    HStack{
-//                                        Image(medicineData[i].Apperance)
-//                                            .resizable()
-//                                            .scaledToFill()
-//                                            .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//
-//                                        VStack(alignment:.leading){
-//                                            Text(medicineData[i].Title)
-//                                                .font(.custom("Poppins-Medium", size: 12))
-//                                                .foregroundColor(Color(#colorLiteral(red: 0.4979991317, green: 0.4980617762, blue: 0.4979779124, alpha: 1)))
-//
-//                                            Text("\(medicineData[i].Strength)\(medicineData[i].unit)")
-//                                                .font(.custom("Poppins-Medium", size: 10))
-//                                                .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-//
-//                                            Text((medicineData[i].notification.first)!)
-//                                                .font(.custom("Poppins-Medium", size: 10))
-//                                                .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-//
-//
-//
-//                                        }
-//
-//                                        Spacer()
-//
-//                                        Image("")
-//                                    }.padding()
-//                                    }
-//                                    Rectangle()
-//                                        .fill(Color.gray)
-//                                        .frame(height: 1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                        .padding(.horizontal)
-//
-//                                    Group{
-//                                    HStack{
-//
-//                                        // *********** SKIP
-//                                        Button(action: {
-//                                            self.selectedIndex = i
-//                                            self.skipAction()
-//                                        }, label: {
-//
-//                                            Image("cancel")
-//                                            Text("Skip")
-//                                                .font(.custom("Poppins-Medium", size: 10))
-//                                                .foregroundColor(Color(#colorLiteral(red: 0.9449101686, green: 0.2611962855, blue: 0.2070304751, alpha: 1)))
-//                                        })
-//                                        .padding(.trailing)
-//
-//
-//                                        // ***********SNOOZE
-//
-//                                        Image("snooze")
-//                                            .resizable()
-//                                            .frame(width: 70, height: 40)
-//
-//
-//
-//
-//                                        // *********** TAKEN
-//                                        Button(action: {
-//                                            self.selectedIndex = i
-//                                            self.takenAction()
-//                                        }, label: {
-//                                            Image("tick")
-//                                            Text("Taken")
-//                                                .font(.custom("Poppins-Medium", size: 10))
-//                                                .foregroundColor(Color(#colorLiteral(red: 0, green: 0.7493677735, blue: 0.08691362292, alpha: 1)))
-//
-//                                        })
-//                                        .padding(.trailing)
-//
-//                                        // *********** Reschdule
-//
-//                                        Image("reschedule")
-//                                            .resizable()
-//                                            .frame(width: 70, height: 40)
-//
-//                                    }
-//                                    .padding(.horizontal)
-//                                    }
-//                                        Spacer()
-//                                }
-//
-//                            }.padding()
-//                        }
                        
+                        
+                        
                       
                     }
                     
@@ -504,135 +460,3 @@ struct DayTimeView: View {
 
 
 
-struct DayReminderCellView: View {
-
-    var ImageTitle: String
-    var MedicineTitle : String
-    var Dose : String
-    var Time : String
-    var status : String
-    var index : Int
-
-
-
-
-    var body: some View {
-        VStack{
-
-            ZStack{
-
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.white)
-                    .frame(height: 130, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .shadow(radius: 3)
-
-                VStack{
-                    Group{
-                    HStack{
-                        Image(ImageTitle)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-
-                        VStack(alignment:.leading){
-                            Text(MedicineTitle)
-                                .font(.custom("Poppins-Medium", size: 12))
-                                .foregroundColor(Color(#colorLiteral(red: 0.4979991317, green: 0.4980617762, blue: 0.4979779124, alpha: 1)))
-
-                            Text(Dose)
-                                .font(.custom("Poppins-Medium", size: 10))
-                                .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-
-                            Text(Time)
-                                .font(.custom("Poppins-Medium", size: 10))
-                                .foregroundColor(Color(#colorLiteral(red: 0.6626930237, green: 0.662774384, blue: 0.6626655459, alpha: 1)))
-
-
-
-                        }
-
-                        Spacer()
-
-                        Image(status)
-                    }.padding()
-                    }
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(height: 1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .padding(.horizontal)
-
-//                    Group{
-//                    HStack{
-//                        Spacer()
-//                        Button(action: {
-//
-//                        }, label: {
-//
-//                            Image("cancel")
-//                            Text("Skip")
-//                                .font(.custom("Poppins-Medium", size: 12))
-//                                .foregroundColor(Color(#colorLiteral(red: 0.9449101686, green: 0.2611962855, blue: 0.2070304751, alpha: 1)))
-//                        })
-//                        Spacer()
-////                        Button(action: {
-////
-////                        }, label: {
-////
-////
-//////                            ZStack {
-//////                                Circle()
-//////                                    .fill(Color(#colorLiteral(red: 0, green: 0.6891491413, blue: 0.6618481874, alpha: 1)))
-//////                                    .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//////
-//////                                Image(systemName: "alarm")
-//////                                    .resizable()
-//////                                    .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//////                                    .foregroundColor(.white)
-//////                            }
-////
-////                            Text("Snooze")
-////                                .font(.custom("Poppins-Medium", size: 12))
-////                                .foregroundColor(Color(#colorLiteral(red: 0, green: 0.6891491413, blue: 0.6618481874, alpha: 1)))
-////                        })
-//                        Spacer()
-//
-//                        Button(action: {
-//
-//                        }, label: {
-//                            Image("tick")
-//                            Text("Taken")
-//                                .font(.custom("Poppins-Medium", size: 12))
-//                                .foregroundColor(Color(#colorLiteral(red: 0, green: 0.7493677735, blue: 0.08691362292, alpha: 1)))
-//
-//                        })
-//                        Spacer()
-////                        Button(action: {
-////
-////                        }, label: {
-////
-//////                            ZStack {
-//////                                Circle()
-//////                                    .fill(Color(#colorLiteral(red: 1, green: 0.6175212264, blue: 0.04734752327, alpha: 1)))
-//////                                    .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//////
-//////                                Image(systemName: "alarm")
-//////                                    .resizable()
-//////                                    .frame(width: 12, height: 12, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//////                                    .foregroundColor(.white)
-//////                            }
-////                            Text("Reschedule")
-////                                .font(.custom("Poppins-Medium", size: 12))
-////                                .foregroundColor(Color(#colorLiteral(red: 1, green: 0.6175212264, blue: 0.04734752327, alpha: 1)))
-////
-////                        })
-//
-//                        Spacer()
-//                    }
-//                    }
-                    Spacer()
-                }
-
-            }.padding()
-        }
-    }
-}
