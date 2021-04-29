@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+
+var totalStock = 0
+var takenCount = 0
+var skipCount = 0
+var missCount = 0
+
+var todayTakenCount = 0
+var todaySkipCount = 0
+
 struct MainView: View {
     
     @State var selectedIndex = 1

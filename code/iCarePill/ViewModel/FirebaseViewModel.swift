@@ -352,5 +352,65 @@ class FirebaseViewModel: ObservableObject{
     }
     
     
+    
+    //MARK: CREATE Dose Status
+    
+    func CreateDoseStatus(docName: String,docName_del: String,uploadData: [String:Any], completion: @escaping(_ status : Bool, _ err : String?)->() ){
+        
+        
+        let collectionRef = dbRef.collection("Users").document(userId!).collection("Dose").document(docName)
+        
+        let temp = uploadData
+        
+        dbRef.collection("Users").document(userId!).collection("Dose").document(docName_del).delete()
+        
+        
+        collectionRef.setData(temp) { (err) in
+            
+            if err == nil{
+                
+                completion(true, nil)
+            }else{
+                completion(false, err?.localizedDescription)
+            }
+        }
+    
+        
+    }
+    
+    
+    
+    //MARK: GET Dose Status
+    
+func GetDoseStatus<T: Decodable>(completion: @escaping(_ status : Bool,_ getData : [T] ,_ err : String?)->() ){
+    
+    
+    
+    dbRef.collection("Users").document(userId!).collection("Dose").getDocuments{ (snapShot, err) in
+            
+        
+        var resp = [T]()
+            if err == nil{
+                
+                guard let data = snapShot?.documents else{return}
+
+                
+                data.forEach { value in
+                    let fetchData = try! FirestoreDecoder().decode(T.self, from: value.data())
+                    
+                    resp.append(fetchData)
+                    
+                }
+               
+                completion(true, resp, nil)
+                
+            }else{
+                completion(false, [], err?.localizedDescription)
+            }
+        }
+    
+}
+    
+    
 }
 

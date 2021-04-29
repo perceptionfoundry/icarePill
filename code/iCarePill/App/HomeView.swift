@@ -27,7 +27,9 @@ struct HomeView: View {
     @State  var skipStatus = [Int]()
 
     
-    
+    let today = Date()
+    let VM = FirebaseViewModel()
+    @State var dateString = ""
     
     
     var body: some View {
@@ -133,11 +135,6 @@ struct HomeView: View {
                     
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                     LazyVStack{
-                        
-                        
-                    
-                    
-                        
                         ForEach(0..<medicineData.count, id:\.self){ i in
             
                             
@@ -179,15 +176,19 @@ struct HomeView: View {
                 .background(
                     Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1))
                 )
-                
-        
-         
             Spacer()
     }.navigationBarHidden(true)
         .onAppear(){
-            let VM = FirebaseViewModel()
             
+            let d_Formattor = DateFormatter()
+            d_Formattor.dateFormat = "dd-MMM"
+//            d_Formattor.dateStyle = .short
             
+            self.dateString = d_Formattor.string(from: today)
+            
+            print(self.dateString)
+           
+         
             //USER
             VM.GetUser(collectionTitle: "Users") { (status, details, err) in
                 
@@ -206,15 +207,92 @@ struct HomeView: View {
             VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
                 
                 if status{
-                    
-                    
                     medicineData = details
+                    
+                    details.forEach { medi in
+                        
+                        totalStock += medi.Stock
+                        
+                    }
+                    
+                    print(totalStock)
+                    //DOSE
+                    
+                    VM.GetDoseStatus { (status, Detail:[Dose], err )in
+                        
+                        if status{
+                            Detail.forEach { Dose in
+                                
+                                
+                                if Dose.status == "Taken" {
+                                    takenCount += 1
+                                }else if Dose.status == "Skip" {
+                                    skipCount += 1
+                                }
+                                
+                                print("taken:\(takenCount)")
+                                print("Skip:\(skipCount)")
+                                
+                                if Dose.dateInfo == self.dateString{
+                                if Dose.status == "Taken"{
+                                    
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                            todayTakenCount += 1
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.takenStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                                else  if Dose.status == "Skip"{
+                                    
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                            todaySkipCount += 1
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.skipStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            }
+                        }
+                    }
+                    
                 }else{
                     print("\(err!)")
                 }
                 
             }
+            
+            
+           
         }
+        
         .actionSheet(isPresented: $isActiveAlert) { () -> ActionSheet in
             
             let takenButton = ActionSheet.Button.default(Text("Taken")) {
@@ -248,6 +326,20 @@ struct HomeView: View {
                     print("added")
                     self.takenStatus.append(self.selectedIndex)
                 }
+           
+                let dict  = [ "id" : "\(self.dateString)-taken-\(medicineData[self.selectedIndex].id)",
+                 "MedicineID" : medicineData[self.selectedIndex].id,
+                 "dateInfo" : self.dateString,
+                "status" : "Taken"]  as [String: Any]
+                
+                VM.CreateDoseStatus(docName: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
+                    
+                    if status{
+                        
+                    }else{
+                        print(err!)
+                    }
+                }
                 
                 
                 
@@ -257,7 +349,7 @@ struct HomeView: View {
                 
                 let TakenIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
                 
-                print(TakenIndex)
+                print(TakenIndex ?? -1)
                 
                 if let value = TakenIndex{
                     print("remove \(value)")
@@ -269,7 +361,7 @@ struct HomeView: View {
                 //*TAKEN*
                 let skipIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
                 
-                print(skipIndex)
+                print(skipIndex ?? -1)
                 
                 if let value = skipIndex{
                     print("remove \(value)")
@@ -278,6 +370,20 @@ struct HomeView: View {
                 }else{
                     print("added")
                     self.skipStatus.append(self.selectedIndex)
+                }
+                
+                let dict  = [ "id" : "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)",
+                 "MedicineID" : medicineData[self.selectedIndex].id,
+                 "dateInfo" : self.dateString,
+                "status" : "Skip"]  as [String: Any]
+                
+                VM.CreateDoseStatus(docName: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
+                    
+                    if status{
+                        
+                    }else{
+                        print(err!)
+                    }
                 }
                 
             }

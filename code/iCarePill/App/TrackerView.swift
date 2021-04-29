@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct TrackerView: View {
+    
+    @State var percent : CGFloat = 0.0
+    
+    
     var body: some View {
        
         VStack(spacing: 10){
@@ -122,7 +126,7 @@ struct TrackerView: View {
                         
       
                         Circle()
-                            .trim(from: 0.0, to: CGFloat(0.75))
+                            .trim(from: 0.0, to: CGFloat(self.percent))
                             .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color(#colorLiteral(red: 0, green: 0.7959628105, blue: 0, alpha: 1)))
                             .frame(width: 120, height: 120, alignment: .top)
@@ -134,7 +138,7 @@ struct TrackerView: View {
                         
                         
                         VStack{
-                            Text("90%")
+                            Text("\(self.percent * 100)%")
                                 .font(.custom("Poppins-Medium", size: 16))
                                 .foregroundColor(Color(#colorLiteral(red: 0, green: 0.7959628105, blue: 0, alpha: 1)))
                             
@@ -175,10 +179,10 @@ struct TrackerView: View {
                                  alignment: .topLeading)
                         .overlay(
                             HStack{
-                                Text("45")
+                                Text("\(takenCount)")
                                     .font(.custom("Poppins-Medium", size: 18))
                                 
-                            Text("/60")
+                            Text("/\(totalStock)")
                                 .padding(.trailing, 10)
                                 }
                                     .font(.custom("Poppins-Medium", size: 13))
@@ -202,10 +206,10 @@ struct TrackerView: View {
                     
                         .overlay(
                             HStack{
-                                Text("05")
+                                Text("\(skipCount)")
                                     .font(.custom("Poppins-Medium", size: 18))
                                 
-                            Text("/60")
+                            Text("/\(totalStock)")
                                 .padding(.trailing, 10)
                                 }
                                     .font(.custom("Poppins-Medium", size: 13))
@@ -241,7 +245,7 @@ struct TrackerView: View {
                             .foregroundColor(Color(#colorLiteral(red: 0.1926886439, green: 0.3166190386, blue: 0.846487999, alpha: 1)))
                             .frame(width:10, height:10,alignment:.center)
                         
-                        Text("60")
+                        Text("\(totalStock)")
                             .foregroundColor(Color(#colorLiteral(red: 0.1926886439, green: 0.3166190386, blue: 0.846487999, alpha: 1)))
                     }
                 }
@@ -255,7 +259,7 @@ struct TrackerView: View {
                             .foregroundColor(Color(#colorLiteral(red: 0, green: 0.8439942002, blue: 0, alpha: 1)))
                             .frame(width:10, height:10,alignment:.center)
                         
-                        Text("60")
+                        Text("\(takenCount)")
                             .foregroundColor(Color(#colorLiteral(red: 0, green: 0.8439942002, blue: 0, alpha: 1)))
                     }
                 }
@@ -269,7 +273,7 @@ struct TrackerView: View {
                             .foregroundColor(Color(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)))
                             .frame(width:10, height:10,alignment:.center)
                         
-                        Text("60")
+                        Text("\(skipCount)")
                             .foregroundColor(Color(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)))
                     }
                 }
@@ -287,7 +291,7 @@ struct TrackerView: View {
                     VStack(alignment:.leading){
                         Text("Weekly Details")
                             .font(.custom("Poppins-Medium", size: 14))
-                        Text("Feb 23 2021 - Feb 30 2021")
+                        Text("Apr 25 2021 - Apr 30 2021")
                             .font(.custom("Poppins-Medium", size: 10))
                             .foregroundColor(Color(#colorLiteral(red: 0.1926886439, green: 0.3166190386, blue: 0.846487999, alpha: 1)))
                     }
@@ -304,14 +308,14 @@ struct TrackerView: View {
                     HStack{
                         
                         VStack(alignment:.leading){
-                            Text("Feb 25, Friday")
+                            Text("Apr 29")
                                 .font(.custom("Poppins-Medium", size: 14))
                             
-                            Text("Missed (0)")
+                            Text("Missed (\(todaySkipCount))")
                                 .font(.custom("Poppins-Medium", size: 12))
                                 .foregroundColor(.gray)
                             
-                            Text("Taken (3)")
+                            Text("Taken (\(todayTakenCount))")
                                 .font(.custom("Poppins-Medium", size: 12))
                                 .foregroundColor(.gray)
                         }
@@ -330,7 +334,16 @@ struct TrackerView: View {
         }
             Spacer()
             
-        }.preferredColorScheme(.light)
+        }.onAppear(){
+            
+            print(takenCount)
+            print(totalStock)
+            let cal = Double(takenCount) / Double(totalStock)
+            print(cal)
+            self.percent = CGFloat(cal)
+            
+        }
+        .preferredColorScheme(.light)
         .navigationBarHidden(true)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.all)

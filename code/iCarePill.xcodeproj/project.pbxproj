@@ -70,6 +70,7 @@
 		F29FD44526010C0400CA43F5 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29FD43326010C0400CA43F5 /* Poppins-ThinItalic.ttf */; };
 		F29FD44626010C0400CA43F5 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29FD43426010C0400CA43F5 /* Poppins-SemiBoldItalic.ttf */; };
 		F29FD44726010C0400CA43F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29FD43526010C0400CA43F5 /* Poppins-Light.ttf */; };
+		F2A3511B263B23B8003EBE21 /* Dose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A3511A263B23B8003EBE21 /* Dose.swift */; };
 		F2AC12552639478E003A95BF /* DayReminderCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC12542639478E003A95BF /* DayReminderCellView.swift */; };
 		F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D326FD260490B2009880BE /* FirebaseViewModel.swift */; };
 		F2D327032604935E009880BE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D327022604935E009880BE /* User.swift */; };
@@ -137,6 +138,7 @@
 		F29FD43326010C0400CA43F5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		F29FD43426010C0400CA43F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		F29FD43526010C0400CA43F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		F2A3511A263B23B8003EBE21 /* Dose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose.swift; sourceTree = "<group>"; };
 		F2AC12542639478E003A95BF /* DayReminderCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayReminderCellView.swift; sourceTree = "<group>"; };
 		F2D326FD260490B2009880BE /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		F2D327022604935E009880BE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				F272D17426257D03009D648F /* Doctor.swift */,
 				F272D17726257D22009D648F /* Appointment.swift */,
 				F272D17A26257D3D009D648F /* Note.swift */,
+				F2A3511A263B23B8003EBE21 /* Dose.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
 				F2AC12552639478E003A95BF /* DayReminderCellView.swift in Sources */,
 				F26E45522611CC520054511E /* AddNoteView.swift in Sources */,
+				F2A3511B263B23B8003EBE21 /* Dose.swift in Sources */,
 				F27328662636A4520059BA3E /* DayReminderView.swift in Sources */,
 				F256BD78260C9E750046C6D8 /* NoRecordView.swift in Sources */,
 				F22EC6272609C8FE009FCF7F /* QRCodeReaderView.swift in Sources */,
