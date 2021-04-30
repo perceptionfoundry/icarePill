@@ -37,7 +37,11 @@ struct DayReminderView: View {
     @State  var takenStatus = [Int]()
     @State  var skipStatus =  [Int]()
     
-    
+    let today = Date()
+    let VM = FirebaseViewModel()
+    @State var dateString = ""
+    @State var weekOfYear = 0
+    @State var monthOfYear = 0
     
     var body: some View {
         
@@ -233,6 +237,25 @@ struct DayReminderView: View {
         .navigationBarHidden(true)
         .onAppear(perform: {
             
+            let d_Formattor = DateFormatter()
+            d_Formattor.dateFormat = "dd-MMM"
+//            d_Formattor.dateStyle = .short
+            self.dateString = d_Formattor.string(from: today)
+            
+            let calendar = Calendar.current
+            let week = calendar.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
+            let month = calendar.component(.month, from: Date.init(timeIntervalSinceNow: 0))
+            
+            print(week)
+            print(month)
+            
+            weekOfYear = week
+            monthOfYear = month
+            
+          
+            
+            print(self.dateString)
+            
             self.dateValue = Date()
             self.UpdateDate()
             for i in (1 ... 30){
@@ -252,9 +275,74 @@ struct DayReminderView: View {
                 VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
                     
                     if status{
-                        
-                        
                         medicineData = details
+                        
+
+                        
+                        print(totalStock)
+                        //DOSE
+                        
+                        VM.GetDoseStatus { (status, Detail:[Dose], err )in
+                            
+                            if status{
+                                Detail.forEach { Dose in
+                                    
+                                    
+                           
+                                    
+                                    print("taken:\(takenCount)")
+                                    print("Skip:\(skipCount)")
+                                    
+                                    if Dose.dateInfo == self.dateString{
+                                    if Dose.status == "Taken"{
+                                        
+                                        let Index = self.medicineData.firstIndex { Medicine in
+                                            
+                                            
+                                            if Medicine.id == Dose.MedicineID!{
+                                                print("found")
+                                                todayTakenCount += 1
+                                                return true
+                                            }else{
+                                                return false
+                                            }
+                                        }
+                                        
+                                        
+                                        
+                                        if let value = Index  {
+                                            self.takenStatus.append(value)
+                                        }
+                                        
+                                    }
+                                    
+                                    else  if Dose.status == "Skip"{
+                                        
+                                        let Index = self.medicineData.firstIndex { Medicine in
+                                            
+                                            
+                                            if Medicine.id == Dose.MedicineID!{
+                                                print("found")
+                                                todaySkipCount += 1
+                                                return true
+                                            }else{
+                                                return false
+                                            }
+                                        }
+                                        
+                                        
+                                        
+                                        if let value = Index  {
+                                            self.skipStatus.append(value)
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                }
+                            }
+                        }
+                        
                     }else{
                         print("\(err!)")
                     }
@@ -304,6 +392,22 @@ struct DayReminderView: View {
             print("added")
             self.takenStatus.append(self.selectedIndex)
         }
+   
+        let dict  = [ "id" : "\(self.dateString)-taken-\(medicineData[self.selectedIndex].id)",
+         "MedicineID" : medicineData[self.selectedIndex].id,
+         "dateInfo" : self.dateString,
+        "status" : "Taken",
+        "week":weekOfYear,
+        "month":monthOfYear]  as [String: Any]
+        
+        VM.CreateDoseStatus(docName: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
+            
+            if status{
+                
+            }else{
+                print(err!)
+            }
+        }
         
         
         
@@ -316,7 +420,7 @@ struct DayReminderView: View {
         
         let TakenIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
         
-        print(TakenIndex)
+        print(TakenIndex ?? -1)
         
         if let value = TakenIndex{
             print("remove \(value)")
@@ -328,7 +432,7 @@ struct DayReminderView: View {
         //*TAKEN*
         let skipIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
         
-        print(skipIndex)
+        print(skipIndex ?? -1)
         
         if let value = skipIndex{
             print("remove \(value)")
@@ -337,6 +441,22 @@ struct DayReminderView: View {
         }else{
             print("added")
             self.skipStatus.append(self.selectedIndex)
+        }
+        
+        let dict  = [ "id" : "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)",
+         "MedicineID" : medicineData[self.selectedIndex].id,
+         "dateInfo" : self.dateString,
+        "status" : "Skip",
+        "week":weekOfYear,
+        "month":monthOfYear]  as [String: Any]
+        
+        VM.CreateDoseStatus(docName: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
+            
+            if status{
+                
+            }else{
+                print(err!)
+            }
         }
         
     }

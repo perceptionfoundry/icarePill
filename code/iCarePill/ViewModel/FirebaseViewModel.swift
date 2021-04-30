@@ -412,5 +412,48 @@ func GetDoseStatus<T: Decodable>(completion: @escaping(_ status : Bool,_ getData
 }
     
     
+    
+    //MARK: GET COLLECTION
+    
+    func GetTrack<T: Decodable>(Field:String, Value: Int, completion: @escaping(_ status : Bool,_ getData : [T] ,_ err : String?)->() ){
+        
+        
+       
+            
+            
+            var fetchData = [T]()
+            
+        dbRef.collection("Users").document(userId!).collection("Dose").whereField(Field, isEqualTo: Value).getDocuments { (snapShot, err) in
+                
+                if err == nil{
+                    
+                    guard let data = snapShot?.documents else{return}
+                    
+                    
+                    data.forEach { (value) in
+                        
+                        let temp = try! FirestoreDecoder().decode(T.self, from: value.data())
+                        fetchData.append(temp)
+                    }
+                    
+
+                    
+                    
+                    completion(true, fetchData, nil)
+                    
+                    
+                }else{
+                    completion(false, [], err?.localizedDescription)
+                }
+            }
+            
+        
+        
+        
+        
+        
+        
+    }
+    
 }
 

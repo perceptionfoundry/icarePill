@@ -30,6 +30,8 @@ struct HomeView: View {
     let today = Date()
     let VM = FirebaseViewModel()
     @State var dateString = ""
+    @State var weekOfYear = 0
+    @State var monthOfYear = 0
     
     
     var body: some View {
@@ -183,8 +185,19 @@ struct HomeView: View {
             let d_Formattor = DateFormatter()
             d_Formattor.dateFormat = "dd-MMM"
 //            d_Formattor.dateStyle = .short
-            
             self.dateString = d_Formattor.string(from: today)
+            
+            let calendar = Calendar.current
+            let week = calendar.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
+            let month = calendar.component(.month, from: Date.init(timeIntervalSinceNow: 0))
+            
+            print(week)
+            print(month)
+            
+            weekOfYear = week
+            monthOfYear = month
+            
+          
             
             print(self.dateString)
            
@@ -209,11 +222,7 @@ struct HomeView: View {
                 if status{
                     medicineData = details
                     
-                    details.forEach { medi in
-                        
-                        totalStock += medi.Stock
-                        
-                    }
+
                     
                     print(totalStock)
                     //DOSE
@@ -224,11 +233,7 @@ struct HomeView: View {
                             Detail.forEach { Dose in
                                 
                                 
-                                if Dose.status == "Taken" {
-                                    takenCount += 1
-                                }else if Dose.status == "Skip" {
-                                    skipCount += 1
-                                }
+                       
                                 
                                 print("taken:\(takenCount)")
                                 print("Skip:\(skipCount)")
@@ -330,7 +335,9 @@ struct HomeView: View {
                 let dict  = [ "id" : "\(self.dateString)-taken-\(medicineData[self.selectedIndex].id)",
                  "MedicineID" : medicineData[self.selectedIndex].id,
                  "dateInfo" : self.dateString,
-                "status" : "Taken"]  as [String: Any]
+                "status" : "Taken",
+                "week":weekOfYear,
+                "month":monthOfYear]  as [String: Any]
                 
                 VM.CreateDoseStatus(docName: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
                     
@@ -375,7 +382,9 @@ struct HomeView: View {
                 let dict  = [ "id" : "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)",
                  "MedicineID" : medicineData[self.selectedIndex].id,
                  "dateInfo" : self.dateString,
-                "status" : "Skip"]  as [String: Any]
+                "status" : "Skip",
+                "week":weekOfYear,
+                "month":monthOfYear]  as [String: Any]
                 
                 VM.CreateDoseStatus(docName: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
                     

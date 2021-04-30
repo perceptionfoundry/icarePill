@@ -14,4 +14,6 @@ class Dose: Identifiable, Codable{
     var MedicineID : String?
     var dateInfo : String?
     var status : String?
+    var week : Int?
+    var month : Int?
 }

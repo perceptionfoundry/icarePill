@@ -10,6 +10,25 @@ import SwiftUI
 struct TrackerView: View {
     
     @State var percent : CGFloat = 0.0
+    @State var isWeek = true
+    @State var isMonth = false
+    @State var isAllTime = false
+    
+    @State var medicineData = [Medicine]()
+    @State var displayData = [Medicine]()
+    let today = Date()
+    let VM = FirebaseViewModel()
+    @State var dateString = ""
+    @State var rangeString = ""
+    @State var rangeDisplayTitle = "Weekly Details"
+    
+    
+    @State  var takenStatus = [Int]()
+    @State  var skipStatus = [Int]()
+    
+    @State var weekOfYear = 0
+    @State var monthOfYear = 0
+    @State var dayOfMonth = 0
     
     
     var body: some View {
@@ -36,21 +55,34 @@ struct TrackerView: View {
                                 Spacer()
                                 Button(action: {
                                     
+                                    isWeek = true
+                                    isMonth = false
+                                    isAllTime = false
+                                    
+                                    self.displayValue()
+                                    rangeDisplayTitle = "Weekly Details"
+                                    
                                 }, label: {
                                    
                                     Text("This week")
                                         .font(.custom("Poppins-Medium", size: 14))
-                                        .foregroundColor(.accentColor)
+                                        .foregroundColor(.white )
                                         .background(
                                         RoundedRectangle(cornerRadius: 15)
-                                            .foregroundColor(.white)
+                                            .stroke(isWeek  ? Color.white : Color.clear)
+                                            .foregroundColor(isWeek ? .white: .accentColor)
                                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                         )
                                         
                                 })
                                 Spacer()
                                 Button(action: {
+                                    isWeek = false
+                                    isMonth = true
+                                    isAllTime = false
                                     
+                                    self.displayValue()
+                                    rangeDisplayTitle = "Monthly Details"
                                 }, label: {
                                    
                                     Text("This Month")
@@ -58,7 +90,8 @@ struct TrackerView: View {
                                         .foregroundColor(.white)
                                         .background(
                                         RoundedRectangle(cornerRadius: 15)
-                                            .stroke(Color.white)
+                                            .stroke(isMonth  ? Color.white : Color.clear)
+                                            .foregroundColor(isMonth ? .white: .accentColor)
                                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                             
                                         )
@@ -66,7 +99,12 @@ struct TrackerView: View {
                                 })
                                 Spacer()
                                 Button(action: {
+                                    isWeek = false
+                                    isMonth = false
+                                    isAllTime = true
                                     
+                                    self.displayValue()
+                                    rangeDisplayTitle = "All-Time Details"
                                 }, label: {
                                    
                                     Text("All Time")
@@ -74,7 +112,7 @@ struct TrackerView: View {
                                         .foregroundColor(.white)
                                         .background(
                                         RoundedRectangle(cornerRadius: 15)
-                                            .stroke(Color.white)
+                                            .stroke(isAllTime  ? Color.white : Color.clear)
                                             .foregroundColor(.white)
                                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                         )
@@ -87,6 +125,9 @@ struct TrackerView: View {
                     
                 
         }
+            .onAppear(){
+                
+            }
           
           
             ScrollView{
@@ -135,10 +176,10 @@ struct TrackerView: View {
                         
                         
                       
-                        
+                       let value = String(format: "%.2f", self.percent * 100)
                         
                         VStack{
-                            Text("\(self.percent * 100)%")
+                            Text("\(value)%")
                                 .font(.custom("Poppins-Medium", size: 16))
                                 .foregroundColor(Color(#colorLiteral(red: 0, green: 0.7959628105, blue: 0, alpha: 1)))
                             
@@ -289,9 +330,9 @@ struct TrackerView: View {
                     //MARK:DURATION
                     HStack{
                     VStack(alignment:.leading){
-                        Text("Weekly Details")
+                        Text(rangeDisplayTitle)
                             .font(.custom("Poppins-Medium", size: 14))
-                        Text("Apr 25 2021 - Apr 30 2021")
+                        Text(rangeString)
                             .font(.custom("Poppins-Medium", size: 10))
                             .foregroundColor(Color(#colorLiteral(red: 0.1926886439, green: 0.3166190386, blue: 0.846487999, alpha: 1)))
                     }
@@ -308,14 +349,14 @@ struct TrackerView: View {
                     HStack{
                         
                         VStack(alignment:.leading){
-                            Text("Apr 29")
+                            Text(dateString)
                                 .font(.custom("Poppins-Medium", size: 14))
                             
-                            Text("Missed (\(todaySkipCount))")
+                            Text("Missed (\(takenCount))")
                                 .font(.custom("Poppins-Medium", size: 12))
                                 .foregroundColor(.gray)
                             
-                            Text("Taken (\(todayTakenCount))")
+                            Text("Taken (\(skipCount))")
                                 .font(.custom("Poppins-Medium", size: 12))
                                 .foregroundColor(.gray)
                         }
@@ -324,29 +365,601 @@ struct TrackerView: View {
                         
                     }.padding(.horizontal)
                     
-                    TrackerMediView(statusImage: "tick",mediType:"capsule", mediTitle:"Asprin", status: "Taken")
-                    TrackerMediView(statusImage: "tick",mediType:"tablet", mediTitle:"Asprin", status: "Taken")
-                    TrackerMediView(statusImage: "tick",mediType:"syrup", mediTitle:"Asprin", status: "Taken")
 
+                    ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+                    LazyVStack{
+                        ForEach(0..<displayData.count, id:\.self){ i in
+            
+                       
+                                if self.takenStatus.contains(i){
+
+                                    
+                                    
+                                    TrackerMediView(statusImage: "tick",mediType:displayData[i].Apperance, mediTitle:displayData[i].Title, status: "Taken")
+                                }
+                             
+                                
+                                else if self.skipStatus.contains(i){
+
+                                    
+                                    TrackerMediView(statusImage: "cancel",mediType:displayData[i].Apperance, mediTitle:displayData[i].Title, status: "Skip")
+                                }
+                                
+                                else{
+
+                                    TrackerMediView(statusImage: "",mediType:displayData[i].Apperance, mediTitle:displayData[i].Title, status: "")
+                            }
+      
+                        }
+    
+                    }
+                    .padding()
+                    }
+                   
 
                     
                 }
         }
+            
             Spacer()
             
-        }.onAppear(){
+        }
+        .padding(.bottom)
+        .onAppear(){
             
-            print(takenCount)
-            print(totalStock)
-            let cal = Double(takenCount) / Double(totalStock)
-            print(cal)
-            self.percent = CGFloat(cal)
+            
+            let currentDate = Date()
+            var dateComponent = DateComponents()
+            dateComponent.day = -7
+            let pastDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+            
+            print(currentDate)
+            print(pastDate!)
+            
+            
+            let calendar_Formattor = DateFormatter()
+            calendar_Formattor.dateFormat = "dd-MMM-yyyy"
+            
+            
+            let c = calendar_Formattor.string(from: currentDate)
+            let p = calendar_Formattor.string(from: pastDate!)
+            
+            print(c)
+            print(p)
+            
+            self.rangeString = "\(p) TO \(c)"
+            
+          
+            
+            
+            let calendar = Calendar.current
+            let week = calendar.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
+            let month = calendar.component(.month, from: Date.init(timeIntervalSinceNow: 0))
+            let day = calendar.component(.day, from: Date.init(timeIntervalSinceNow: 0))
+            
+            self.dayOfMonth = day
+            
+            weekOfYear = week
+            monthOfYear = month
+            
+            let d_Formattor = DateFormatter()
+            d_Formattor.dateFormat = "dd-MMM"
+//            d_Formattor.dateStyle = .short
+            
+            self.dateString = d_Formattor.string(from: today)
+            
+            print(self.dateString)
+            
+         
+            
+            //MEDICINE
+            VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
+                
+                if status{
+                    medicineData = details
+                    
+                    details.forEach { medi in
+                        
+                        totalStock += medi.Stock
+                        
+                    }
+                    
+                    print(totalStock)
+                    //DOSE
+                    
+                    VM.GetTrack(Field: "week", Value: weekOfYear) { (status, Detail:[Dose], err )in
+                        
+                        if status{
+                            
+                            
+                            Detail.forEach { Dose in
+                                
+                                let _ = medicineData.firstIndex { Medicine in
+                                    
+                                    if Medicine.id == Dose.MedicineID{
+                                        
+                                        self.displayData.append(Medicine)
+                                        return true
+                                    }
+                                    else{
+                                        return false
+                                    }
+                                }
+                                
+                                
+                                
+                                if Dose.status == "Taken" {
+                                    takenCount += 1
+                                }else if Dose.status == "Skip" {
+                                    skipCount += 1
+                                }
+                                
+                                print("taken:\(takenCount)")
+                                print("Skip:\(skipCount)")
+                                
+                                
+                              
+                                
+                                if Dose.status == "Taken"{
+             
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                           
+                                            
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.takenStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                                else  if Dose.status == "Skip"{
+                                    
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                            
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.skipStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        
+                            
+                            print(takenCount)
+                            print(totalStock)
+                            let cal = Double(takenCount) / Double(totalStock)
+                            print(cal)
+                            self.percent = CGFloat(cal)
+
+                        }
+                    }
+                    
+                }else{
+                    print("\(err!)")
+                }
+                
+            }
+            
             
         }
         .preferredColorScheme(.light)
         .navigationBarHidden(true)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
+        
+        
+      
+    }
+    
+    func displayValue(){
+        
+        totalStock = 0
+        takenCount = 0
+        skipCount = 0
+        
+        self.displayData.removeAll()
+        
+        if isWeek{
+            
+            let currentDate = Date()
+            var dateComponent = DateComponents()
+            dateComponent.day = -7
+            let pastDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+            
+            print(currentDate)
+            print(pastDate!)
+            
+            
+            let calendar_Formattor = DateFormatter()
+            calendar_Formattor.dateFormat = "dd-MMM-yyyy"
+            
+            
+            let c = calendar_Formattor.string(from: currentDate)
+            let p = calendar_Formattor.string(from: pastDate!)
+            
+            print(c)
+            print(p)
+            
+            self.rangeString = "\(p) TO \(c)"
+       
+            
+            VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock")  { (status, details : [Medicine], err) in
+                
+                if status{
+                    medicineData = details
+                    
+                    details.forEach { medi in
+                        
+                        totalStock += medi.Stock
+                        
+                    }
+                    
+                    print(totalStock)
+                    //DOSE
+                    
+                    VM.GetTrack(Field: "week", Value: weekOfYear) { (status, Detail:[Dose], err )in
+                        
+                        if status{
+                            
+                            
+                            Detail.forEach { Dose in
+                                
+                                let _ = medicineData.firstIndex { Medicine in
+                                    
+                                    if Medicine.id == Dose.MedicineID{
+                                        
+                                        self.displayData.append(Medicine)
+                                        return true
+                                    }
+                                    else{
+                                        return false
+                                    }
+                                }
+                                
+                                
+                                
+                                if Dose.status == "Taken" {
+                                    takenCount += 1
+                                }else if Dose.status == "Skip" {
+                                    skipCount += 1
+                                }
+                                
+                                print("taken:\(takenCount)")
+                                print("Skip:\(skipCount)")
+                                
+                                
+                              
+                                
+                                if Dose.status == "Taken"{
+             
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                           
+                                            
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.takenStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                                else  if Dose.status == "Skip"{
+                                    
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                            
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.skipStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            print(takenCount)
+                            print(totalStock)
+                            let cal = Double(takenCount) / Double(totalStock)
+                            print(cal)
+                            self.percent = CGFloat(cal)
+
+                        }
+                    }
+                    
+                }else{
+                    print("\(err!)")
+                }
+                
+            }
+            
+        }
+        else if isMonth{
+            
+            
+            let currentDate = Date()
+            var dateComponent = DateComponents()
+            dateComponent.day = -dayOfMonth
+            let pastDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+            
+            print(currentDate)
+            print(pastDate!)
+            
+            
+            let calendar_Formattor = DateFormatter()
+            calendar_Formattor.dateFormat = "dd-MMM-yyyy"
+            
+            
+            let c = calendar_Formattor.string(from: currentDate)
+            let p = calendar_Formattor.string(from: pastDate!)
+            
+            print(c)
+            print(p)
+            
+            self.rangeString = "\(p) TO \(c)"
+            
+            VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock")  { (status, details : [Medicine], err) in
+                
+                if status{
+                    medicineData = details
+                    
+                    details.forEach { medi in
+
+                        totalStock += medi.Stock
+
+                    }
+                    
+                    print(totalStock)
+                    //DOSE
+                    
+                    VM.GetTrack(Field: "month", Value: monthOfYear) { (status, Detail:[Dose], err )in
+                        
+                        if status{
+                            
+                            
+                            Detail.forEach { Dose in
+                                
+                                let _ = medicineData.firstIndex { Medicine in
+                                    
+                                    if Medicine.id == Dose.MedicineID{
+                                        
+                                        self.displayData.append(Medicine)
+                                        return true
+                                    }
+                                    else{
+                                        return false
+                                    }
+                                }
+                                
+                                
+                                
+                                if Dose.status == "Taken" {
+                                    takenCount += 1
+                                }else if Dose.status == "Skip" {
+                                    skipCount += 1
+                                }
+                                
+                                print("taken:\(takenCount)")
+                                print("Skip:\(skipCount)")
+                                
+                                
+                              
+                                
+                                if Dose.status == "Taken"{
+             
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                           
+                                            
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.takenStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                                else  if Dose.status == "Skip"{
+                                    
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                            
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.skipStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            print(takenCount)
+                            print(totalStock)
+                            let cal = Double(takenCount) / Double(totalStock)
+                            print(cal)
+                            self.percent = CGFloat(cal)
+
+                        }
+                    }
+                    
+                }else{
+                    print("\(err!)")
+                }
+                
+            }
+            
+        }
+        
+        
+        else{
+            
+            let currentDate = Date()
+            print(currentDate)
+       
+            
+            
+            let calendar_Formattor = DateFormatter()
+            calendar_Formattor.dateFormat = "dd-MMM-yyyy"
+            
+            
+            let c = calendar_Formattor.string(from: currentDate)
+           
+            
+            print(c)
+            
+            self.rangeString = "Till \(c)"
+            
+            VM.GetCollection(collectionTitle: "Medicine", subCollectionTitle: "Stock") { (status, details : [Medicine], err) in
+                
+                if status{
+                    displayData = details
+                    
+                    details.forEach { medi in
+                        
+                        totalStock += medi.Stock
+                        
+                    }
+
+                    
+                    print(totalStock)
+                    //DOSE
+                    
+                    VM.GetDoseStatus { (status, Detail:[Dose], err )in
+                        
+                        if status{
+                            Detail.forEach { Dose in
+                                
+                                
+                                if Dose.status == "Taken" {
+                                    takenCount += 1
+                                }else if Dose.status == "Skip" {
+                                    skipCount += 1
+                                }
+                       
+                                
+                                print("taken:\(takenCount)")
+                                print("Skip:\(skipCount)")
+                                
+                                if Dose.dateInfo == self.dateString{
+                                if Dose.status == "Taken"{
+                                    
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                            todayTakenCount += 1
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    if let value = Index  {
+                                        self.takenStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                                else  if Dose.status == "Skip"{
+                                    
+                                    let Index = self.medicineData.firstIndex { Medicine in
+                                        
+                                        
+                                        if Medicine.id == Dose.MedicineID!{
+                                            print("found")
+                                            todaySkipCount += 1
+                                            return true
+                                        }else{
+                                            return false
+                                        }
+                                    }
+                                   
+                                    if let value = Index  {
+                                        self.skipStatus.append(value)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            }
+                            
+                            print(takenCount)
+                            print(totalStock)
+                            let cal = Double(takenCount) / Double(totalStock)
+                            print(cal)
+                            self.percent = CGFloat(cal)
+                        }
+                    }
+                    
+                }else{
+                    print("\(err!)")
+                }
+                
+            }
+        }
     }
 }
 
@@ -362,10 +975,14 @@ struct TrackerMediView: View {
     var mediType: String
     var mediTitle : String
     var status: String
+    @State var isStatus = false
     
     var body: some View {
         HStack{
             Image(statusImage)
+                .resizable()
+                .frame(width: 20, height: 20, alignment: .center)
+                .scaledToFill()
             Image(mediType)
                 .resizable()
                 .frame(width:25, height:26)
@@ -377,8 +994,23 @@ struct TrackerMediView: View {
             Spacer()
             Text(status)
                 .font(.custom("Poppins-Medium", size: 10))
-                .foregroundColor(Color(#colorLiteral(red: 0.01960825361, green: 0.7933595777, blue: 0.009918640368, alpha: 1)))
+                .foregroundColor(isStatus ? Color(#colorLiteral(red: 0.01960825361, green: 0.7933595777, blue: 0.009918640368, alpha: 1)) : Color(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)))
         }.padding(.horizontal)
         .padding(.bottom, 8)
+        .onAppear(){
+            if status == "Taken"{
+                isStatus = true
+            }
+        }
+    }
+}
+
+
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
     }
 }
