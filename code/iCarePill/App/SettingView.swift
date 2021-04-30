@@ -51,7 +51,7 @@ struct SettingView: View {
                   
                     
                     NavigationLink(
-                        destination: SignInView(),
+                        destination: Text("Option Up coming"),
                         isActive: $isPlace,
                         label: {
                             
