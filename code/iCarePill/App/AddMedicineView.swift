@@ -54,31 +54,31 @@ struct AddMedicineView: View {
                             .shadow(radius: 4)
                         
                         
-                        Button( action:{
-                            isSearchBar = true
-                        }, label:{
-                            HStack {
-                                Image("medi_tab")
+                       
+                        NavigationLink(
+                            destination: SearchbarView(selection: $MedicationTitle),
+                            isActive: $isSearchBar,
+                            label: {
+                                Button( action:{
+                                    isSearchBar = true
+                                }, label:{
+                                    HStack {
+                                        Image("medi_tab")
+                                        
+                                        Text(MedicationTitle)
+                                            .font(.custom("Poppins-Medium", size: 14))
+                                            .foregroundColor(.accentColor)
+                                            
+                                        Spacer()
+                                    }
+                                })
+                                .padding()
                                 
-                                
-                                Text(MedicationTitle)
-                                    .font(.custom("Poppins-Medium", size: 14))
-                                    .foregroundColor(.accentColor)
-                                    
-                                Spacer()
-                            }
-                        })
-                       
-                       
-                        .padding()
-                        
-                        
-                       
-                        
+                            })
                     }
                      
                         Button(action: {
-                            isQRScanning.toggle()
+                            isQRScanning = true
                         }, label: {
                             Image("qrcode")
                         })
@@ -86,9 +86,7 @@ struct AddMedicineView: View {
                     }
                 }
               
-                .sheet(isPresented: $isQRScanning, content: {
-                    SearchbarView(selection: $MedicationTitle)
-                })
+
             
             //MARK: Condition
             VStack(alignment: .leading){
@@ -429,9 +427,17 @@ struct AddMedicineView: View {
             
             Spacer()
             }
-            .sheet(isPresented: $isSearchBar, content: {
-                SearchbarView(selection: $MedicationTitle)
+            
+
+            
+            .sheet(isPresented: $isQRScanning, content: {
+                QRCodeReaderView(qrCodeValue: $MedicationTitle)
             })
+            
+//            .sheet(isPresented: $isQRScanning, content: {
+////                    SearchbarView(selection: $MedicationTitle)
+//                QRCodeReaderView(qrCodeValue: $MedicationTitle)
+//            })
             .padding()
             .alert(isPresented: $isAlert, content: {
                 Alert(title: Text("Textfield Empty"), message: Text(" Please assure all fields are filled"), dismissButton: .default(Text("Dismiss")))
