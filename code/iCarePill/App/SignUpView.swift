@@ -46,7 +46,7 @@ struct SignUpView: View {
     
     var body: some View {
         
-    
+//        ScrollView{
             VStack{
                 
                 HStack(alignment:.center) {
@@ -399,11 +399,12 @@ struct SignUpView: View {
                     RoundedRectangle(cornerRadius: 15)
                         
                         .foregroundColor(.white)
-                        .frame(height: 700, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(height: UIScreen.main.bounds.height * 0.8, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .offset(y: -30))
                 
                
             }// Main VStack end
+//    }
             .sheet(isPresented: $showImagePicker) {
                 ImagePickerView(sourceType: .photoLibrary) { (getImage) in
                     

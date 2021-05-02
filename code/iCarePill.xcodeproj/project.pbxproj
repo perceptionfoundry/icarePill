@@ -20,7 +20,6 @@
 		F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */; };
 		F22EC6242609C8C1009FCF7F /* QRCodeReader in Frameworks */ = {isa = PBXBuildFile; productRef = F22EC6232609C8C1009FCF7F /* QRCodeReader */; };
 		F22EC6272609C8FE009FCF7F /* QRCodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */; };
-		F23801642601CB3000B3FEA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */; };
 		F23801742601D0DE00B3FEA1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F23801732601D0DE00B3FEA1 /* SDWebImageSwiftUI */; };
 		F23801782601D1FB00B3FEA1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F23801772601D1FB00B3FEA1 /* IQKeyboardManagerSwift */; };
 		F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238017B2601D82C00B3FEA1 /* SignUpView.swift */; };
@@ -45,6 +44,7 @@
 		F27328662636A4520059BA3E /* DayReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27328652636A4520059BA3E /* DayReminderView.swift */; };
 		F287547E260E159A00D2D051 /* AddAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F287547D260E159A00D2D051 /* AddAppointmentView.swift */; };
 		F2875481260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */; };
+		F290FC01263E7CD1001933C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F290FC00263E7CD0001933C7 /* GoogleService-Info.plist */; };
 		F296CF6E2613883B00BB1331 /* GeneralSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */; };
 		F296CF712613915B00BB1331 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F296CF702613915B00BB1331 /* PasscodeView.swift */; };
 		F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD40F260106D500CA43F5 /* iCarePillApp.swift */; };
@@ -88,7 +88,6 @@
 		F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageViewModel.swift; sourceTree = "<group>"; };
 		F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
 		F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderView.swift; sourceTree = "<group>"; };
-		F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Resource/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F238017B2601D82C00B3FEA1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		F242106D2608A30B0046EA2B /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F24210702608A3550046EA2B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		F27328652636A4520059BA3E /* DayReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayReminderView.swift; sourceTree = "<group>"; };
 		F287547D260E159A00D2D051 /* AddAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAppointmentView.swift; sourceTree = "<group>"; };
 		F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDateOrTimeViewModel.swift; sourceTree = "<group>"; };
+		F290FC00263E7CD0001933C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingView.swift; sourceTree = "<group>"; };
 		F296CF702613915B00BB1331 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,7 +230,7 @@
 				F29FD41F260106F800CA43F5 /* Launch Screen.storyboard */,
 				F29FD413260106D600CA43F5 /* Assets.xcassets */,
 				F29FD418260106D600CA43F5 /* Info.plist */,
-				F23801632601CB3000B3FEA1 /* GoogleService-Info.plist */,
+				F290FC00263E7CD0001933C7 /* GoogleService-Info.plist */,
 				F29FD415260106D600CA43F5 /* Preview Content */,
 			);
 			path = iCarePill;
@@ -419,7 +419,7 @@
 				F29FD44026010C0400CA43F5 /* Poppins-Black.ttf in Resources */,
 				F29FD43B26010C0400CA43F5 /* Poppins-BlackItalic.ttf in Resources */,
 				F29FD43D26010C0400CA43F5 /* Poppins-Thin.ttf in Resources */,
-				F23801642601CB3000B3FEA1 /* GoogleService-Info.plist in Resources */,
+				F290FC01263E7CD1001933C7 /* GoogleService-Info.plist in Resources */,
 				F29FD44526010C0400CA43F5 /* Poppins-ThinItalic.ttf in Resources */,
 				F29FD43A26010C0400CA43F5 /* Poppins-BoldItalic.ttf in Resources */,
 			);
@@ -673,7 +673,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pf.iCarePill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -696,7 +696,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pf.iCarePill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
