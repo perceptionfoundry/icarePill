@@ -52,15 +52,9 @@ struct AddMedicineView: View {
                             .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .foregroundColor(.white)
                             .shadow(radius: 4)
-                        
-                        
-                       
-                        NavigationLink(
-                            destination: SearchbarView(selection: $MedicationTitle),
-                            isActive: $isSearchBar,
-                            label: {
+    
                                 Button( action:{
-                                    isSearchBar = true
+                                    isSearchBar.toggle()
                                 }, label:{
                                     HStack {
                                         Image("medi_tab")
@@ -73,12 +67,18 @@ struct AddMedicineView: View {
                                     }
                                 })
                                 .padding()
+                                .sheet(isPresented: $isSearchBar, content: {
+                                    SearchbarView(selection: $MedicationTitle)
+                                })
                                 
-                            })
+
                     }
                      
+                        
+                        
+                        
                         Button(action: {
-                            isQRScanning = true
+                            isQRScanning.toggle()
                         }, label: {
                             Image("qrcode")
                         })
@@ -280,11 +280,7 @@ struct AddMedicineView: View {
                         .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
                         .shadow(radius: 4)
-                    
-                  
-//                        TextField("Condition", text: $MedicationTitle)
-//                            .font(.custom("Poppins-Medium", size: 14))
-//                            .padding()
+
                     HStack{
                         
                     DatePicker("", selection: $DoE, displayedComponents: .date)
@@ -427,18 +423,11 @@ struct AddMedicineView: View {
             
             Spacer()
             }
-            
-
-            
             .sheet(isPresented: $isQRScanning, content: {
                 QRCodeReaderView(qrCodeValue: $MedicationTitle)
             })
-            
-//            .sheet(isPresented: $isQRScanning, content: {
-////                    SearchbarView(selection: $MedicationTitle)
-//                QRCodeReaderView(qrCodeValue: $MedicationTitle)
-//            })
             .padding()
+            
             .alert(isPresented: $isAlert, content: {
                 Alert(title: Text("Textfield Empty"), message: Text(" Please assure all fields are filled"), dismissButton: .default(Text("Dismiss")))
                 
