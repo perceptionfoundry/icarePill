@@ -56,7 +56,7 @@ struct ShowDateOrTimeViewModel{
                 
                 
                 let formattor = DateFormatter()
-                formattor.dateFormat = "dd/MM/yyyy"
+                formattor.dateFormat = "MM/dd/yyyy"
                 
                 date_String = formattor.string(from: date)
             }

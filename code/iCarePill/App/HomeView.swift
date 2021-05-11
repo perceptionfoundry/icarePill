@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import UserNotifications
 
 
 var userDetail : User?
@@ -295,6 +296,7 @@ struct HomeView: View {
             }
             
             
+            self.medicineNotification()
            
         }
         
@@ -404,6 +406,41 @@ struct HomeView: View {
         
         
        
+    }
+    
+    func medicineNotification(){
+        
+        //********** 1. User Permission
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.alert, .sound]) { status, err in
+        }
+        
+        //************ 2. Create the notification Content
+        let content = UNMutableNotificationContent()
+        content.title = "iCarePill Remind"
+        content.body = "Welcome"
+        
+        //************* 3. Trigger
+        let date = Date().addingTimeInterval(20)
+        
+        let dateComponent = Calendar.current.dateComponents([.month,.day,.hour,.minute], from: date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+        
+        
+        //********* 4. Create Request
+        
+        let uuidString = UUID().uuidString
+        let request  = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+        
+        // 5. register Notification
+        
+        center.add(request) { (err) in
+            // Check the error
+        }
+        
+        
     }
 }
 

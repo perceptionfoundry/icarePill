@@ -16,6 +16,19 @@ struct GeneralSettingView: View {
     @State var isVibrate = false
     @State var isZone = false
     
+    @State var isExpand = false
+    @State var isExpand1 = false
+    @State var isExpand2 = false
+    @State var isExpand3 = false
+    @State var isExpand4 = false
+    
+    let reminderValue = ["Snooze times", "popup","Snooze times","Snooze times, popup, max alarms"]
+    @State var selectedReminder = "Snooze times, popup, max alarms"
+    @State var selectedMorningReminder = "Snooze times, popup, max alarms"
+    @State var selectedEveningReminder = "Snooze times, popup, max alarms"
+    @State var selectedWeeklyReminder = "Snooze times, popup, max alarms"
+    @State var selectedWeekendReminder = "Snooze times, popup, max alarms"
+    
     
     
     var body: some View {
@@ -50,10 +63,32 @@ struct GeneralSettingView: View {
                                             Text("Medication Reminders")
                                                 .font(.custom("Poppins-Medium", size: 14))
                                                 .foregroundColor(.black)
-                                                
-                                                Text("Snooze times, popup, max alarms")
-                                                    .font(.custom("Poppins-Medium", size: 10))
-                                                    .foregroundColor(Color(.lightGray))
+      
+                                                DisclosureGroup(selectedReminder, isExpanded: $isExpand) {
+                                                    
+                                                    VStack{
+                                                        ForEach(reminderValue, id:\.self){ value  in
+                                                            
+                                                            Text("\(value)")
+                                                                .foregroundColor(.accentColor)
+                                                                .font(.custom("Poppins-Medium", size: 14))
+                                                                .padding(.bottom)
+                                                                .onTapGesture {
+                                                                    self.selectedReminder = value
+                                                                    
+                                                                    withAnimation{
+                                                                        self.isExpand.toggle()
+                                                                    }
+                                                               
+                                                                }
+                                                            
+                                                        }
+                                                    }
+                                                }
+                                                .font(.custom("Poppins-Medium", size: 10))
+                                                .foregroundColor(Color(.lightGray))
+                                                .padding(.bottom, 5)
+
                                             }
                                             Spacer()
                                             
@@ -61,6 +96,8 @@ struct GeneralSettingView: View {
                                         
                                     })
                            
+                            
+                            
                             
                             
                             //********** Morning ***********
@@ -80,9 +117,30 @@ struct GeneralSettingView: View {
                                           .font(.custom("Poppins-Medium", size: 14))
                                           .foregroundColor(.black)
                                           
-                                          Text("Snooze times, popup, max alarms")
-                                              .font(.custom("Poppins-Medium", size: 10))
-                                              .foregroundColor(Color(.lightGray))
+                                        DisclosureGroup(selectedMorningReminder, isExpanded: $isExpand1) {
+                                            
+                                            VStack{
+                                                ForEach(reminderValue, id:\.self){ value  in
+                                                    
+                                                    Text("\(value)")
+                                                        .foregroundColor(.accentColor)
+                                                        .font(.custom("Poppins-Medium", size: 14))
+                                                        .padding(.bottom)
+                                                        .onTapGesture {
+                                                            self.selectedMorningReminder = value
+                                                            
+                                                            withAnimation{
+                                                                self.isExpand1.toggle()
+                                                            }
+                                                       
+                                                        }
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .font(.custom("Poppins-Medium", size: 10))
+                                        .foregroundColor(Color(.lightGray))
+                                        .padding(.bottom, 5)
                                       }
                                       Spacer()
                                       
@@ -109,9 +167,30 @@ struct GeneralSettingView: View {
                                           .font(.custom("Poppins-Medium", size: 14))
                                           .foregroundColor(.black)
                                           
-                                          Text("Snooze times, popup, max alarms")
-                                              .font(.custom("Poppins-Medium", size: 10))
-                                              .foregroundColor(Color(.lightGray))
+                                        DisclosureGroup(selectedEveningReminder, isExpanded: $isExpand2) {
+                                            
+                                            VStack{
+                                                ForEach(reminderValue, id:\.self){ value  in
+                                                    
+                                                    Text("\(value)")
+                                                        .foregroundColor(.accentColor)
+                                                        .font(.custom("Poppins-Medium", size: 14))
+                                                        .padding(.bottom)
+                                                        .onTapGesture {
+                                                            self.selectedEveningReminder = value
+                                                            
+                                                            withAnimation{
+                                                                self.isExpand2.toggle()
+                                                            }
+                                                       
+                                                        }
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .font(.custom("Poppins-Medium", size: 10))
+                                        .foregroundColor(Color(.lightGray))
+                                        .padding(.bottom, 5)
                                       }
                                       Spacer()
                                       
@@ -138,9 +217,30 @@ struct GeneralSettingView: View {
                                           .font(.custom("Poppins-Medium", size: 14))
                                           .foregroundColor(.black)
                                           
-                                          Text("Snooze times, popup, max alarms")
-                                              .font(.custom("Poppins-Medium", size: 10))
-                                              .foregroundColor(Color(.lightGray))
+                                        DisclosureGroup(selectedWeeklyReminder, isExpanded: $isExpand3) {
+                                            
+                                            VStack{
+                                                ForEach(reminderValue, id:\.self){ value  in
+                                                    
+                                                    Text("\(value)")
+                                                        .foregroundColor(.accentColor)
+                                                        .font(.custom("Poppins-Medium", size: 14))
+                                                        .padding(.bottom)
+                                                        .onTapGesture {
+                                                            self.selectedWeeklyReminder = value
+                                                            
+                                                            withAnimation{
+                                                                self.isExpand3.toggle()
+                                                            }
+                                                       
+                                                        }
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .font(.custom("Poppins-Medium", size: 10))
+                                        .foregroundColor(Color(.lightGray))
+                                        .padding(.bottom, 5)
                                       }
                                       Spacer()
                                       
@@ -168,9 +268,30 @@ struct GeneralSettingView: View {
                                           .font(.custom("Poppins-Medium", size: 14))
                                           .foregroundColor(.black)
                                           
-                                          Text("Snooze times, popup, max alarms")
-                                              .font(.custom("Poppins-Medium", size: 10))
-                                              .foregroundColor(Color(.lightGray))
+                                        DisclosureGroup(selectedWeekendReminder, isExpanded: $isExpand4) {
+                                            
+                                            VStack{
+                                                ForEach(reminderValue, id:\.self){ value  in
+                                                    
+                                                    Text("\(value)")
+                                                        .foregroundColor(.accentColor)
+                                                        .font(.custom("Poppins-Medium", size: 14))
+                                                        .padding(.bottom)
+                                                        .onTapGesture {
+                                                            self.selectedWeekendReminder = value
+                                                            
+                                                            withAnimation{
+                                                                self.isExpand4.toggle()
+                                                            }
+                                                       
+                                                        }
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .font(.custom("Poppins-Medium", size: 10))
+                                        .foregroundColor(Color(.lightGray))
+                                        .padding(.bottom, 5)
                                       }
                                       Spacer()
                                       

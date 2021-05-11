@@ -21,7 +21,7 @@ struct AddAppointmentView: View {
     @State var timeValue = Date()
     @State var timeValue_String = "hh:mm"
     @State var dateValue = Date()
-    @State var dateValue_String = "yyyy/mm/dd"
+    @State var dateValue_String = "mm/dd/yyyy"
     
     
     @State var locationValue = ""
@@ -203,7 +203,7 @@ struct AddAppointmentView: View {
                                         .padding(.leading)
                                     Text(dateValue_String)
                                         .foregroundColor(.accentColor)
-                                        .font(.custom("Poppins-Medium", size: 14))
+                                        .font(.custom("Poppins-Medium", size: 12))
                                         .padding()
                                 }
                                 
@@ -247,7 +247,7 @@ struct AddAppointmentView: View {
                                                 .padding(.leading)
                                             Text(timeValue_String)
                                                 .foregroundColor(.accentColor)
-                                                .font(.custom("Poppins-Medium", size: 14))
+                                                .font(.custom("Poppins-Medium", size: 12))
                                                 .padding()
                                             Spacer()
                                         }
