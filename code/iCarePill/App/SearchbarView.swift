@@ -47,25 +47,7 @@ struct SearchbarView: View {
                     
                 }
             })
-            
-            
 
-//            ForEach(self.names, id:\.self){ name in
-//
-//                    Button(action: {
-//                        selection = name
-//
-//                        print(selection)
-//
-//                        presentationMode.wrappedValue.dismiss()
-//                    }, label: {
-//                    Text(name)
-//                            .font(.custom("Poppins-Medium", size: 12))
-//                            .foregroundColor(.accentColor)
-//                            .padding(.top)
-//                    })
-//
-//            }
             
             ForEach(allRecord, id: \.self){ value in
 
