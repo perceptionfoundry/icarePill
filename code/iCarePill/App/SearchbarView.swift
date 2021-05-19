@@ -14,32 +14,89 @@ struct SearchbarView: View {
     @State private var searchTerm: String = ""
     @Binding var selection : String
     
-    let names = ["Calpol", "Histop", "Panadol", "fucidin", "Actifad", "sinofarm", "dexa","delta"]
-    
+    @State private var names = [""]
+    @State var allRecord = [Record]()
     
     var body: some View {
         
         List(){
 
-            SearchBar(text: $searchTerm)
-
-            ForEach(self.names.filter {
-                self.searchTerm.isEmpty ? true : $0.localizedCaseInsensitiveContains(self.searchTerm)
-            }, id:\.self){ name in
+            SearchBar(text: $searchTerm).onChange(of: searchTerm, perform: { value in
+                
+                print("*************")
+                print(value)
+                print("*************")
+                let VM = ApiViewModel()
+                
+                VM.SearchDrug(Keyword: searchTerm) { status, values, err in
+                    
+                    if status{
+                        
+                        print(values)
+                        names.removeAll()
+                        allRecord.removeAll()
+                        
+                        
+                        
+                        values.records?.forEach({ Record in
+                            names.append(Record.drugName!)
+                            self.allRecord.append(Record)
+                        })
+                        
+                    }
+                    
+                }
+            })
             
-                    Button(action: {
-                        selection = name
-                        
-                        print(selection)
-                        
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                    Text(name)
-                            .font(.custom("Poppins-Medium", size: 12))
-                            .foregroundColor(.accentColor)
-                            .padding(.top)
-                    })
-               
+            
+
+//            ForEach(self.names, id:\.self){ name in
+//
+//                    Button(action: {
+//                        selection = name
+//
+//                        print(selection)
+//
+//                        presentationMode.wrappedValue.dismiss()
+//                    }, label: {
+//                    Text(name)
+//                            .font(.custom("Poppins-Medium", size: 12))
+//                            .foregroundColor(.accentColor)
+//                            .padding(.top)
+//                    })
+//
+//            }
+            
+            ForEach(allRecord, id: \.self){ value in
+
+              
+                
+                Button(action: {
+                    selection = value.drugName!
+                    
+                    print(selection)
+                    
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    HStack {
+                        VStack(alignment:.leading){
+                            Text(value.drugName!)
+                                .font(.custom("Poppins-Medium", size: 12))
+                                .foregroundColor(.accentColor)
+                                .padding(.top)
+                            
+                            Text(value.strength!)
+                                .font(.custom("Poppins-Medium", size: 9))
+                                .foregroundColor(.gray)
+                                .padding(.top)
+                        }
+                        Spacer()
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 25, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    }
+                })
+
             }
         }
         
