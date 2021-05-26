@@ -60,7 +60,7 @@ struct SettingView: View {
                             }, label: {
                             
                                 SettingFormCellView(iconName: "location_small", title: "My Place", isForwardIcon: false)
-                            })
+                            }).disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                            
                         })
                     
@@ -124,7 +124,7 @@ struct SettingView: View {
                     
                                
                 }
-                
+                .disabled(true)
                 
                 // MARK: - SECTION : General
                 Section(header: Text("General") .font(.custom("Poppins-Bold", size: 18))) {

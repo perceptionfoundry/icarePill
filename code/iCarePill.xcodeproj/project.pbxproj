@@ -71,6 +71,7 @@
 		F29FD44726010C0400CA43F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29FD43526010C0400CA43F5 /* Poppins-Light.ttf */; };
 		F2A3511B263B23B8003EBE21 /* Dose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A3511A263B23B8003EBE21 /* Dose.swift */; };
 		F2AC12552639478E003A95BF /* DayReminderCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC12542639478E003A95BF /* DayReminderCellView.swift */; };
+		F2CCCC42265830DE0075DE6F /* ScanDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CCCC41265830DE0075DE6F /* ScanDocumentView.swift */; };
 		F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D326FD260490B2009880BE /* FirebaseViewModel.swift */; };
 		F2D327032604935E009880BE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D327022604935E009880BE /* User.swift */; };
 		F2DD85BF2654DFF200BBA621 /* APIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD85BE2654DFF200BBA621 /* APIViewModel.swift */; };
@@ -142,6 +143,7 @@
 		F29FD43526010C0400CA43F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		F2A3511A263B23B8003EBE21 /* Dose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose.swift; sourceTree = "<group>"; };
 		F2AC12542639478E003A95BF /* DayReminderCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayReminderCellView.swift; sourceTree = "<group>"; };
+		F2CCCC41265830DE0075DE6F /* ScanDocumentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanDocumentView.swift; sourceTree = "<group>"; };
 		F2D326FD260490B2009880BE /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		F2D327022604935E009880BE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F2DD85BE2654DFF200BBA621 /* APIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIViewModel.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		F223B1A9260877C60038A925 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F2CCCC41265830DE0075DE6F /* ScanDocumentView.swift */,
 				F223B1AA260877D10038A925 /* ImagePickerView.swift */,
 				F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */,
 				F256BD77260C9E750046C6D8 /* NoRecordView.swift */,
@@ -522,6 +525,7 @@
 				F29FD412260106D500CA43F5 /* SignInView.swift in Sources */,
 				F238017C2601D82C00B3FEA1 /* SignUpView.swift in Sources */,
 				F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */,
+				F2CCCC42265830DE0075DE6F /* ScanDocumentView.swift in Sources */,
 				F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */,
 				F2D327032604935E009880BE /* User.swift in Sources */,
 				F25D558226130C1000E9152B /* SettingView.swift in Sources */,
@@ -678,7 +682,7 @@
 				DEVELOPMENT_TEAM = 4CZP9C7L6H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iCarePill/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -703,7 +707,7 @@
 				DEVELOPMENT_TEAM = 4CZP9C7L6H;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iCarePill/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

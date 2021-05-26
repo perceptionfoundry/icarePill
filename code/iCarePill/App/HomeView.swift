@@ -353,7 +353,7 @@ struct HomeView: View {
                 
                 
             }
-            let skipButton = ActionSheet.Button.destructive(Text("Skip")) {
+            let skipButton = ActionSheet.Button.default(Text("Skip")) {
                 print("SKIP")
                 
                 let TakenIndex = self.takenStatus.firstIndex(of: self.selectedIndex)
@@ -399,7 +399,9 @@ struct HomeView: View {
                 
             }
             
-            return ActionSheet(title: Text("Action"), message: nil, buttons: [takenButton, skipButton])
+            
+            let cancelButton = ActionSheet.Button.cancel()
+            return ActionSheet(title: Text("Action"), message: nil, buttons: [takenButton, skipButton, cancelButton])
             
             
         }

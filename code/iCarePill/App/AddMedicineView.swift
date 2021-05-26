@@ -424,7 +424,8 @@ struct AddMedicineView: View {
             Spacer()
             }
             .sheet(isPresented: $isQRScanning, content: {
-                QRCodeReaderView(qrCodeValue: $MedicationTitle)
+//                QRCodeReaderView(qrCodeValue: $MedicationTitle)
+                ScanDocumentView(recognizedText: self.$MedicationTitle)
             })
             .padding()
             
