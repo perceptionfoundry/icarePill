@@ -13,6 +13,9 @@ struct SearchbarView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var searchTerm: String = ""
     @Binding var selection : String
+    @Binding var strengthValue: String
+    @Binding var unitValue: String
+    @Binding var form: String
     
     @State private var names = [""]
     @State var allRecord = [Record]()
@@ -54,7 +57,19 @@ struct SearchbarView: View {
               
                 
                 Button(action: {
-                    selection = value.drugName!
+                    selection = value.drugName ?? ""
+                    strengthValue = value.strength ?? ""
+                    unitValue = value.unit ?? ""
+                    
+                    
+                        if value.form == "TABLET"{
+                            NotificationCenter.default.post(name: .tablet, object: nil)
+                        }else if value.form == "INJECTABLE"{
+                            NotificationCenter.default.post(name: .injection, object: nil)
+                        }else{
+                            NotificationCenter.default.post(name: .capsule, object: nil)
+                        }
+                    
                     
                     print(selection)
                     
@@ -73,9 +88,13 @@ struct SearchbarView: View {
                                 .padding(.top)
                         }
                         Spacer()
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 25, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        if value.form == "TABLET"{
+                            Image("tablet")
+                        }else if value.form == "INJECTABLE"{
+                            Image("syrup")
+                        }else{
+                            Image("capsule")
+                        }
                     }
                 })
 
@@ -88,8 +107,8 @@ struct SearchbarView: View {
     }
 }
 
-struct SearchbarView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchbarView(selection: .constant("fd"))
-    }
-}
+//struct SearchbarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchbarView(selection: .constant("fd"))
+//    }
+//}

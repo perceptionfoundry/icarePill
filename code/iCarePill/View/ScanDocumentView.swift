@@ -14,9 +14,13 @@ struct ScanDocumentView: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var recognizedText: String
+    @Binding var strengthValue: String
+    @Binding var unitValue: String
+    @Binding var form: String
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(recognizedText: $recognizedText, parent: self)
+//        Coordinator(recognizedText: $recognizedText, parent: self)
+        Coordinator(recognizedText: $recognizedText, strength: $strengthValue, unit: $unitValue, form: $form, parent: self)
     }
     
     func makeUIViewController(context: Context) -> VNDocumentCameraViewController {
@@ -31,10 +35,16 @@ struct ScanDocumentView: UIViewControllerRepresentable {
     
     class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
         var recognizedText: Binding<String>
+        var strengthValue: Binding<String>
+        var unitValue: Binding<String>
+        var form: Binding<String>
         var parent: ScanDocumentView
         
-        init(recognizedText: Binding<String>, parent: ScanDocumentView) {
+        init(recognizedText: Binding<String>,strength: Binding<String>,unit: Binding<String>,form: Binding<String>, parent: ScanDocumentView) {
             self.recognizedText = recognizedText
+            self.strengthValue =  strength
+            self.unitValue = unit
+            self.form = form
             self.parent = parent
         }
         
@@ -43,7 +53,37 @@ struct ScanDocumentView: UIViewControllerRepresentable {
             let processedText = recognizeText(from: extractedImages)
             recognizedText.wrappedValue = processedText
             
-            parent.presentationMode.wrappedValue.dismiss()
+            //******** API HIT
+            let vc = ApiViewModel()
+            
+            vc.SearchNDC(code: recognizedText.wrappedValue) { status, value, err in
+                
+                if status{
+                    
+                    print(value)
+                    
+                    self.recognizedText.wrappedValue = (value.records?.first?.drugName)!
+                    self.strengthValue.wrappedValue = (value.records?.first?.strength)!
+                    self.unitValue.wrappedValue = (value.records?.first?.unit)!
+                    self.form.wrappedValue = (value.records?.first?.form)!
+                    
+                    
+                    DispatchQueue.main.async {
+                        if self.form.wrappedValue == "TABLET"{
+                            NotificationCenter.default.post(name: .tablet, object: nil)
+                        }else if self.form.wrappedValue == "INJECTABLE"{
+                            NotificationCenter.default.post(name: .injection, object: nil)
+                        }else{
+                            NotificationCenter.default.post(name: .capsule, object: nil)
+                        }
+                    }
+                   
+                    
+                    
+                    self.parent.presentationMode.wrappedValue.dismiss()
+                }
+            }
+            
         }
         
         fileprivate func extractImages(from scan: VNDocumentCameraScan) -> [CGImage] {
@@ -68,7 +108,8 @@ struct ScanDocumentView: UIViewControllerRepresentable {
                 for observation in observations {
                     guard let candidate = observation.topCandidates(maximumRecognitionCandidates).first else { continue }
                     
-                    entireRecognizedText += "\(candidate.string)\n"
+//                    entireRecognizedText += "\(candidate.string)\n"
+                    entireRecognizedText += "\(candidate.string)"
                     
                 }
             }

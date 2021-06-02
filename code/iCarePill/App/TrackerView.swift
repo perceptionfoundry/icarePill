@@ -352,11 +352,11 @@ struct TrackerView: View {
                             Text(dateString)
                                 .font(.custom("Poppins-Medium", size: 14))
                             
-                            Text("Missed (\(takenCount))")
+                            Text("Missed (\(skipCount))")
                                 .font(.custom("Poppins-Medium", size: 12))
                                 .foregroundColor(.gray)
                             
-                            Text("Taken (\(skipCount))")
+                            Text("Taken (\(takenCount))")
                                 .font(.custom("Poppins-Medium", size: 12))
                                 .foregroundColor(.gray)
                         }

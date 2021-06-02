@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchBar: UIViewRepresentable {
 
     @Binding var text : String
+  
     
     class Coordinator: NSObject, UISearchBarDelegate{
         @Binding var text : String

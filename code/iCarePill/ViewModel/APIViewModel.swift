@@ -46,4 +46,39 @@ class ApiViewModel: ObservableObject{
         
      
     }
+    
+    
+    func SearchNDC(code:String,completion: @escaping(_ status : Bool,_ getData : Drugs,_ err : String?)->() ){
+        
+       
+
+        let request = NSMutableURLRequest(url: (URL(string: "http://www.zero2cloud.com/iCarePill-RESTAPI/api/searchndc.php?ndc=\(code)") ?? URL(string: "http://www.zero2cloud.com/iCarePill-RESTAPI/api/searchndc.php?ndc=0"))!,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
+        request.httpMethod = "GET"
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+//                let httpResponse = response as? HTTPURLResponse
+                print(data)
+                
+                let decoder = JSONDecoder()
+                
+                do {
+                    let result = try decoder.decode(Drugs.self, from: data!)
+                    print(result)
+                    completion(true, result , nil)
+                }catch{
+                    print("error is json")
+                }
+            }
+        })
+
+        dataTask.resume()
+        
+     
+    }
 }

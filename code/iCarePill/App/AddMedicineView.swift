@@ -21,8 +21,11 @@ struct AddMedicineView: View {
     @State var DoE = Date()
     @State var stockValue = ""
     @State var reminderStatus = false
+    @State var formType = ""
 
-    
+    let pub_tablet = NotificationCenter.default.publisher(for: .tablet)
+    let pub_capsule = NotificationCenter.default.publisher(for: .capsule)
+    let pub_injection = NotificationCenter.default.publisher(for: .injection)
     
     @State var isSearchBar = false
     @State  var isTablet  = false
@@ -68,7 +71,7 @@ struct AddMedicineView: View {
                                 })
                                 .padding()
                                 .sheet(isPresented: $isSearchBar, content: {
-                                    SearchbarView(selection: $MedicationTitle)
+                                    SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
                                 })
                                 
 
@@ -425,7 +428,7 @@ struct AddMedicineView: View {
             }
             .sheet(isPresented: $isQRScanning, content: {
 //                QRCodeReaderView(qrCodeValue: $MedicationTitle)
-                ScanDocumentView(recognizedText: self.$MedicationTitle)
+                ScanDocumentView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
             })
             .padding()
             
@@ -433,6 +436,23 @@ struct AddMedicineView: View {
                 Alert(title: Text("Textfield Empty"), message: Text(" Please assure all fields are filled"), dismissButton: .default(Text("Dismiss")))
                 
             })
+            
+            .onReceive(pub_tablet, perform: { _ in
+                isCapsule = false
+                isTablet = true
+                isSyrup = false
+            })
+            .onReceive(pub_capsule, perform: { _ in
+                isCapsule = true
+                isTablet = false
+                isSyrup = false
+            })
+            .onReceive(pub_injection, perform: { _ in
+                isCapsule = false
+                isTablet = false
+                isSyrup = true
+            })
+          
     }
         .preferredColorScheme(.light)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
@@ -493,4 +513,11 @@ struct AppearanceButtonView: View {
             ,alignment: .topTrailing
         )
     }
+}
+
+
+extension Notification.Name{
+    static let tablet = Notification.Name("tablet")
+    static let capsule = Notification.Name("capsule")
+    static let injection = Notification.Name("injection")
 }
