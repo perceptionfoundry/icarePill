@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		27B2FC0C2F966E82661F69AA /* Pods_iCarePill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC10C62CD34B2E20672282A /* Pods_iCarePill.framework */; };
+		F20497092677432C0085ED10 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20497082677432C0085ED10 /* StringUtils.swift */; };
+		F204970C267746600085ED10 /* ScanNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F204970A267746600085ED10 /* ScanNumberViewController.swift */; };
+		F204970D267746600085ED10 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F204970B267746600085ED10 /* PreviewView.swift */; };
+		F204970F267746F90085ED10 /* ScanNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F204970E267746F90085ED10 /* ScanNumberView.swift */; };
 		F21653A5262806470035950D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F21653A4262806470035950D /* FirebaseAnalytics */; };
 		F21653A7262806470035950D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F21653A6262806470035950D /* FirebaseStorage */; };
 		F21653A9262806470035950D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F21653A8262806470035950D /* FirebaseAuth */; };
@@ -87,6 +91,10 @@
 /* Begin PBXFileReference section */
 		33821C87FC00771B0927DF60 /* Pods-iCarePill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCarePill.release.xcconfig"; path = "Target Support Files/Pods-iCarePill/Pods-iCarePill.release.xcconfig"; sourceTree = "<group>"; };
 		CAC10C62CD34B2E20672282A /* Pods_iCarePill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iCarePill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F20497082677432C0085ED10 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		F204970A267746600085ED10 /* ScanNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanNumberViewController.swift; sourceTree = "<group>"; };
+		F204970B267746600085ED10 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		F204970E267746F90085ED10 /* ScanNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNumberView.swift; sourceTree = "<group>"; };
 		F21653D2262810030035950D /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
 		F223B1AA260877D10038A925 /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageViewModel.swift; sourceTree = "<group>"; };
@@ -198,7 +206,11 @@
 		F223B1A9260877C60038A925 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F204970B267746600085ED10 /* PreviewView.swift */,
+				F204970A267746600085ED10 /* ScanNumberViewController.swift */,
+				F204970E267746F90085ED10 /* ScanNumberView.swift */,
 				F2CCCC41265830DE0075DE6F /* ScanDocumentView.swift */,
+				F20497082677432C0085ED10 /* StringUtils.swift */,
 				F223B1AA260877D10038A925 /* ImagePickerView.swift */,
 				F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */,
 				F256BD77260C9E750046C6D8 /* NoRecordView.swift */,
@@ -504,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F24210712608A3550046EA2B /* HomeView.swift in Sources */,
+				F204970D267746600085ED10 /* PreviewView.swift in Sources */,
 				F256BD72260C97270046C6D8 /* DoctorsView.swift in Sources */,
 				F256BD75260C97790046C6D8 /* NotesView.swift in Sources */,
 				F24210812608EFA30046EA2B /* Medicine.swift in Sources */,
@@ -511,6 +524,7 @@
 				F2F4930926367906009E9BA5 /* SearchBar.swift in Sources */,
 				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
 				F2AC12552639478E003A95BF /* DayReminderCellView.swift in Sources */,
+				F20497092677432C0085ED10 /* StringUtils.swift in Sources */,
 				F26E45522611CC520054511E /* AddNoteView.swift in Sources */,
 				F2A3511B263B23B8003EBE21 /* Dose.swift in Sources */,
 				F27328662636A4520059BA3E /* DayReminderView.swift in Sources */,
@@ -532,6 +546,7 @@
 				F24210742608A3630046EA2B /* MediView.swift in Sources */,
 				F26E454E2611C04B0054511E /* AddDoctorView.swift in Sources */,
 				F21653D3262810030035950D /* SocialLogin.swift in Sources */,
+				F204970C267746600085ED10 /* ScanNumberViewController.swift in Sources */,
 				F2DD85BF2654DFF200BBA621 /* APIViewModel.swift in Sources */,
 				F256BD6C260C8B250046C6D8 /* MoreView.swift in Sources */,
 				F256BD6F260C96860046C6D8 /* AppointmentsView.swift in Sources */,
@@ -541,6 +556,7 @@
 				F272D17826257D22009D648F /* Appointment.swift in Sources */,
 				F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */,
 				F2F49306263678E8009E9BA5 /* SwiftUIView.swift in Sources */,
+				F204970F267746F90085ED10 /* ScanNumberView.swift in Sources */,
 				F272D17B26257D3D009D648F /* Note.swift in Sources */,
 				F2F493032636778D009E9BA5 /* SearchbarView.swift in Sources */,
 				F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */,

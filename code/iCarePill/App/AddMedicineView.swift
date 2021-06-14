@@ -39,7 +39,8 @@ struct AddMedicineView: View {
     @State  var  isAlert = false
     
     var body: some View {
-        
+        VStack{
+            ZStack{
         ScrollView{
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 20){
             
@@ -70,9 +71,9 @@ struct AddMedicineView: View {
                                     }
                                 })
                                 .padding()
-                                .sheet(isPresented: $isSearchBar, content: {
-                                    SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
-                                })
+//                                .sheet(isPresented: $isSearchBar, content: {
+//                                    SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
+//                                })
                                 
 
                     }
@@ -428,7 +429,8 @@ struct AddMedicineView: View {
             }
             .sheet(isPresented: $isQRScanning, content: {
 //                QRCodeReaderView(qrCodeValue: $MedicationTitle)
-                ScanDocumentView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
+//                ScanDocumentView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
+                ScanNumberView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
             })
             .padding()
             
@@ -453,6 +455,18 @@ struct AddMedicineView: View {
                 isSyrup = true
             })
           
+    }
+        .opacity(isSearchBar ? 0.3 : 1)
+        
+                
+        if isSearchBar{
+            SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType, isSelected: $isSearchBar)
+            
+        }else{
+            SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType, isSelected: $isSearchBar).hidden()
+        }
+                
+            }
     }
         .preferredColorScheme(.light)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))

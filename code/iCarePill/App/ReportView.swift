@@ -79,10 +79,19 @@ struct ReportView: View {
                                 ReportTopView(icon: "user_smallest", Category: "Age", Value: "37 y")
                                     
                                     .padding(.trailing, 30)
+                                
+                                
+                                
                                 ReportTopView(icon: "blood", Category: "Blood", Value: "B+")
                                     .padding(.trailing, 30)
+                                
+                                
+                                
                                 ReportTopView(icon: "height", Category: "Height", Value: "150 cm")
                                     .padding(.trailing, 30)
+                                
+                                
+                                
                                 ReportTopView(icon: "weighing", Category: "Weight", Value: "68 kg")
                                     
                                

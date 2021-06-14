@@ -97,7 +97,20 @@ struct DayReminderView: View {
                             isEvening = false
                             isNight = false
                         }, label: {
-                            DayTimeView(image: "morning", title: "Morning", isSelected: isMorning)
+                            DayTimeView_Rect(image: "morning", title: "Morning", isSelected: isMorning)
+                            
+//                            VStack {
+//                                Image("morning")
+//                                    .resizable()
+//                                    .frame(width: 50, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//                                    .scaledToFit()
+//                                Text(title)
+//                                    .foregroundColor(isMorning ? .accentColor : Color.gray)
+//
+//                                Rectangle()
+//                                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//                                    .foregroundColor(isSelected ? .accentColor : Color.clear)
+//                            }
                         })
                         
                         
@@ -567,7 +580,7 @@ struct DayTimeView: View {
             Image(image)
                 .resizable()
                 .frame(width: 30, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .scaledToFit()
+//                .scaledToFit()
             Text(title)
                 .foregroundColor(isSelected ? .accentColor : Color.gray)
             
@@ -578,5 +591,29 @@ struct DayTimeView: View {
     }
 }
 
+
+struct DayTimeView_Rect: View {
+    
+    var image: String
+    var title: String
+    var isSelected : Bool
+    
+    var body: some View {
+        
+        
+        VStack {
+            Image(image)
+                .resizable()
+                .frame(width: 50, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .scaledToFit()
+            Text(title)
+                .foregroundColor(isSelected ? .accentColor : Color.gray)
+            
+            Rectangle()
+                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .foregroundColor(isSelected ? .accentColor : Color.clear)
+        }
+    }
+}
 
 

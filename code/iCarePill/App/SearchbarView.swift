@@ -16,12 +16,13 @@ struct SearchbarView: View {
     @Binding var strengthValue: String
     @Binding var unitValue: String
     @Binding var form: String
+    @Binding var isSelected: Bool
     
     @State private var names = [""]
     @State var allRecord = [Record]()
     
     var body: some View {
-        
+        VStack{
         List(){
 
             SearchBar(text: $searchTerm).onChange(of: searchTerm, perform: { value in
@@ -73,7 +74,8 @@ struct SearchbarView: View {
                     
                     print(selection)
                     
-                    presentationMode.wrappedValue.dismiss()
+                    isSelected = true
+//                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     HStack {
                         VStack(alignment:.leading){
@@ -100,6 +102,9 @@ struct SearchbarView: View {
 
             }
         }
+    }
+        .shadow(radius: 2, x:0, y: 0)
+        .frame(width: UIScreen.main.bounds.width * 0.8,height: UIScreen.main.bounds.height * 0.6)
         
         .preferredColorScheme(.light)
        

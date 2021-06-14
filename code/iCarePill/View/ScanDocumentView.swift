@@ -51,7 +51,12 @@ struct ScanDocumentView: UIViewControllerRepresentable {
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
             let extractedImages = extractImages(from: scan)
             let processedText = recognizeText(from: extractedImages)
+            
+            
             recognizedText.wrappedValue = processedText
+            
+            
+            
             
             //******** API HIT
             let vc = ApiViewModel()
@@ -86,6 +91,8 @@ struct ScanDocumentView: UIViewControllerRepresentable {
             
         }
         
+        
+        // Third Party
         fileprivate func extractImages(from scan: VNDocumentCameraScan) -> [CGImage] {
             var extractedImages = [CGImage]()
             for index in 0..<scan.pageCount {
@@ -123,5 +130,6 @@ struct ScanDocumentView: UIViewControllerRepresentable {
             
             return entireRecognizedText
         }
+        
     }
 }

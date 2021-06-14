@@ -16,8 +16,10 @@ class ApiViewModel: ObservableObject{
     func SearchDrug(Keyword:String,completion: @escaping(_ status : Bool,_ getData : Drugs,_ err : String?)->() ){
         
        
+//        let oldLink = "http://www.zero2cloud.com/iCarePill-RESTAPI/api/search.php?s="
+       
 
-        let request = NSMutableURLRequest(url: NSURL(string: "http://www.zero2cloud.com/iCarePill-RESTAPI/api/search.php?s=\(Keyword)")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "http://www.icarepill.com/v1/api/details?search=drug.name:\(Keyword)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
         request.httpMethod = "GET"
@@ -50,19 +52,23 @@ class ApiViewModel: ObservableObject{
     
     func SearchNDC(code:String,completion: @escaping(_ status : Bool,_ getData : Drugs,_ err : String?)->() ){
         
-       
-
-        let request = NSMutableURLRequest(url: (URL(string: "http://www.zero2cloud.com/iCarePill-RESTAPI/api/searchndc.php?ndc=\(code)") ?? URL(string: "http://www.zero2cloud.com/iCarePill-RESTAPI/api/searchndc.php?ndc=0"))!,
+//let link = "http://www.zero2cloud.com/iCarePill-RESTAPI/api/searchndc.php?ndc="
+        
+        let apiLink = "http://www.icarepill.com/v1/api/details?search=drug.ndc:\(code)"
+        
+        let request = NSMutableURLRequest(url: (URL(string: apiLink) ?? URL(string: "http://www.icarepill.com/v1/api/details?search=drug.ndc:62559-340-01"))!,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
         request.httpMethod = "GET"
 
         let session = URLSession.shared
+        
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print(error)
             } else {
 //                let httpResponse = response as? HTTPURLResponse
+                
                 print(data)
                 
                 let decoder = JSONDecoder()
