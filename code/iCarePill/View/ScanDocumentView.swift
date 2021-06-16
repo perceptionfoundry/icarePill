@@ -61,6 +61,38 @@ struct ScanDocumentView: UIViewControllerRepresentable {
             
             recognizedText.wrappedValue = processedText
             
+//            let string = recognizedText.wrappedValue
+//
+//
+//            let se = string.lowercased().components(separatedBy: "ndc ")
+//
+//            print(se)
+//
+//            if let number = Int(se[1].components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) {
+//                // Do something with this number
+//                var temp = ""
+//                var count = 0
+//                let s = "\(number)"
+//
+//                s.forEach { i in
+//                    if count<10{
+//                        if count == 5 || count == 8{
+//                            temp += "-\(i)"
+//                        }else{
+//                            temp += "\(i)"
+//                        }
+//                   count += 1
+//                    }else{
+//                        return
+//                    }
+//                }
+//                print(temp)
+//
+//                recognizedText.wrappedValue = temp
+//
+//            }
+            
+          
             
             
             

@@ -68,15 +68,11 @@ extension String {
 		// Note that this doesn't only look for digits since some digits look
 		// very similar to letters. This is handled later.
 		let pattern = #"""
-		(?x)					# Verbose regex, allows comments
-		(?:\+1-?)?				# Potential international prefix, may have -
-		[(]?					# Potential opening (
-		\b(\w{3})				# Capture xxx
-		[)]?					# Potential closing )
-		[\ -./]?				# Potential separator
+		\b(\w{5})				# Capture xxxxx
+		[ -]?				# Potential separator
 		(\w{3})					# Capture xxx
-		[\ -./]?				# Potential separator
-		(\w{4})\b				# Capture xxxx
+		[ -]?				# Potential separator
+		(\w{2})\b				# Capture xx
 		"""#
 		
 		guard let range = self.range(of: pattern, options: .regularExpression, range: nil, locale: nil) else {

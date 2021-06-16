@@ -317,7 +317,7 @@ extension String {
     }
     
     
-    
+  
     
     func isPassword() -> Bool {
         let passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<]{6,}$"
