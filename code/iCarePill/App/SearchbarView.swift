@@ -16,7 +16,7 @@ struct SearchbarView: View {
     @Binding var strengthValue: String
     @Binding var unitValue: String
     @Binding var form: String
-    @Binding var isSelected: Bool
+    @Binding var isOpen: Bool
     
     @State private var names = [""]
     @State var allRecord = [Record]()
@@ -74,7 +74,7 @@ struct SearchbarView: View {
                     
                     print(selection)
                     
-                    isSelected = true
+                    isOpen = false
 //                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     HStack {

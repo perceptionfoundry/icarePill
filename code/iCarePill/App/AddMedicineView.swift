@@ -460,10 +460,10 @@ struct AddMedicineView: View {
         
                 
         if isSearchBar{
-            SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType, isSelected: $isSearchBar)
+            SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType, isOpen: $isSearchBar)
             
         }else{
-            SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType, isSelected: $isSearchBar).hidden()
+            SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType, isOpen: $isSearchBar).hidden()
         }
                 
             }

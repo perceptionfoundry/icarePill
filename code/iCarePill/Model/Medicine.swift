@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Medicine: Identifiable, Codable {
+struct Medicine: Identifiable, Codable,Hashable {
     var id : String
     var Title : String
     var Condition : String

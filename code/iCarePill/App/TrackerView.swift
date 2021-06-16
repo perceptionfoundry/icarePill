@@ -16,6 +16,12 @@ struct TrackerView: View {
     
     @State var medicineData = [Medicine]()
     @State var displayData = [Medicine]()
+    @State var tableData = [Medicine]()
+    
+    @State var medicineNamelist = ["All Medicine"]
+    @State private var selectedMedicine = "All Medicine"
+    @State  var isExpand  = false
+    
     let today = Date()
     let VM = FirebaseViewModel()
     @State var dateString = ""
@@ -29,6 +35,7 @@ struct TrackerView: View {
     @State var weekOfYear = 0
     @State var monthOfYear = 0
     @State var dayOfMonth = 0
+    
     
     
     var body: some View {
@@ -134,13 +141,52 @@ struct TrackerView: View {
                 VStack{
             //MARK: GROUPBOX
             GroupBox{
-                DisclosureGroup(
-                    "All Medication")
-                    {
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velesse cillumdolore eu fugiat nulla pariatur. Excepteur sint.")
-                            .font(.custom("Poppins-Regular", size: 12))
-                        
+
+                VStack{
+                DisclosureGroup(selectedMedicine, isExpanded: $isExpand) {
+                    
+                    VStack{
+                        ForEach(medicineNamelist, id:\.self){ value  in
+                            
+                            Text("\(value)")
+                                .foregroundColor(.accentColor)
+                                .padding(.bottom)
+                                .onTapGesture {
+                                    self.selectedMedicine = value
+                                    tableData.removeAll()
+                                    if selectedMedicine == "All Medicine"{
+                                        
+                                        
+                                        tableData = displayData
+                                    }else{
+                                        
+                                        displayData.forEach { medi in
+                                            
+                                            if medi.Title == selectedMedicine{
+                                                tableData.append(medi)
+                                            }
+                                        }
+                                    }
+                                    
+                                    withAnimation{
+                                        self.isExpand.toggle()
+                                    }
+                               
+                                }
+                            
+                        }
                     }
+                }.foregroundColor(.accentColor)
+                .font(.custom("Poppins-Medium", size: 13))
+                .padding()
+                .background(
+                    Rectangle()
+//                                .frame(height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.white)
+                        .shadow(radius: 4)
+                )
+          
+            }
                 
             }
             .padding()
@@ -368,26 +414,27 @@ struct TrackerView: View {
 
                     ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                     LazyVStack{
-                        ForEach(0..<displayData.count, id:\.self){ i in
+                        
+                        
+                        
+                        ForEach(0..<tableData.count, id:\.self){ i in
             
                        
                                 if self.takenStatus.contains(i){
 
-                                    
-                                    
-                                    TrackerMediView(statusImage: "tick",mediType:displayData[i].Apperance, mediTitle:displayData[i].Title, status: "Taken")
+                                    TrackerMediView(statusImage: "tick",mediType:tableData[i].Apperance, mediTitle:tableData[i].Title, status: "Taken")
                                 }
                              
                                 
                                 else if self.skipStatus.contains(i){
 
                                     
-                                    TrackerMediView(statusImage: "cancel",mediType:displayData[i].Apperance, mediTitle:displayData[i].Title, status: "Skip")
+                                    TrackerMediView(statusImage: "cancel",mediType:tableData[i].Apperance, mediTitle:tableData[i].Title, status: "Skip")
                                 }
                                 
                                 else{
 
-                                    TrackerMediView(statusImage: "",mediType:displayData[i].Apperance, mediTitle:displayData[i].Title, status: "")
+                                    TrackerMediView(statusImage: "",mediType:tableData[i].Apperance, mediTitle:tableData[i].Title, status: "")
                             }
       
                         }
@@ -404,9 +451,10 @@ struct TrackerView: View {
             Spacer()
             
         }
-        .padding(.bottom)
+        .padding(.bottom, 60)
         .onAppear(){
             
+            selectedMedicine = "All Medicine"
             
             let currentDate = Date()
             var dateComponent = DateComponents()
@@ -462,6 +510,7 @@ struct TrackerView: View {
                         
                         totalStock += medi.Stock
                         
+                       
                     }
                     
                     print(totalStock)
@@ -479,6 +528,8 @@ struct TrackerView: View {
                                     if Medicine.id == Dose.MedicineID{
                                         
                                         self.displayData.append(Medicine)
+                                        self.tableData.append(Medicine)
+                                        medicineNamelist.append(Medicine.Title)
                                         return true
                                     }
                                     else{
@@ -582,7 +633,11 @@ struct TrackerView: View {
         skipCount = 0
         
         self.displayData.removeAll()
+        medicineNamelist.removeAll()
+        tableData.removeAll()
         
+
+        // MARK: *** WEEK
         if isWeek{
             
             let currentDate = Date()
@@ -611,10 +666,10 @@ struct TrackerView: View {
                 
                 if status{
                     medicineData = details
-                    
                     details.forEach { medi in
                         
                         totalStock += medi.Stock
+                        medicineNamelist = ["All Medicine"]
                         
                     }
                     
@@ -633,6 +688,8 @@ struct TrackerView: View {
                                     if Medicine.id == Dose.MedicineID{
                                         
                                         self.displayData.append(Medicine)
+                                        self.tableData.append(Medicine)
+                                        medicineNamelist.append(Medicine.Title)
                                         return true
                                     }
                                     else{
@@ -716,6 +773,8 @@ struct TrackerView: View {
             }
             
         }
+        
+        // MARK: *** MONTH
         else if isMonth{
             
             
@@ -744,10 +803,12 @@ struct TrackerView: View {
                 
                 if status{
                     medicineData = details
-                    
+//                    medicineNamelist.removeAll()
                     details.forEach { medi in
 
                         totalStock += medi.Stock
+                        medicineNamelist = ["All Medicine"]
+                        medicineNamelist.append(medi.Title)
 
                     }
                     
@@ -766,6 +827,9 @@ struct TrackerView: View {
                                     if Medicine.id == Dose.MedicineID{
                                         
                                         self.displayData.append(Medicine)
+                                        self.tableData.append(Medicine)
+                                        medicineNamelist.append(Medicine.Title)
+
                                         return true
                                     }
                                     else{
@@ -850,7 +914,7 @@ struct TrackerView: View {
             
         }
         
-        
+        // MARK: *** ALL
         else{
             
             let currentDate = Date()
@@ -873,11 +937,19 @@ struct TrackerView: View {
                 
                 if status{
                     displayData = details
+                    self.tableData = details
+                    medicineNamelist.removeAll()
+                    medicineNamelist = ["All Medicine"]
+                    
+                    displayData.forEach { value in
+                        print(value.Title)
+                        medicineNamelist.append(value.Title)
+                    }
+                    
                     
                     details.forEach { medi in
                         
                         totalStock += medi.Stock
-                        
                     }
 
                     
