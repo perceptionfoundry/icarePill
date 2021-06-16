@@ -20,7 +20,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "81A4B77E-111C-4988-808C-E32CC393EB53 - c268318e5d32c24d"
+                  uuid = "81A4B77E-111C-4988-808C-E32CC393EB53 - c268318e5d32fc9b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,12 +30,12 @@
                   urlString = "file:///Users/shahrukh/Documents/GitHub/icarePill/code/iCarePill/App/TrackerView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "930"
-                  endingLineNumber = "930"
-                  offsetFromSymbolStart = "710">
+                  startingLineNumber = "944"
+                  endingLineNumber = "944"
+                  offsetFromSymbolStart = "936">
                </Location>
                <Location
-                  uuid = "81A4B77E-111C-4988-808C-E32CC393EB53 - aa13fb4c2c81aa73"
+                  uuid = "81A4B77E-111C-4988-808C-E32CC393EB53 - aa13fb4c2c8194a5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -45,9 +45,9 @@
                   urlString = "file:///Users/shahrukh/Documents/GitHub/icarePill/code/iCarePill/App/TrackerView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "931"
-                  endingLineNumber = "931"
-                  offsetFromSymbolStart = "93">
+                  startingLineNumber = "945"
+                  endingLineNumber = "945"
+                  offsetFromSymbolStart = "140">
                </Location>
             </Locations>
          </BreakpointContent>

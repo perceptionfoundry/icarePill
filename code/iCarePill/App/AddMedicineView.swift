@@ -429,8 +429,8 @@ struct AddMedicineView: View {
             }
             .sheet(isPresented: $isQRScanning, content: {
 //                QRCodeReaderView(qrCodeValue: $MedicationTitle)
-//                ScanDocumentView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
-                ScanNumberView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
+                ScanDocumentView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
+//                ScanNumberView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
             })
             .padding()
             

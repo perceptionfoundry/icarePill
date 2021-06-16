@@ -15,6 +15,9 @@ class ScanNumberViewController: UIViewController {
 	@IBOutlet weak var cutoutView: UIView!
 	@IBOutlet weak var numberView: UILabel!
 	var maskLayer = CAShapeLayer()
+    let preview = PreviewView()
+    let cutout = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var numberLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
 	// Device orientation. Updated whenever the orientation changes to a
 	// different supported orientation.
 	var currentOrientation = UIDeviceOrientation.portrait
@@ -57,13 +60,22 @@ class ScanNumberViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// Set up preview view.
-		previewView.session = captureSession
+//		previewView.session = captureSession
+        
+        
+        
+        preview.session = captureSession
+//        view.addSubview(numberLabel)
+//        view.addSubview(cutout)
+        preview.addSubview(cutout)
+        preview.addSubview(numberLabel)
+        view.addSubview(preview)
 		
 		// Set up cutout view.
-		cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+		cutout.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
 		maskLayer.backgroundColor = UIColor.clear.cgColor
 		maskLayer.fillRule = .evenOdd
-		cutoutView.layer.mask = maskLayer
+		cutout.layer.mask = maskLayer
 		
         // Starting the capture session is a blocking call. Perform setup using
         // a dedicated serial dispatch queue to prevent blocking the main thread.
@@ -141,17 +153,17 @@ class ScanNumberViewController: UIViewController {
 	func updateCutout() {
 		// Figure out where the cutout ends up in layer coordinates.
 		let roiRectTransform = bottomToTopTransform.concatenating(uiRotationTransform)
-		let cutout = previewView.videoPreviewLayer.layerRectConverted(fromMetadataOutputRect: regionOfInterest.applying(roiRectTransform))
+		let cutout = preview.videoPreviewLayer.layerRectConverted(fromMetadataOutputRect: regionOfInterest.applying(roiRectTransform))
 		
 		// Create the mask.
-		let path = UIBezierPath(rect: cutoutView.frame)
+		let path = UIBezierPath(rect: cutout)
 		path.append(UIBezierPath(rect: cutout))
 		maskLayer.path = path.cgPath
 		
 		// Move the number view down to under cutout.
 		var numFrame = cutout
 		numFrame.origin.y += numFrame.size.height
-		numberView.frame = numFrame
+        numberLabel.frame = numFrame
 	}
 	
 	func setupOrientationAndTransform() {
@@ -182,7 +194,7 @@ class ScanNumberViewController: UIViewController {
 	}
 	
 	func setupCamera() {
-		guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .back) else {
+		guard let captureDevice = AVCaptureDevice.default(.builtInDualCamera, for: AVMediaType.video, position: .back) else {
 			print("Could not create capture device.")
 			return
 		}
@@ -214,6 +226,7 @@ class ScanNumberViewController: UIViewController {
 		videoDataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
 		if captureSession.canAddOutput(videoDataOutput) {
 			captureSession.addOutput(videoDataOutput)
+           
 			// NOTE:
 			// There is a trade-off to be made here. Enabling stabilization will
 			// give temporally more stable results and should help the recognizer
@@ -250,8 +263,8 @@ class ScanNumberViewController: UIViewController {
 		captureSessionQueue.sync {
 			self.captureSession.stopRunning()
             DispatchQueue.main.async {
-                self.numberView.text = string
-                self.numberView.isHidden = false
+                self.numberLabel.text = string
+                self.numberLabel.isHidden = false
             }
 		}
 	}
@@ -262,7 +275,7 @@ class ScanNumberViewController: UIViewController {
                 self.captureSession.startRunning()
             }
             DispatchQueue.main.async {
-                self.numberView.isHidden = true
+                self.numberLabel.isHidden = true
             }
         }
 	}

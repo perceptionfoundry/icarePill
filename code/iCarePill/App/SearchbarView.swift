@@ -25,7 +25,8 @@ struct SearchbarView: View {
         VStack{
         List(){
 
-            SearchBar(text: $searchTerm).onChange(of: searchTerm, perform: { value in
+            SearchBar(text: $searchTerm)
+                .onChange(of: searchTerm, perform: { value in
                 
                 print("*************")
                 print(value)
@@ -102,18 +103,27 @@ struct SearchbarView: View {
 
             }
         }
-    }
+        }
+        .overlay(
+            Button(action: {
+                isOpen = false
+            }, label: {
+                Image(systemName:"xmark.circle.fill")
+                    .font(.title)
+                    .offset(x:10,y:-10)
+                
+            }), alignment: .topTrailing)
         .shadow(radius: 2, x:0, y: 0)
         .frame(width: UIScreen.main.bounds.width * 0.8,height: UIScreen.main.bounds.height * 0.6)
-        
         .preferredColorScheme(.light)
        
         
     }
 }
 
-//struct SearchbarView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchbarView(selection: .constant("fd"))
-//    }
-//}
+struct SearchbarView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchbarView(selection: .constant(""), strengthValue: .constant(""), unitValue: .constant(""), form: .constant(""), isOpen: .constant(true))
+        
+    }
+}

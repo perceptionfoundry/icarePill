@@ -31,6 +31,7 @@ struct SearchBar: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
+        searchBar.becomeFirstResponder()
         searchBar.delegate = context.coordinator
         return searchBar
     }

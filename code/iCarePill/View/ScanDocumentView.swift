@@ -6,9 +6,15 @@
 //  Copyright © 2020 Stefan Blos. All rights reserved.
 //
 
+
+
 import SwiftUI
-import VisionKit
+import Foundation
+import UIKit
+import AVFoundation
 import Vision
+import VisionKit
+
 
 struct ScanDocumentView: UIViewControllerRepresentable {
     

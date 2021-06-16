@@ -40,6 +40,7 @@
 		F256BD78260C9E750046C6D8 /* NoRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD77260C9E750046C6D8 /* NoRecordView.swift */; };
 		F256BD7B260CAD5C0046C6D8 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256BD7A260CAD5C0046C6D8 /* FAQView.swift */; };
 		F25D558226130C1000E9152B /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25D558126130C1000E9152B /* SettingView.swift */; };
+		F26353902679E7160052D258 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F263538F2679E7160052D258 /* Main.storyboard */; };
 		F26E454E2611C04B0054511E /* AddDoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E454D2611C04B0054511E /* AddDoctorView.swift */; };
 		F26E45522611CC520054511E /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E45512611CC520054511E /* AddNoteView.swift */; };
 		F272D17526257D03009D648F /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272D17426257D03009D648F /* Doctor.swift */; };
@@ -114,6 +115,7 @@
 		F256BD77260C9E750046C6D8 /* NoRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRecordView.swift; sourceTree = "<group>"; };
 		F256BD7A260CAD5C0046C6D8 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		F25D558126130C1000E9152B /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		F263538F2679E7160052D258 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F26E454D2611C04B0054511E /* AddDoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDoctorView.swift; sourceTree = "<group>"; };
 		F26E45512611CC520054511E /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		F272D17426257D03009D648F /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				F29FD42326010BEC00CA43F5 /* Fonts */,
 				F29FD44B26010F2D00CA43F5 /* App */,
 				F29FD41F260106F800CA43F5 /* Launch Screen.storyboard */,
+				F263538F2679E7160052D258 /* Main.storyboard */,
 				F29FD413260106D600CA43F5 /* Assets.xcassets */,
 				F29FD418260106D600CA43F5 /* Info.plist */,
 				F2F698E126523BC9002E0CA5 /* GoogleService-Info.plist */,
@@ -436,6 +439,7 @@
 				F29FD43E26010C0400CA43F5 /* Poppins-ExtraBold.ttf in Resources */,
 				F29FD43626010C0400CA43F5 /* Poppins-Italic.ttf in Resources */,
 				F29FD43C26010C0400CA43F5 /* Poppins-SemiBold.ttf in Resources */,
+				F26353902679E7160052D258 /* Main.storyboard in Resources */,
 				F29FD414260106D600CA43F5 /* Assets.xcassets in Resources */,
 				F29FD44126010C0400CA43F5 /* Poppins-ExtraBoldItalic.ttf in Resources */,
 				F29FD44426010C0400CA43F5 /* Poppins-ExtraLightItalic.ttf in Resources */,
