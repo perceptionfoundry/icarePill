@@ -19,7 +19,7 @@ class ApiViewModel: ObservableObject{
 //        let oldLink = "http://www.zero2cloud.com/iCarePill-RESTAPI/api/search.php?s="
        
 
-        let request = NSMutableURLRequest(url: NSURL(string: "http://www.icarepill.com/v1/api/details?search=drug.name:\(Keyword)")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "https://www.icarepill.com/v1/api/details?search=drug.name:\(Keyword)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
         request.httpMethod = "GET"
@@ -54,7 +54,7 @@ class ApiViewModel: ObservableObject{
         
 //let link = "http://www.zero2cloud.com/iCarePill-RESTAPI/api/searchndc.php?ndc="
         
-        let apiLink = "http://www.icarepill.com/v1/api/details?search=drug.ndc:\(code)"
+        let apiLink = "https://www.icarepill.com/v1/api/details?search=drug.ndc:\(code)"
         
         let request = NSMutableURLRequest(url: (URL(string: apiLink) ?? URL(string: "http://www.icarepill.com/v1/api/details?search=drug.ndc:62559-340-01"))!,
                                                 cachePolicy: .useProtocolCachePolicy,
