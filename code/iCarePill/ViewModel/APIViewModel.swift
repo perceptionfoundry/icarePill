@@ -50,7 +50,7 @@ class ApiViewModel: ObservableObject{
     }
     
     
-    func SearchNDC(code:String,completion: @escaping(_ status : Bool,_ getData : Drugs,_ err : String?)->() ){
+    func SearchNDC(code:String,completion: @escaping(_ status : Bool,_ getData : Drugs?,_ err : String?)->() ){
         
 //let link = "http://www.zero2cloud.com/iCarePill-RESTAPI/api/searchndc.php?ndc="
         
@@ -66,6 +66,7 @@ class ApiViewModel: ObservableObject{
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print(error)
+                completion(false, nil , nil)
             } else {
 //                let httpResponse = response as? HTTPURLResponse
                 
@@ -79,6 +80,7 @@ class ApiViewModel: ObservableObject{
                     completion(true, result , nil)
                 }catch{
                     print("error is json")
+                    completion(false, nil , nil)
                 }
             }
         })

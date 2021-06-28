@@ -13,7 +13,7 @@ struct AddMedicineView: View {
     
     @State var MedicationTitle = ""
     @State var conditionValue = ""
-    @State var isQRScanning = false
+    @State var isNDCScanning = false
     @State private var selectedStrength = "1"
     let strengthValue = ["1", "2.5","5","7.5"]
     @State private var selectedUnit = "mg"
@@ -37,6 +37,7 @@ struct AddMedicineView: View {
     @State  var  isNext = false
     
     @State  var  isAlert = false
+    @State  var  isScanError = false
     
     var body: some View {
         VStack{
@@ -82,7 +83,7 @@ struct AddMedicineView: View {
                         
                         
                         Button(action: {
-                            isQRScanning.toggle()
+                            isNDCScanning.toggle()
                         }, label: {
                             Image("qrcode")
                         })
@@ -110,9 +111,6 @@ struct AddMedicineView: View {
                             .foregroundColor(.accentColor)
                             .font(.custom("Poppins-Medium", size: 14))
                             .padding()
-                  
-                    
-                   
                     
                 }
                  
@@ -427,15 +425,28 @@ struct AddMedicineView: View {
             
             Spacer()
             }
-            .sheet(isPresented: $isQRScanning, content: {
+            .sheet(isPresented: $isNDCScanning, content: {
 //                QRCodeReaderView(qrCodeValue: $MedicationTitle)
-                ScanDocumentView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
-//                ScanNumberView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
+                ScanDocumentView(recognizedText: self.$MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType).onDisappear(){
+                    print("DISAPPEAR")
+                    
+                    if MedicationTitle == "error"{
+                        isScanError.toggle()
+                        MedicationTitle = ""
+                    }
+                }
+                    
+
             })
             .padding()
             
             .alert(isPresented: $isAlert, content: {
                 Alert(title: Text("Textfield Empty"), message: Text(" Please assure all fields are filled"), dismissButton: .default(Text("Dismiss")))
+                
+            })
+            
+            .alert(isPresented: $isScanError, content: {
+                Alert(title: Text("Error!"), message: Text("Unable Fetch Scan NDC Response result"), dismissButton: .default(Text("Dismiss")))
                 
             })
             

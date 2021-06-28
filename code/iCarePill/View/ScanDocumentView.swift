@@ -64,23 +64,23 @@ struct ScanDocumentView: UIViewControllerRepresentable {
             let string = recognizedText.wrappedValue
 
 
-            let ndcValue = self.matchesNDC(for: "[0-9]{2,6}-[0-9]{2,5}-[0-9]{1,5}", in: string)
+            let ndcValue = self.matchesNDC(for: "[0-9]{2,6}-[0-9]{2,5}-[0-9]{1,2}", in: string)
             print(ndcValue)
 //            self.recognizedText.wrappedValue = ndcValue.first!
             
             //******** API HIT
             let vc = ApiViewModel()
             
-            vc.SearchNDC(code: recognizedText.wrappedValue) { status, value, err in
+            vc.SearchNDC(code: ndcValue.first!) { status, value, err in
                 
                 if status{
                     
                     print(value)
                     
-                    self.recognizedText.wrappedValue = (value.records?.first?.drugName)!
-                    self.strengthValue.wrappedValue = (value.records?.first?.strength)!
-                    self.unitValue.wrappedValue = (value.records?.first?.unit)!
-                    self.form.wrappedValue = (value.records?.first?.form)!
+                    self.recognizedText.wrappedValue = (value?.records?.first?.drugName)!
+                    self.strengthValue.wrappedValue = (value?.records?.first?.strength)!
+                    self.unitValue.wrappedValue = (value?.records?.first?.unit)!
+                    self.form.wrappedValue = (value?.records?.first?.form)!
                     
                     
                     DispatchQueue.main.async {
@@ -97,7 +97,8 @@ struct ScanDocumentView: UIViewControllerRepresentable {
                     
                     self.parent.presentationMode.wrappedValue.dismiss()
                 }else{
-                    self.recognizedText.wrappedValue = ""
+                    self.recognizedText.wrappedValue = "error"
+                    self.parent.presentationMode.wrappedValue.dismiss()
                 }
             }
             
