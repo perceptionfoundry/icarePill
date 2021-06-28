@@ -61,40 +61,12 @@ struct ScanDocumentView: UIViewControllerRepresentable {
             
             recognizedText.wrappedValue = processedText
             
-//            let string = recognizedText.wrappedValue
-//
-//
-//            let se = string.lowercased().components(separatedBy: "ndc ")
-//
-//            print(se)
-//
-//            if let number = Int(se[1].components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) {
-//                // Do something with this number
-//                var temp = ""
-//                var count = 0
-//                let s = "\(number)"
-//
-//                s.forEach { i in
-//                    if count<10{
-//                        if count == 5 || count == 8{
-//                            temp += "-\(i)"
-//                        }else{
-//                            temp += "\(i)"
-//                        }
-//                   count += 1
-//                    }else{
-//                        return
-//                    }
-//                }
-//                print(temp)
-//
-//                recognizedText.wrappedValue = temp
-//
-//            }
-            
-          
-            
-            
+            let string = recognizedText.wrappedValue
+
+
+            let ndcValue = self.matchesNDC(for: "[0-9]{2,6}-[0-9]{2,5}-[0-9]{1,5}", in: string)
+            print(ndcValue)
+//            self.recognizedText.wrappedValue = ndcValue.first!
             
             //******** API HIT
             let vc = ApiViewModel()
@@ -124,6 +96,8 @@ struct ScanDocumentView: UIViewControllerRepresentable {
                     
                     
                     self.parent.presentationMode.wrappedValue.dismiss()
+                }else{
+                    self.recognizedText.wrappedValue = ""
                 }
             }
             
@@ -169,5 +143,29 @@ struct ScanDocumentView: UIViewControllerRepresentable {
             return entireRecognizedText
         }
         
+        
+        func matchesNDC(for regex:String, in text:String)-> [String]
+        {
+            
+            do {
+                let regex = try NSRegularExpression(pattern: regex)
+                let results = regex.matches(in: text, range: NSRange(text.startIndex...,in: text))
+            
+                return results.map {
+                    String(text[Range($0.range,in: text)!])
+                }
+            }catch{
+                
+                print("invalid")
+                return[]
+                
+            }
+            
+            
+        }
     }
+ 
+    
+    
+  
 }
