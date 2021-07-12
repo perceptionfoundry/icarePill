@@ -20,7 +20,7 @@ struct NotesView: View {
         VStack{
        
             if noteArray.count == 0{
-        NoRecordView(imageName: "no_doctor")
+        NoRecordView(imageName: "no_note")
             }
             else{
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){

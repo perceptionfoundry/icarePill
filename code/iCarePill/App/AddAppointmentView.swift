@@ -42,7 +42,10 @@ struct AddAppointmentView: View {
     @State  var  isAlert = false
     @State  var  alertTitle = ""
     @State  var  alertMessage = ""
-    
+   
+    @State var value : CGFloat = 0
+    @State var isPushUp = false
+
     var body: some View {
         
         ScrollView{
@@ -124,13 +127,7 @@ struct AddAppointmentView: View {
                                 }
                             })
                         })
-                  
-                    
-                   
-                  
-                    
-                   
-                    
+                      
                 }
                  
                
@@ -271,6 +268,7 @@ struct AddAppointmentView: View {
             }
         
     
+             
                 
             //MARK: Location
             VStack(alignment: .leading){
@@ -293,6 +291,9 @@ struct AddAppointmentView: View {
                             .font(.custom("Poppins-Medium", size: 14))
                             .foregroundColor(.accentColor)
                             .padding()
+                            .onTapGesture {
+                                isPushUp = true
+                            }
                     
                   
                     }
@@ -399,13 +400,12 @@ struct AddAppointmentView: View {
             
             Spacer()
         }.padding()
-    }
-        
+        }
         .alert(isPresented: $isAlert, content: {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Dismiss")))
         }).preferredColorScheme(.light)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
-        .edgesIgnoringSafeArea(.bottom)
+//        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing:
         

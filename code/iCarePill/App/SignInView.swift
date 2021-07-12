@@ -28,6 +28,7 @@ struct SignInView: View {
     @State var isLogin = false
     @State var isAlert = false
     @State var alertMsg = ""
+    @State var isforget = false
     
     @State var manager = LoginManager()
     
@@ -66,14 +67,21 @@ struct SignInView: View {
                     .padding(.top, 5)
                 
                 
-                Button(action: {
-                    
-                }, label: {
-                    Text("Forget Password?")
-                        .font(.custom("Poppins-Medium", size: 12))
-                        .foregroundColor(.accentColor)
-                        .padding(.top)
-                })
+                NavigationLink(
+                    destination: ForgetPasswordView(),
+                    isActive: $isforget,
+                    label: {
+                        Button(action: {
+                            isforget.toggle()
+                        }, label: {
+                            Text("Forget Password?")
+                                .font(.custom("Poppins-Medium", size: 12))
+                                .foregroundColor(.accentColor)
+                                .padding(.top)
+                        })
+                    })
+           
+                
                 
             }
             .padding(.top, 40)

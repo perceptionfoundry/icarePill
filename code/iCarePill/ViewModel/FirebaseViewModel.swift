@@ -167,6 +167,22 @@ class FirebaseViewModel: ObservableObject{
         
     }
     
+    //MARK: FORGET PASSWORD
+    
+    func ForgetPassword(Email:String,completion: @escaping(_ status : Bool, _ error: String?)->()){
+        
+        Auth.auth().sendPasswordReset(withEmail: Email) { err in
+            
+            if (err != nil){
+                completion(false, err?.localizedDescription)
+            }else{
+                completion(true, nil)
+            }
+        }
+    }
+    
+    
+    
     //MARK: CREATE COLLECTION
     
     func CreateCollection(collectionTitle: String, subCollectionTitle: String, uploadData: [String:Any], completion: @escaping(_ status : Bool, _ err : String?)->() ){

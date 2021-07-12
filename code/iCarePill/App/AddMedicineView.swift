@@ -72,9 +72,7 @@ struct AddMedicineView: View {
                                     }
                                 })
                                 .padding()
-//                                .sheet(isPresented: $isSearchBar, content: {
-//                                    SearchbarView(selection: $MedicationTitle, strengthValue:$selectedStrength, unitValue:$selectedUnit, form: $formType)
-//                                })
+
                                 
 
                     }
@@ -395,6 +393,8 @@ struct AddMedicineView: View {
                                 
                                 previousMediValue = Medicine(id: "", Title: MedicationTitle, Condition: conditionValue, Apperance: appearanceValue, Strength: Double(selectedStrength)!, unit: selectedUnit, DoE: dateString, Stock: Int(stockValue)!, reminder: reminderStatus, dosage: "", giveAt: "", days: [""], notification: [""])
                                 
+                                isNext.toggle()
+                                
                             }else{
                                 isAlert.toggle()
                             }
@@ -402,7 +402,7 @@ struct AddMedicineView: View {
                           
                             
                             
-                            isNext.toggle()
+                            
 
                             
                         }, label: {
@@ -479,6 +479,7 @@ struct AddMedicineView: View {
                 
             }
     }
+        
         .preferredColorScheme(.light)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)

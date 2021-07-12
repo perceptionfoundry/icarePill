@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 
 struct SearchbarView: View {
@@ -60,8 +61,16 @@ struct SearchbarView: View {
                 
                 Button(action: {
                     selection = value.drugName ?? ""
-                    strengthValue = value.strength ?? ""
                     unitValue = value.unit ?? ""
+                    
+                    let strengthString = value.strength ?? ""
+                    let stringArray = strengthString.components(separatedBy: CharacterSet.decimalDigits.inverted)
+                    for item in stringArray {
+                        if let number = Int(item) {
+                            print("number: \(number)")
+                            strengthValue = "\(number)"
+                        }
+                    }
                     
                     
                         if value.form == "TABLET"{

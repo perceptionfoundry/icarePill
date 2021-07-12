@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
+import IQKeyboardManagerSwift
 
 @main
 struct iCarePillApp: App {
@@ -26,6 +27,7 @@ struct iCarePillApp: App {
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
            
+            IQKeyboardManager.shared.enable = true
             
             ApplicationDelegate.shared.application(
                        application,
@@ -34,6 +36,8 @@ struct iCarePillApp: App {
             
             GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
             GIDSignIn.sharedInstance().delegate = self
+            
+            
             return true
         }
         
