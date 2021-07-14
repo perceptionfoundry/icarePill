@@ -24,6 +24,8 @@ struct AddNoteView: View {
     @State  var  isNext = false
     
     @State  var  isAlert = false
+    @State  var  isViewDisable = false
+    @State  var  isSave = false
     @State  var  alertTitle = ""
     @State  var  alertMessage = ""
     
@@ -53,10 +55,6 @@ struct AddNoteView: View {
                                 .font(.custom("Poppins-Medium", size: 14))
                                 .foregroundColor(.accentColor)
                                 .padding()
-
-
-
-
                     }
                      
                     }
@@ -219,14 +217,12 @@ struct AddNoteView: View {
             
                 Spacer()
             
-            
-            
-            
-                
                 //MARK: Next Button
                 
               
                         Button(action: {
+                            isSave = true
+                            isViewDisable = true
                             
                             if NoteValue.isEmpty == false && dateValue_String != "yyyy/mm/dd" && timeValue_String != "hh:mm"{
 
@@ -246,6 +242,8 @@ struct AddNoteView: View {
                                         self.alertTitle = "Server Error!"
                                         self.alertMessage = "\(err ?? "unknown error")"
                                         isAlert.toggle()
+                                        isSave = false
+                                        isViewDisable = false
                                     }
                                 }
                             }else{
@@ -253,6 +251,8 @@ struct AddNoteView: View {
                                 self.alertTitle = "Textfield Empty"
                                 self.alertMessage = "Please assure all textfield are filled.."
                                 isAlert.toggle()
+                                isSave = false
+                                isViewDisable = false
                             }
 //
                             
@@ -268,7 +268,16 @@ struct AddNoteView: View {
                                     .foregroundColor(.white)
                                     .font(.custom("Poppins-Medium", size: 16))
                                 
-                            }
+                            }.overlay(
+                                
+                                ProgressView()
+                                        .colorScheme(.dark)
+                                        .padding(.trailing, 30)
+                                    .opacity(isSave ? 1 : 0)
+                                
+                               
+                                
+                                        , alignment: .trailing)
                             
                         })
                  
@@ -278,6 +287,7 @@ struct AddNoteView: View {
          
         }.padding()
     }
+        .allowsHitTesting(!isViewDisable)
         .alert(isPresented: $isAlert, content: {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Dismiss")))
         })

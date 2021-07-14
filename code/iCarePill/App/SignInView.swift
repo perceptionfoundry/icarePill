@@ -23,12 +23,15 @@ struct SignInView: View {
     
     
   
-    
+    @State var isEmailAuth = false
+    @State var isGoogleAuth = false
+    @State var isFBAuth = false
     @State var isSignUp = false
     @State var isLogin = false
     @State var isAlert = false
     @State var alertMsg = ""
     @State var isforget = false
+    @State var isViewDisable = false
     
     @State var manager = LoginManager()
     
@@ -94,7 +97,8 @@ struct SignInView: View {
                 label: {
                     Button(action: {
                         
-//                        isLogin.toggle()
+                        isViewDisable = true
+                        isEmailAuth = true
                         
                         fbViewModel.signInWithEmail(Email: emailTF.email, Password: passwordTF.pass) { (status, err) in
 
@@ -103,10 +107,9 @@ struct SignInView: View {
 
                             }else{
                                 isAlert.toggle()
-
-
+                                isViewDisable = false
+                                isEmailAuth = false
                                 alertMsg = err!
-
                             }
                         }
                     
@@ -122,7 +125,16 @@ struct SignInView: View {
                                 .foregroundColor(.white)
                                 .font(.custom("Poppins-Medium", size: 16))
                             
-                        }
+                        }.overlay(
+                        
+                            ProgressView()
+                                    .colorScheme(.dark)
+                                    .padding(.trailing, 30)
+                                .opacity(isEmailAuth ? 1 : 0)
+                            
+                           
+                            
+                                    , alignment: .trailing)
                         
                     }).alert(isPresented: $isAlert, content: {
                         
@@ -161,7 +173,8 @@ struct SignInView: View {
             //MARK: FACEBOOK BUTTON
             Button(action: {
               
-
+                isViewDisable = true
+                isFBAuth = true
                 
                 manager.logIn(permissions: ["email","public_profile"], from: nil) { (result, err) in
                     
@@ -181,6 +194,8 @@ struct SignInView: View {
                             }
                         }
                     }else{
+                        isViewDisable = false
+                        isFBAuth = false
                         print(err?.localizedDescription)
                     }
                 }
@@ -205,7 +220,9 @@ struct SignInView: View {
                         .font(.custom("Poppins-Medium", size: 16))
                 }
                     
-                }
+                }.overlay(ProgressView()
+                            .padding(.trailing, 30)
+                            .opacity(isFBAuth ? 1 : 0), alignment: .trailing)
                 
             })
             
@@ -213,7 +230,8 @@ struct SignInView: View {
             Button(action: {
                 
                 SocialLogin().attemptLoginGoogle()
-                
+                isViewDisable = true
+                isGoogleAuth = true
                 isLogin = firebaseObj.isSocialAuth
                 
             }, label: {
@@ -236,7 +254,9 @@ struct SignInView: View {
                             .font(.custom("Poppins-Medium", size: 16))
                     }
                     
-                }
+                }.overlay(ProgressView()
+                            .padding(.trailing, 30)
+                            .opacity(isGoogleAuth ? 1 : 0), alignment: .trailing)
                 
             })
             
@@ -244,6 +264,7 @@ struct SignInView: View {
         }// Main VStack End
     }// ScrollView
         .padding(.horizontal)
+        .allowsHitTesting(!isViewDisable)
         
         }
         .preferredColorScheme(.light)

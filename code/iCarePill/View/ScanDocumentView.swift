@@ -82,6 +82,14 @@ struct ScanDocumentView: UIViewControllerRepresentable {
                     self.unitValue.wrappedValue = (value?.records?.first?.unit)!
                     self.form.wrappedValue = (value?.records?.first?.form)!
                     
+                    let strengthString = (value?.records?.first?.strength)!
+                    let stringArray = strengthString.components(separatedBy: CharacterSet.decimalDigits.inverted)
+                    for item in stringArray {
+                        if let number = Int(item) {
+                            print("number: \(number)")
+                            self.strengthValue.wrappedValue = "\(number)"
+                        }
+                    }
                     
                     DispatchQueue.main.async {
                         if self.form.wrappedValue == "TABLET"{

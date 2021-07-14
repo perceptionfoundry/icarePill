@@ -26,7 +26,7 @@ struct FAQView: View {
     
     var question1 = "What is iCarePill App?"
     var answer1 = """
- iCarePill helps you manage and take your medication on time with our mobile medication management platform. Medisafe allows your family, friends & caregivers to register to administer the medicine.
+ iCarePill helps you manage and take your medication on time with our mobile medication management platform. iCarePill allows your family, friends & caregivers to register to administer the medicine.
 """
     var question2 = "iCarePill Privacy Policy"
     var answer2 = """
@@ -141,15 +141,13 @@ In order to delete a medication, please follow these steps:
                     FAQCellView(expandState: $isFaq_8, question: question8, answer: answer8)
                     FAQCellView(expandState: $isFaq_9, question: question9, answer: answer9)
                     FAQCellView(expandState: $isFaq_10, question: question10, answer: answer10)
+                    
                 })
+                
+                Text("For more query: help@icarepill.com")
+                    .font(.subheadline)
+                    .foregroundColor(.accentColor)
             }
-         
-
-           
-
-            
-         
-
             Spacer()
             
            
@@ -181,7 +179,7 @@ In order to delete a medication, please follow these steps:
                     
                     ToolbarItem(placement: .principal) {
                         VStack {
-                            Text("FAQ")
+                            Text("FAQs")
                                 .font(.custom("Poppins-Medium", size: 18))
                                 .foregroundColor(.accentColor)
                            

@@ -17,6 +17,8 @@ struct SignUpView: View {
     var fbViewModel = FirebaseViewModel()
     @State var alertMsg = ""
     @State var isAlert = false
+    @State var isViewDisable = false
+    @State var isSave = false
     
     @Environment(\.presentationMode) var presentationModel
     
@@ -341,9 +343,13 @@ struct SignUpView: View {
                     
                     InputFieldView(imageName: "zip", title: "Zip Code", inputTF: $zipCode, PlaceHolder: "zip code")
                     
+                    
+                    //MARK: BUTTON
                     Button(action: {
                         
-                   
+                        isViewDisable = true
+                        isSave = true
+                        
                         let Formattor = DateFormatter()
                         Formattor.dateStyle = .medium
                         
@@ -366,7 +372,8 @@ struct SignUpView: View {
                             if status{
                                 presentationModel.wrappedValue.dismiss()
                             }else{
-                                
+                                isViewDisable = false
+                                isSave = false
                                 isAlert.toggle()
                                 self.alertMsg = err!
                               
@@ -384,7 +391,10 @@ struct SignUpView: View {
                                 .foregroundColor(.white)
                                 .font(.custom("Poppins-Medium", size: 16))
                             
-                        }
+                        }.overlay(ProgressView()
+                                    .colorScheme(.dark)
+                                    .padding(.trailing, 30)
+                                    .opacity(isViewDisable ? 1 : 0), alignment: .trailing)
                         
                     }).alert(isPresented: $isAlert, content: {
                         
@@ -405,6 +415,7 @@ struct SignUpView: View {
                
             }// Main VStack end
     }
+        .allowsHitTesting(!isViewDisable)
             .sheet(isPresented: $showImagePicker) {
                 ImagePickerView(sourceType: .photoLibrary) { (getImage) in
                     

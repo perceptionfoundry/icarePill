@@ -77,6 +77,7 @@ struct ScheduleView: View {
                     
                   
                         TextField("Number of Pills", text: $dosageValue)
+                            .keyboardType(.numberPad)
                             .foregroundColor(.accentColor)
                             .font(.custom("Poppins-Medium", size: 14))
                             .padding()

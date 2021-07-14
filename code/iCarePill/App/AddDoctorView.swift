@@ -21,6 +21,8 @@ struct AddDoctorView: View {
     @State var locationValue = ""
     @State  var  isNext = false
     @State  var  isAlert = false
+    @State  var  isViewDisable = false
+    @State  var  isSave = false
     @State  var  alertTitle = ""
     @State  var  alertMessage = ""
     
@@ -142,6 +144,7 @@ struct AddDoctorView: View {
                         HStack{
                             
                             TextField("Mobile Number", text: $mobileNumberValue)
+                                .keyboardType(.phonePad)
                                 .font(.custom("Poppins-Medium", size: 14))
                                 .foregroundColor(.accentColor)
                                 .padding()
@@ -177,6 +180,7 @@ struct AddDoctorView: View {
                         HStack{
                             
                             TextField("Office Number", text: $officeNumberValue)
+                                .keyboardType(.phonePad)
                                 .font(.custom("Poppins-Medium", size: 14))
                                 .foregroundColor(.accentColor)
                                 .padding()
@@ -232,7 +236,8 @@ struct AddDoctorView: View {
                 
               
                         Button(action: {
-                            
+                            isSave = true
+                            isViewDisable = true
                             
                             if dpImage != UIImage(named: "dp"){
                                 
@@ -262,6 +267,8 @@ struct AddDoctorView: View {
                                                 self.alertTitle = "Server Error!"
                                                 self.alertMessage = "\(fb_err ?? "unknown error")"
                                                 isAlert.toggle()
+                                                isSave = false
+                                                isViewDisable = false
 
                                             }
                                         }
@@ -272,6 +279,8 @@ struct AddDoctorView: View {
                                         self.alertTitle = "Upload Image Error!"
                                         self.alertMessage = "\(err ?? "unknown error")"
                                         isAlert.toggle()
+                                        isSave = false
+                                        isViewDisable = false
                                     }
                                 }
                                 
@@ -309,11 +318,19 @@ struct AddDoctorView: View {
                                     .foregroundColor(.white)
                                     .font(.custom("Poppins-Medium", size: 16))
                                 
-                            }
+                            }.overlay(
+                                
+                                ProgressView()
+                                        .colorScheme(.dark)
+                                        .padding(.trailing, 30)
+                                    .opacity(isSave ? 1 : 0)
+
+                                        , alignment: .trailing)
                             
                         })
         }.padding()
     }
+        .allowsHitTesting(!isViewDisable)
         .alert(isPresented: $isAlert, content: {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Dismiss")))
         })

@@ -42,6 +42,8 @@ struct AddAppointmentView: View {
     @State  var  isAlert = false
     @State  var  alertTitle = ""
     @State  var  alertMessage = ""
+    @State  var  isViewDisable = false
+    @State  var  isSave = false
    
     @State var value : CGFloat = 0
     @State var isPushUp = false
@@ -346,6 +348,8 @@ struct AddAppointmentView: View {
               
                         Button(action: {
                             
+                            isSave = true
+                            isViewDisable = true
                             
                             
                             if appointmentTitle.isEmpty == false && selectedDocInfo?.name.isEmpty == false &&  dateValue_String != "yyyy/mm/dd" && timeValue_String != "hh:mm" && locationValue.isEmpty == false && NoteValue.isEmpty == false{
@@ -365,6 +369,8 @@ struct AddAppointmentView: View {
                                         self.alertTitle = "Server Error!"
                                         self.alertMessage = "\(err ?? "unknown error")"
                                         isAlert.toggle()
+                                        isSave = false
+                                        isViewDisable = false
                                     }
                                 }
                             }else{
@@ -372,6 +378,8 @@ struct AddAppointmentView: View {
                                 self.alertTitle = "Textfield Empty"
                                 self.alertMessage = "Please assure all textfield are filled.."
                                 isAlert.toggle()
+                                isSave = false
+                                isViewDisable = false
                             }
 
                             
@@ -391,7 +399,16 @@ struct AddAppointmentView: View {
                                     .foregroundColor(.white)
                                     .font(.custom("Poppins-Medium", size: 16))
                                 
-                            }
+                            }.overlay(
+                                
+                                ProgressView()
+                                        .colorScheme(.dark)
+                                        .padding(.trailing, 30)
+                                    .opacity(isSave ? 1 : 0)
+                                
+                               
+                                
+                                        , alignment: .trailing)
                             
                         })
                  
@@ -401,6 +418,7 @@ struct AddAppointmentView: View {
             Spacer()
         }.padding()
         }
+        .allowsHitTesting(!isViewDisable)
         .alert(isPresented: $isAlert, content: {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Dismiss")))
         }).preferredColorScheme(.light)
