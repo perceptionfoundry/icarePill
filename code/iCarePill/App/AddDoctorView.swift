@@ -291,6 +291,8 @@ struct AddDoctorView: View {
                                     self.alertTitle = "Textfield Empty"
                                     self.alertMessage = "Please assure all textfield are filled.."
                                     isAlert.toggle()
+                                    isSave = false
+                                    isViewDisable = false
                                     
                                 }
                                 
@@ -298,6 +300,8 @@ struct AddDoctorView: View {
                                 self.alertTitle = "Image Missing"
                                 self.alertMessage = "Please add Doctor refers image"
                                 isAlert.toggle()
+                                isSave = false
+                                isViewDisable = false
                                 
                             }
                             

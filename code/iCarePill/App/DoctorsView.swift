@@ -21,31 +21,31 @@ struct DoctorsView: View {
     
     var body: some View {
         VStack{
-       
+            
             if docArray.count == 0{
-        NoRecordView(imageName: "no_doctor")
+                NoRecordView(imageName: "no_doctor")
             }
             else{
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
-                LazyVStack(content: {
-                    ForEach(docArray) { value in
-             
-                        DoctorCellView(imageString: value.image, name: value.name)
-                            .onTapGesture {
-                                selectedDocInfo = value
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                      
-                    }.padding(.horizontal)
-                    .padding(.vertical, 7)
-                })
-                
+                    LazyVStack(content: {
+                        ForEach(docArray) { value in
+                            
+                            DoctorCellView(imageString: value.image, name: value.name)
+                                .onTapGesture {
+                                    selectedDocInfo = value
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            
+                        }.padding(.horizontal)
+                        .padding(.vertical, 7)
+                    })
+                    
                 }
                 
                 
-              
                 
-
+                
+                
             }
             Spacer()
             //MARK: Done Button
@@ -57,7 +57,7 @@ struct DoctorsView: View {
                     Button(action: {
                         
                         isNext.toggle()
-
+                        
                         
                     }, label: {
                         
@@ -75,7 +75,7 @@ struct DoctorsView: View {
                         
                     })
                 })
-                   
+            
             
         }.preferredColorScheme(.light)
         .onAppear(){
@@ -86,6 +86,11 @@ struct DoctorsView: View {
                 if status{
                     
                     docArray = details
+                    
+                    let sortedNames = details.sorted { $0.name < $1.name }
+                    
+                    docArray = sortedNames
+
                 }else{
                     
                     print(err!)
@@ -98,28 +103,28 @@ struct DoctorsView: View {
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
-        
+                                
                                 Button(action: {
                                     presentationMode.wrappedValue.dismiss()
                                 }) {
                                     Image("back")
                                         .imageScale(.large)
                                 }
-        
+                            
         )
         .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-              
+        .toolbar {
+            
+            
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("Doctors")
+                        .font(.custom("Poppins-Medium", size: 18))
+                        .foregroundColor(.accentColor)
                     
-                    ToolbarItem(placement: .principal) {
-                        VStack {
-                            Text("Doctors")
-                                .font(.custom("Poppins-Medium", size: 18))
-                                .foregroundColor(.accentColor)
-                           
-                        }
-                    }
                 }
+            }
+        }
     }
         
 }

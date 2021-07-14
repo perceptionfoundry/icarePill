@@ -328,21 +328,9 @@ struct AddAppointmentView: View {
                             .font(.custom("Poppins-Medium", size: 14))
                             .foregroundColor(.accentColor)
                             .padding()
-                  
-                    
-                   
-                    
                 }
-                 
-               
-                    
                 }
             }
-            
-            
-            
-            
-                
                 //MARK: Next Button
                 
               

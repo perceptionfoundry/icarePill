@@ -28,7 +28,12 @@ struct AppointmentsView: View {
                 ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                 LazyVStack(content: {
                     ForEach(appointmentArray) { value in
-                        AppointmentCellView(imageString: value.doctorImage, docName: value.doctorName, specialist: value.doctorSpeciality, time: value.appointmentTime, location: value.location)
+                        AppointmentCellView(
+                            imageString: value.doctorImage,
+                            docName: value.doctorName,
+                            specialist: value.doctorSpeciality,
+                            time: "\(value.appointmentDate)",
+                            location: value.location)
                             
                     }.padding(.horizontal)
                     .padding(.vertical, 7)
@@ -153,7 +158,7 @@ struct AppointmentCellView: View {
                     .foregroundColor(.accentColor)
                     .padding(.bottom, 5)
                 
-                VStack(alignment:.center, spacing: 2){
+                VStack(alignment:.leading, spacing: 2){
                     Text(time)
                         .font(.custom("Poppins-Medium", size: 10))
                         .foregroundColor(.gray)
