@@ -84,6 +84,14 @@ struct AppointmentsView: View {
                 if status{
                     
                     appointmentArray = details
+                    
+                    let formattor = DateFormatter()
+                    formattor.dateFormat = "MM/dd/yyyy"
+                    
+                    let newDetail = details.sorted(by: { formattor.date(from:$0.appointmentDate)!.compare(formattor.date(from:$1.appointmentDate)!) == .orderedAscending })
+                    
+                    appointmentArray = newDetail
+                    
                 }else{
                     
                     print(err!)
