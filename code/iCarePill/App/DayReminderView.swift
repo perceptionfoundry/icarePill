@@ -60,9 +60,9 @@ struct DayReminderView: View {
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image("back")
-                            .resizable()
-                            .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .imageScale(.large)
+                            .padding()
+                        
                     }.padding(.leading, 20)
                     
                     Spacer()

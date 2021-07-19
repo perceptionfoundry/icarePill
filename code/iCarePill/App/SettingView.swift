@@ -224,6 +224,7 @@ struct SettingView: View {
                                 }) {
                                    Text("Cancel")
                                 }
+            .padding()
         
         )
         .navigationBarTitleDisplayMode(.inline)

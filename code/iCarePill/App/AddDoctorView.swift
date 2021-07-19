@@ -349,6 +349,7 @@ struct AddDoctorView: View {
                                 }) {
                                    Text("Cancel")
                                 }
+            .padding()
         
         )
         .navigationBarTitleDisplayMode(.inline)

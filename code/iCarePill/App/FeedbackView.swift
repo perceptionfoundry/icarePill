@@ -144,6 +144,7 @@ struct FeedbackView: View {
                                 }) {
                                    Text("Cancel")
                                 }
+            .padding()
         
         )
         .navigationBarTitleDisplayMode(.inline)

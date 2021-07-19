@@ -170,6 +170,7 @@ In order to delete a medication, please follow these steps:
                                 }) {
                                     Image("back")
                                         .imageScale(.large)
+                                        .padding()
                                 }
         
         )

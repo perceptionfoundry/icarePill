@@ -91,6 +91,7 @@ struct PasscodeView: View {
                                 }) {
                                     Text("Cancel")
                                 }
+            .padding()
                             
         )
         .navigationBarTitleDisplayMode(.inline)

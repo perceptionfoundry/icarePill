@@ -302,6 +302,7 @@ struct AddNoteView: View {
                                 }) {
                                    Text("Cancel")
                                 }
+            .padding()
         
         )
         .navigationBarTitleDisplayMode(.inline)

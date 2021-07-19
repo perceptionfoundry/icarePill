@@ -109,6 +109,7 @@ struct DoctorsView: View {
                                 }) {
                                     Image("back")
                                         .imageScale(.large)
+                                        .padding()
                                 }
                             
         )

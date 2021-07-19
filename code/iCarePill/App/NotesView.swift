@@ -101,6 +101,7 @@ struct NotesView: View {
                                 }) {
                                     Image("back")
                                         .imageScale(.large)
+                                        .padding()
                                 }
         
         )

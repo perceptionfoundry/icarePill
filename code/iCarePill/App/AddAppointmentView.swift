@@ -420,6 +420,7 @@ struct AddAppointmentView: View {
                                 }) {
                                    Text("Cancel")
                                 }
+            .padding()
         
         )
         .navigationBarTitleDisplayMode(.inline)

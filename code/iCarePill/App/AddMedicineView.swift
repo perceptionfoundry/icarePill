@@ -492,6 +492,7 @@ struct AddMedicineView: View {
                                 }) {
                                     Image("back")
                                         .imageScale(.large)
+                                        .padding()
                                 }
         
         )

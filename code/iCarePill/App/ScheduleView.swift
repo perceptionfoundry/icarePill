@@ -467,6 +467,7 @@ struct ScheduleView: View {
                             }) {
                                 Image("back")
                                     .imageScale(.large)
+                                    .padding()
                             }
     
     )

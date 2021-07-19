@@ -110,6 +110,7 @@ struct AppointmentsView: View {
                                 }) {
                                     Image("back")
                                         .imageScale(.large)
+                                        .padding()
                                 }
         
         )
