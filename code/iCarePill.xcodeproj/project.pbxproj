@@ -21,6 +21,8 @@
 		F21653D8262827930035950D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = F21653D7262827930035950D /* FacebookLogin */; };
 		F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AA260877D10038A925 /* ImagePickerView.swift */; };
 		F223B1AE26087AB80038A925 /* SaveImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */; };
+		F224BD0026A57AB30025C224 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F224BCFF26A57AB30025C224 /* ShareSheet.swift */; };
+		F224BD0226A589090025C224 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F224BD0126A589090025C224 /* FeedbackView.swift */; };
 		F22E56BA269C237D00242E46 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22E56B9269C237D00242E46 /* ForgetPasswordView.swift */; };
 		F22EC61F2609BAAC009FCF7F /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */; };
 		F22EC6242609C8C1009FCF7F /* QRCodeReader in Frameworks */ = {isa = PBXBuildFile; productRef = F22EC6232609C8C1009FCF7F /* QRCodeReader */; };
@@ -100,6 +102,8 @@
 		F21653D2262810030035950D /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
 		F223B1AA260877D10038A925 /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageViewModel.swift; sourceTree = "<group>"; };
+		F224BCFF26A57AB30025C224 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		F224BD0126A589090025C224 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		F22E56B9269C237D00242E46 /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		F22EC61E2609BAAC009FCF7F /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
 		F22EC6262609C8FE009FCF7F /* QRCodeReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderView.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				F2F49305263678E8009E9BA5 /* SwiftUIView.swift */,
 				F2F4930826367906009E9BA5 /* SearchBar.swift */,
 				F2AC12542639478E003A95BF /* DayReminderCellView.swift */,
+				F224BCFF26A57AB30025C224 /* ShareSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				F25D558126130C1000E9152B /* SettingView.swift */,
 				F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */,
 				F296CF702613915B00BB1331 /* PasscodeView.swift */,
+				F224BD0126A589090025C224 /* FeedbackView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -563,6 +569,7 @@
 				F272D17826257D22009D648F /* Appointment.swift in Sources */,
 				F223B1AB260877D10038A925 /* ImagePickerView.swift in Sources */,
 				F22E56BA269C237D00242E46 /* ForgetPasswordView.swift in Sources */,
+				F224BD0226A589090025C224 /* FeedbackView.swift in Sources */,
 				F2F49306263678E8009E9BA5 /* SwiftUIView.swift in Sources */,
 				F204970F267746F90085ED10 /* ScanNumberView.swift in Sources */,
 				F272D17B26257D3D009D648F /* Note.swift in Sources */,
@@ -570,6 +577,7 @@
 				F2D326FE260490B2009880BE /* FirebaseViewModel.swift in Sources */,
 				F24210772608A3720046EA2B /* TrackerView.swift in Sources */,
 				F256BD7B260CAD5C0046C6D8 /* FAQView.swift in Sources */,
+				F224BD0026A57AB30025C224 /* ShareSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

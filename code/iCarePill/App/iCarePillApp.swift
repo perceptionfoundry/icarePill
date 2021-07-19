@@ -62,10 +62,7 @@ struct iCarePillApp: App {
         
         
         func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-            // ...
-            
-          
-            
+         
             if  error == nil {
                 // ...
                 guard let authentication = user.authentication else { return }
@@ -88,9 +85,13 @@ struct iCarePillApp: App {
             }
                 
             else{
-               
+                print(error?.localizedDescription)
                 
             }
+            
+        }
+        
+        func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
             
         }
     }

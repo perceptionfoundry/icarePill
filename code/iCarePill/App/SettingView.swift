@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import StoreKit
 
 struct SettingView: View {
     
@@ -19,6 +20,9 @@ struct SettingView: View {
     @State var isLogin = false
     @State var isPasscode = false
     @State var islogout = false
+    @State var isShare = false
+    @State var isFeedback = false
+    
     
     
     
@@ -68,6 +72,7 @@ struct SettingView: View {
                     
                                
                 }
+                
                 .foregroundColor(.accentColor)
                 
                 
@@ -129,11 +134,33 @@ struct SettingView: View {
                 // MARK: - SECTION : General
                 Section(header: Text("General") .font(.custom("Poppins-Bold", size: 18))) {
                   
-                    SettingFormCellView(iconName: "share_small", title: "Share", isForwardIcon: false)
+                    Button(action: {
+                        isShare.toggle()
+                    }, label: {
+                        SettingFormCellView(iconName: "share_small", title: "Share", isForwardIcon: false)
+                    })
+                   
+                    Button(action: {
+                        if let scene = UIApplication.shared.connectedScenes.first(where: {$0.activationState == .foregroundActive}) as? UIWindowScene{
+                            SKStoreReviewController.requestReview(in: scene)
+                        }
+                    }, label: {
+                        SettingFormCellView(iconName: "", title: "Rate App", isForwardIcon: false)
+
+                    })
                     
-                    SettingFormCellView(iconName: "", title: "Rate App", isForwardIcon: false)
+                    NavigationLink(
+                        destination: FeedbackView(),
+                        isActive: $isFeedback,
+                        label: {
+                            Button(action: {
+                                isFeedback.toggle()
+                            }, label: {
+                                SettingFormCellView(iconName: "", title: "Send Feedback", isForwardIcon: false)
+                            })
+                        })
                     
-                    SettingFormCellView(iconName: "", title: "Send Feedback", isForwardIcon: false)
+                    
                     SettingFormCellView(iconName: "", title: "About", isForwardIcon: false)
                     
                                
@@ -142,6 +169,7 @@ struct SettingView: View {
                
                 
               } .foregroundColor(.accentColor)
+                
             
             
             
@@ -182,6 +210,9 @@ struct SettingView: View {
               
            
     }
+        .sheet(isPresented: $isShare, content: {
+            ShareSheet(activityItems: ["App is not published on AppStore"])
+        })
         .preferredColorScheme(.light)
         .background(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
         .edgesIgnoringSafeArea(.bottom)

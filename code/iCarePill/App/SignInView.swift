@@ -230,8 +230,9 @@ struct SignInView: View {
             Button(action: {
                 
                 SocialLogin().attemptLoginGoogle()
-                isViewDisable = true
-                isGoogleAuth = true
+          
+//                isViewDisable = true
+//                isGoogleAuth = true
                 isLogin = firebaseObj.isSocialAuth
                 
             }, label: {
@@ -268,8 +269,7 @@ struct SignInView: View {
         
         }
         .preferredColorScheme(.light)
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
+  
     }
 }
 
