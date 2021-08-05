@@ -36,6 +36,8 @@ struct HomeView: View {
     
     @State var selectedTime = "Morning"
     
+    let notificationHelper = localNotificationHelper()
+    
     
     var body: some View {
         
@@ -143,10 +145,6 @@ struct HomeView: View {
                    
                 })
             
-            
-            
-            
-            
             VStack(alignment:.leading){
                 
                 Text("My Medicines")
@@ -161,6 +159,7 @@ struct HomeView: View {
                     LazyVStack{
                         ForEach(0..<medicineData.count, id:\.self){ i in
                             
+                          
                             
                             Button(action: {
                                 isActiveAlert.toggle()
@@ -204,6 +203,8 @@ struct HomeView: View {
         }.navigationBarHidden(true)
         .onAppear(){
             
+            self.medicineNotification()
+            
             let d_Formattor = DateFormatter()
             d_Formattor.dateFormat = "dd-MMM"
             //            d_Formattor.dateStyle = .short
@@ -245,6 +246,10 @@ struct HomeView: View {
                     medicineData = details
                     
                     
+                    medicineData.forEach { value in
+                        
+                        notificationHelper.scheduleNotification(title: value.Title, body: "It's your time to take \(value.Title)", time: "\((value.notification.first)!)")
+                    }
                     
                     print(totalStock)
                     //DOSE
@@ -253,10 +258,7 @@ struct HomeView: View {
                         
                         if status{
                             Detail.forEach { Dose in
-                                
-                                
-                                
-                                
+                         
                                 print("taken:\(takenCount)")
                                 print("Skip:\(skipCount)")
                                 
@@ -317,7 +319,7 @@ struct HomeView: View {
             }
             
             
-            self.medicineNotification()
+           
             
         }
         
@@ -439,6 +441,8 @@ struct HomeView: View {
         center.requestAuthorization(options: [.alert, .sound]) { status, err in
         }
         
+        center.removeAllDeliveredNotifications()
+        center.removeAllPendingNotificationRequests()
         //************ 2. Create the notification Content
         let content = UNMutableNotificationContent()
         content.title = "iCarePill Remind"
@@ -459,9 +463,7 @@ struct HomeView: View {
         
         // 5. register Notification
         
-        center.add(request) { (err) in
-            // Check the error
-        }
+        center.add(request)
         
         
     }

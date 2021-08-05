@@ -7,65 +7,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1B7544DC-C0BE-48C6-B06D-B16F2925B035"
+            uuid = "F9F749A7-0A88-48B5-BDB8-98CFC52C1BF2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iCarePill/App/AddMedicineView.swift"
+            filePath = "iCarePill/ViewModel/LocalNotificationHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "scheduleNotification(title:body:time:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "503C806E-8B2E-4E50-B534-BE76943B44F4"
+            uuid = "3622B057-1292-4440-854E-D4600454D781"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iCarePill/App/AddMedicineView.swift"
+            filePath = "iCarePill/ViewModel/LocalNotificationHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8314F2EE-3FC2-4B50-AC72-3CEE5F3244B2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iCarePill/App/ForgetPasswordView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DFD77431-62AD-402F-8A0B-E25CF5ABBD66"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iCarePill/App/ForgetPasswordView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "scheduleNotification(title:body:time:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

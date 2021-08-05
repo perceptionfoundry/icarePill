@@ -54,6 +54,7 @@
 		F2875481260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */; };
 		F296CF6E2613883B00BB1331 /* GeneralSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */; };
 		F296CF712613915B00BB1331 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F296CF702613915B00BB1331 /* PasscodeView.swift */; };
+		F29ADD5426BC450C00A89F2A /* LocalNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29ADD5326BC450C00A89F2A /* LocalNotificationHelper.swift */; };
 		F29FD410260106D500CA43F5 /* iCarePillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD40F260106D500CA43F5 /* iCarePillApp.swift */; };
 		F29FD412260106D500CA43F5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29FD411260106D500CA43F5 /* SignInView.swift */; };
 		F29FD414260106D600CA43F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29FD413260106D600CA43F5 /* Assets.xcassets */; };
@@ -132,6 +133,7 @@
 		F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDateOrTimeViewModel.swift; sourceTree = "<group>"; };
 		F296CF6D2613883B00BB1331 /* GeneralSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingView.swift; sourceTree = "<group>"; };
 		F296CF702613915B00BB1331 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		F29ADD5326BC450C00A89F2A /* LocalNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHelper.swift; sourceTree = "<group>"; };
 		F29FD40C260106D500CA43F5 /* iCarePill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCarePill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29FD40F260106D500CA43F5 /* iCarePillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCarePillApp.swift; sourceTree = "<group>"; };
 		F29FD411260106D500CA43F5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				F223B1AD26087AB80038A925 /* SaveImageViewModel.swift */,
 				F2875480260E1ADF00D2D051 /* ShowDateOrTimeViewModel.swift */,
 				F2DD85BE2654DFF200BBA621 /* APIViewModel.swift */,
+				F29ADD5326BC450C00A89F2A /* LocalNotificationHelper.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				F2F4930926367906009E9BA5 /* SearchBar.swift in Sources */,
 				F242107A2608A3970046EA2B /* ReportView.swift in Sources */,
 				F2AC12552639478E003A95BF /* DayReminderCellView.swift in Sources */,
+				F29ADD5426BC450C00A89F2A /* LocalNotificationHelper.swift in Sources */,
 				F20497092677432C0085ED10 /* StringUtils.swift in Sources */,
 				F26E45522611CC520054511E /* AddNoteView.swift in Sources */,
 				F2A3511B263B23B8003EBE21 /* Dose.swift in Sources */,
