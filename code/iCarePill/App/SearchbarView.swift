@@ -123,7 +123,7 @@ struct SearchbarView: View {
                 
             }), alignment: .topTrailing)
         .shadow(radius: 2, x:0, y: 0)
-        .frame(width: UIScreen.main.bounds.width * 0.8,height: UIScreen.main.bounds.height * 0.6)
+        .frame(width: UIScreen.main.bounds.width * 0.8,height: UIScreen.main.bounds.height * 0.45)
         .preferredColorScheme(.light)
        
         

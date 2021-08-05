@@ -11,7 +11,9 @@ import SDWebImageSwiftUI
 struct DayReminderView: View {
     
     @Environment(\.presentationMode) var presentationMode
+    
     @State var medicineData = [Medicine]()
+    @State var selectedMedicineData = [Medicine]()
     @Binding var dateValue : Date
     @State var data : DateType!
     @State var calendarData = [DateType]()
@@ -29,7 +31,7 @@ struct DayReminderView: View {
     @State var isAfternoon = false
     @State var isEvening = false
     @State var isNight = false
-    
+    @Binding var selectedTime : String
     
 //
 //    let tempData = [Medicine]()
@@ -96,21 +98,10 @@ struct DayReminderView: View {
                             isAfternoon = false
                             isEvening = false
                             isNight = false
+                            selectedMedicineData = morningDrug
                         }, label: {
                             DayTimeView_Rect(image: "morning", title: "Morning", isSelected: isMorning)
-                            
-//                            VStack {
-//                                Image("morning")
-//                                    .resizable()
-//                                    .frame(width: 50, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                    .scaledToFit()
-//                                Text(title)
-//                                    .foregroundColor(isMorning ? .accentColor : Color.gray)
-//
-//                                Rectangle()
-//                                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                    .foregroundColor(isSelected ? .accentColor : Color.clear)
-//                            }
+
                         })
                         
                         
@@ -120,6 +111,7 @@ struct DayReminderView: View {
                             isAfternoon = true
                             isEvening = false
                             isNight = false
+                            selectedMedicineData = afternoonDrug
                         }, label: {
                             DayTimeView(image: "sun", title: "Afternoon", isSelected: isAfternoon)
                         })
@@ -129,6 +121,7 @@ struct DayReminderView: View {
                             isAfternoon = false
                             isEvening = true
                             isNight = false
+                            selectedMedicineData = eveningDrug
                         }, label: {
                             DayTimeView(image: "evening", title: "Evening", isSelected: isEvening)
                         })
@@ -138,6 +131,7 @@ struct DayReminderView: View {
                             isAfternoon = false
                             isEvening = false
                             isNight = true
+                            selectedMedicineData = nightDrug
                         }, label: {
                             DayTimeView(image: "moon", title: "Night", isSelected: isNight)
                         })
@@ -154,7 +148,7 @@ struct DayReminderView: View {
                 
                 
                 
-                ForEach(0..<medicineData.count, id:\.self){ i in
+                ForEach(0..<selectedMedicineData.count, id:\.self){ i in
                     
                     
                     
@@ -162,9 +156,9 @@ struct DayReminderView: View {
                     
                     if self.takenStatus.contains(i){
                         
-                        DayReminderCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "taken")
+                        DayReminderCellView(ImageTitle: selectedMedicineData[i].Apperance, MedicineTitle: selectedMedicineData[i].Title, Dose: "\(selectedMedicineData[i].Strength)\(selectedMedicineData[i].unit)", Time: "\((selectedMedicineData[i].notification.first)!)", status: "taken")
                             .shadow(radius: 3)
-                            .padding(.bottom, 10).tag(medicineData[i].id)
+                            .padding(.bottom, 10).tag(selectedMedicineData[i].id)
                             .padding(.horizontal)
 
                     }
@@ -172,9 +166,9 @@ struct DayReminderView: View {
                     
                     else if self.skipStatus.contains(i){
 
-                        DayReminderCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "skip")
+                        DayReminderCellView(ImageTitle: selectedMedicineData[i].Apperance, MedicineTitle: selectedMedicineData[i].Title, Dose: "\(medicineData[i].Strength)\(selectedMedicineData[i].unit)", Time: "\((selectedMedicineData[i].notification.first)!)", status: "skip")
                             .shadow(radius: 3)
-                            .padding(.bottom, 10).tag(medicineData[i].id)
+                            .padding(.bottom, 10).tag(selectedMedicineData[i].id)
                             .padding(.horizontal)
 
                     }
@@ -188,8 +182,8 @@ struct DayReminderView: View {
                                 .shadow(radius: 2)
                             
                             VStack{
-                            DayReminderCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "")
-                                .padding(.bottom, 10).tag(medicineData[i].id)
+                            DayReminderCellView(ImageTitle: selectedMedicineData[i].Apperance, MedicineTitle: selectedMedicineData[i].Title, Dose: "\(selectedMedicineData[i].Strength)\(selectedMedicineData[i].unit)", Time: "\((selectedMedicineData[i].notification.first)!)", status: "")
+                                .padding(.bottom, 10).tag(selectedMedicineData[i].id)
                                 .padding(.horizontal)
                                 
                                 
@@ -230,15 +224,7 @@ struct DayReminderView: View {
                             }
                         }.padding(.horizontal)
                         .padding(.bottom, 10)
-                        
-                       
-                        
-                        
-                      
                     }
-                    
-                    
-                    
                 }
   
             }
@@ -249,6 +235,8 @@ struct DayReminderView: View {
         }
         .navigationBarHidden(true)
         .onAppear(perform: {
+            
+         
             
             let d_Formattor = DateFormatter()
             d_Formattor.dateFormat = "dd-MMM"
@@ -276,8 +264,6 @@ struct DayReminderView: View {
                 self.count = i
                 
                 self.newDate()
-                
-                
                 
                 let VM = FirebaseViewModel()
                 
@@ -360,6 +346,34 @@ struct DayReminderView: View {
                         print("\(err!)")
                     }
                     
+                }
+                
+                if selectedTime == "Afternoon"{
+                    isMorning = false
+                    isAfternoon = true
+                    isEvening = false
+                    isNight = false
+                    selectedMedicineData = afternoonDrug
+                }
+                else if selectedTime == "Evening"{
+                    isMorning = false
+                    isAfternoon = false
+                    isEvening = true
+                    isNight = false
+                    selectedMedicineData = eveningDrug
+                }
+                else if selectedTime == "Night"{
+                    isMorning = false
+                    isAfternoon = false
+                    isEvening = false
+                    isNight = true
+                    selectedMedicineData = nightDrug
+                }else{
+                    isMorning = true
+                    isAfternoon = false
+                    isEvening = false
+                    isNight = false
+                    selectedMedicineData = morningDrug
                 }
                 
                 
@@ -550,20 +564,45 @@ struct DayReminderView: View {
                         
                     }
                 }
+                
+                if selectedTime == "Afternoon"{
+                    isMorning = false
+                    isAfternoon = true
+                    isEvening = false
+                    isNight = false
+                    selectedMedicineData = afternoonDrug
+                }
+                else if selectedTime == "Evening"{
+                    isMorning = false
+                    isAfternoon = false
+                    isEvening = true
+                    isNight = false
+                    selectedMedicineData = eveningDrug
+                }
+                else if selectedTime == "Night"{
+                    isMorning = false
+                    isAfternoon = false
+                    isEvening = false
+                    isNight = true
+                    selectedMedicineData = nightDrug
+                }else{
+                    isMorning = true
+                    isAfternoon = false
+                    isEvening = false
+                    isNight = false
+                    selectedMedicineData = morningDrug
+                }
+                
             }else{
                 print(err!)
             }
-            
-            
-            
-            
         }
     }
 }
 
 struct DayReminderView_Previews: PreviewProvider {
     static var previews: some View {
-        DayReminderView(dateValue: .constant(Date()))
+        DayReminderView(dateValue: .constant(Date()), selectedTime: .constant("Morning"))
     }
 }
 

@@ -14,7 +14,7 @@ var userDetail : User?
 
 struct HomeView: View {
     
-
+    
     @State var medicineData = [Medicine]()
     @State  var isNewEntry = false
     @State  var isDayReminder = false
@@ -26,7 +26,7 @@ struct HomeView: View {
     
     @State  var takenStatus = [Int]()
     @State  var skipStatus = [Int]()
-
+    
     
     let today = Date()
     let VM = FirebaseViewModel()
@@ -34,112 +34,133 @@ struct HomeView: View {
     @State var weekOfYear = 0
     @State var monthOfYear = 0
     
+    @State var selectedTime = "Morning"
+    
     
     var body: some View {
         
         
         VStack{
-
-                HStack{
-                    
-                    let imageurl  = URL(string: userDetail?.dp ?? "")
-                    
-                    WebImage(url: imageurl)
-                        .placeholder(Image(uiImage: UIImage(named: "dp")!
-                        ))
-                        .resizable()
-                        .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .scaledToFill()
-                        .clipShape(Circle())
-                        .shadow(radius: 3)
-                        .padding()
-                    
-                    VStack(alignment:.leading){
-                        Text("Hello, \(userName)!")
-                            .font(.custom("Poppins-Medium", size: 18))
-                            
-                           
-                            
-                        Text("Good Morning")
-                            .font(.custom("Poppins-Medium", size: 18))
-                            .foregroundColor(.accentColor)
-                            
-                           
-                           
-                    }
-                    Spacer()
-                    
-                    NavigationLink(
-                        destination: AddMedicineView(),
-                        isActive: $isNewEntry,
-                        label: {
-                            Button(action: {
-                                isNewEntry.toggle()
-                            }, label: {
-                                Image("add_button")
-                                    .padding(.trailing)
-                            })
-                        })
-                   
-                }.background(
-                    Rectangle()
-                        .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
-                        .shadow(radius: 6 )
-                        .frame(height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .edgesIgnoringSafeArea(.all)
-                        
-                )
-                .padding(.bottom, 30)
-               
+            
+            HStack{
                 
-       
+                let imageurl  = URL(string: userDetail?.dp ?? "")
+                
+                WebImage(url: imageurl)
+                    .placeholder(Image(uiImage: UIImage(named: "dp")!
+                    ))
+                    .resizable()
+                    .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .scaledToFill()
+                    .clipShape(Circle())
+                    .shadow(radius: 3)
+                    .padding()
+                
+                VStack(alignment:.leading){
+                    Text("Hello, \(userName)!")
+                        .font(.custom("Poppins-Medium", size: 18))
+                    
+                    
+                    
+                    Text("Good Morning")
+                        .font(.custom("Poppins-Medium", size: 18))
+                        .foregroundColor(.accentColor)
+                    
+                    
+                    
+                }
+                Spacer()
+                
+                NavigationLink(
+                    destination: AddMedicineView(),
+                    isActive: $isNewEntry,
+                    label: {
+                        Button(action: {
+                            isNewEntry.toggle()
+                        }, label: {
+                            Image("add_button")
+                                .padding(.trailing)
+                        })
+                    })
+                
+            }.background(
+                Rectangle()
+                    .foregroundColor(Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1)))
+                    .shadow(radius: 6 )
+                    .frame(height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .edgesIgnoringSafeArea(.all)
+                
+            )
+            .padding(.bottom, 30)
+            
+            
+            
             NavigationLink(
-                destination: DayReminderView(dateValue: .constant(Date())),
+                destination: DayReminderView(dateValue: .constant(Date()), selectedTime: $selectedTime),
                 isActive: $isDayReminder,
                 label: {
-                    Button(action: {
-                        isDayReminder.toggle()
-                    }, label: {
+              
                         VStack{
                             
-                            
                             HStack{
+                                
+                                Button(action: {
+                                    selectedTime = "Morning"
+                                    isDayReminder.toggle()
+                                }, label: {
                                 HomeCenterButtonView(imageName: "morning", title: " Morning")
-                                  
+                                })
                                 
+                                Button(action: {
+                                    selectedTime = "Afternoon"
+                                    isDayReminder.toggle()
+                                }, label: {
                                 HomeCenterButtonView(imageName: "sun", title: " Afternoon")
-                                                    }
-
-                            HStack{
-                                HomeCenterButtonView(imageName: "evening", title: " Evening")
-                                   
-                                
-                                HomeCenterButtonView(imageName: "moon", title: " Night")
-                                    
+                            })
                             }
                             
-                    
+                            HStack{
+                                Button(action: {
+                                    selectedTime = "Evening"
+                                    isDayReminder.toggle()
+                                }, label: {
+                                HomeCenterButtonView(imageName: "evening", title: " Evening")
+                                })
                                 
+                                Button(action: {
+                                    selectedTime = "Night"
+                                    isDayReminder.toggle()
+                                }, label: {
+                                HomeCenterButtonView(imageName: "moon", title: " Night")
+                                })
+                                
+                            }
+                            
+                            
+                            
                         }
-                    })
+                    
+                   
                 })
-      
-    
-          
-                VStack(alignment:.leading){
-                    
-                    Text("My Medicines")
-                        .font(.custom("Poppins-Medium", size: 18))
-                        .foregroundColor(.black)
-                        .padding()
-                    
-                    
-                    
-                    
-                    ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+            
+            
+            
+            
+            
+            VStack(alignment:.leading){
+                
+                Text("My Medicines")
+                    .font(.custom("Poppins-Medium", size: 18))
+                    .foregroundColor(.black)
+                    .padding()
+                
+                
+                
+                
+                ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
                     LazyVStack{
                         ForEach(0..<medicineData.count, id:\.self){ i in
-            
+                            
                             
                             Button(action: {
                                 isActiveAlert.toggle()
@@ -154,7 +175,7 @@ struct HomeView: View {
                                     HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "taken")
                                         .padding(.bottom, 10).tag(medicineData[i].id)
                                 }
-                             
+                                
                                 
                                 else if self.skipStatus.contains(i){
                                     HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "skip")
@@ -162,30 +183,30 @@ struct HomeView: View {
                                 }
                                 
                                 else{
-                                HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "")
-                                    .padding(.bottom, 10).tag(medicineData[i].id)
-                            }
+                                    HomeCellView(ImageTitle: medicineData[i].Apperance, MedicineTitle: medicineData[i].Title, Dose: "\(medicineData[i].Strength)\(medicineData[i].unit)", Time: "\((medicineData[i].notification.first)!)", status: "")
+                                        .padding(.bottom, 10).tag(medicineData[i].id)
+                                }
                             })
-
                             
-                           
+                            
+                            
                         }
-    
+                        
                     }
                     .padding()
-                    }
-                    
                 }
-                .background(
-                    Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1))
-                )
+                
+            }
+            .background(
+                Color(#colorLiteral(red: 0.9724746346, green: 0.9725909829, blue: 0.9724350572, alpha: 1))
+            )
             Spacer()
-    }.navigationBarHidden(true)
+        }.navigationBarHidden(true)
         .onAppear(){
             
             let d_Formattor = DateFormatter()
             d_Formattor.dateFormat = "dd-MMM"
-//            d_Formattor.dateStyle = .short
+            //            d_Formattor.dateStyle = .short
             self.dateString = d_Formattor.string(from: today)
             
             let calendar = Calendar.current
@@ -198,11 +219,11 @@ struct HomeView: View {
             weekOfYear = week
             monthOfYear = month
             
-          
+            
             
             print(self.dateString)
-           
-         
+            
+            
             //USER
             VM.GetUser(collectionTitle: "Users") { (status, details, err) in
                 
@@ -223,7 +244,7 @@ struct HomeView: View {
                 if status{
                     medicineData = details
                     
-
+                    
                     
                     print(totalStock)
                     //DOSE
@@ -234,57 +255,57 @@ struct HomeView: View {
                             Detail.forEach { Dose in
                                 
                                 
-                       
+                                
                                 
                                 print("taken:\(takenCount)")
                                 print("Skip:\(skipCount)")
                                 
                                 if Dose.dateInfo == self.dateString{
-                                if Dose.status == "Taken"{
-                                    
-                                    let Index = self.medicineData.firstIndex { Medicine in
+                                    if Dose.status == "Taken"{
                                         
-                                        
-                                        if Medicine.id == Dose.MedicineID!{
-                                            print("found")
-                                            todayTakenCount += 1
-                                            return true
-                                        }else{
-                                            return false
+                                        let Index = self.medicineData.firstIndex { Medicine in
+                                            
+                                            
+                                            if Medicine.id == Dose.MedicineID!{
+                                                print("found")
+                                                todayTakenCount += 1
+                                                return true
+                                            }else{
+                                                return false
+                                            }
                                         }
+                                        
+                                        
+                                        
+                                        if let value = Index  {
+                                            self.takenStatus.append(value)
+                                        }
+                                        
                                     }
                                     
-                                    
-                                    
-                                    if let value = Index  {
-                                        self.takenStatus.append(value)
+                                    else  if Dose.status == "Skip"{
+                                        
+                                        let Index = self.medicineData.firstIndex { Medicine in
+                                            
+                                            
+                                            if Medicine.id == Dose.MedicineID!{
+                                                print("found")
+                                                todaySkipCount += 1
+                                                return true
+                                            }else{
+                                                return false
+                                            }
+                                        }
+                                        
+                                        
+                                        
+                                        if let value = Index  {
+                                            self.skipStatus.append(value)
+                                        }
+                                        
                                     }
                                     
                                 }
-                                
-                                else  if Dose.status == "Skip"{
-                                    
-                                    let Index = self.medicineData.firstIndex { Medicine in
-                                        
-                                        
-                                        if Medicine.id == Dose.MedicineID!{
-                                            print("found")
-                                            todaySkipCount += 1
-                                            return true
-                                        }else{
-                                            return false
-                                        }
-                                    }
-                                    
-                                    
-                                    
-                                    if let value = Index  {
-                                        self.skipStatus.append(value)
-                                    }
-                                    
-                                }
-                                
-                            }
                             }
                         }
                     }
@@ -297,7 +318,7 @@ struct HomeView: View {
             
             
             self.medicineNotification()
-           
+            
         }
         
         .actionSheet(isPresented: $isActiveAlert) { () -> ActionSheet in
@@ -333,13 +354,13 @@ struct HomeView: View {
                     print("added")
                     self.takenStatus.append(self.selectedIndex)
                 }
-           
+                
                 let dict  = [ "id" : "\(self.dateString)-taken-\(medicineData[self.selectedIndex].id)",
-                 "MedicineID" : medicineData[self.selectedIndex].id,
-                 "dateInfo" : self.dateString,
-                "status" : "Taken",
-                "week":weekOfYear,
-                "month":monthOfYear]  as [String: Any]
+                              "MedicineID" : medicineData[self.selectedIndex].id,
+                              "dateInfo" : self.dateString,
+                              "status" : "Taken",
+                              "week":weekOfYear,
+                              "month":monthOfYear]  as [String: Any]
                 
                 VM.CreateDoseStatus(docName: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
                     
@@ -382,11 +403,11 @@ struct HomeView: View {
                 }
                 
                 let dict  = [ "id" : "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)",
-                 "MedicineID" : medicineData[self.selectedIndex].id,
-                 "dateInfo" : self.dateString,
-                "status" : "Skip",
-                "week":weekOfYear,
-                "month":monthOfYear]  as [String: Any]
+                              "MedicineID" : medicineData[self.selectedIndex].id,
+                              "dateInfo" : self.dateString,
+                              "status" : "Skip",
+                              "week":weekOfYear,
+                              "month":monthOfYear]  as [String: Any]
                 
                 VM.CreateDoseStatus(docName: "\(self.dateString)-Skip-\(medicineData[self.selectedIndex].id)", docName_del: "\(self.dateString)-Taken-\(medicineData[self.selectedIndex].id)", uploadData: dict) { status, err in
                     
@@ -407,7 +428,7 @@ struct HomeView: View {
         }
         
         
-       
+        
     }
     
     func medicineNotification(){
@@ -476,8 +497,8 @@ struct HomeCenterButtonView: View {
                 }
                 
             }
-
-        
+            
+            
         }
         .padding()
     }
