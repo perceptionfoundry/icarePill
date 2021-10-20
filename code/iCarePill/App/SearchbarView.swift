@@ -42,8 +42,6 @@ struct SearchbarView: View {
                         names.removeAll()
                         allRecord.removeAll()
                         
-                        
-                        
                         values.records?.forEach({ Record in
                             names.append(Record.drugName!)
                             self.allRecord.append(Record)

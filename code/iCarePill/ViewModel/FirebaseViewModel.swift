@@ -214,12 +214,6 @@ class FirebaseViewModel: ObservableObject{
     
     func GetUser(collectionTitle: String, completion: @escaping(_ status : Bool,_ getData : User? ,_ err : String?)->() ){
         
-        
-       
-            
-            
-         
-            
             dbRef.collection(collectionTitle).document(userId!).getDocument { (snapShot, err) in
                 
                 if err == nil{

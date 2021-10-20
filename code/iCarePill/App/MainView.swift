@@ -25,10 +25,18 @@ struct MainView: View {
     @State var isMedi = false
     @State var date = Date()
     
+    init() {
+         UITabBar.appearance().backgroundColor = UIColor.white
+            
+     }
+    
     var body: some View {
         
         NavigationView{
         TabView(selection: $selectedIndex){
+            
+          
+            
             HomeView()
                 .tabItem {
                     Image(selectedIndex == 1 ? "home_tab_selected":"home_tab")
